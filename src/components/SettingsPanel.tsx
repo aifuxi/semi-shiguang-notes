@@ -260,7 +260,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 <div className={styles.sdkStatus}>
                   <div className={styles.statusHeading}>
                     <span className={styles.statusLabel}>SDK: @google/genai</span>
-                    <span className={styles.statusValue}>✓ 已就绪</span>
+                    <span className={styles.statusValue}><IconTick /> 已就绪</span>
                   </div>
                   <div className={styles.statusDetails}>
                     <span>GEMINI_API_KEY</span>
@@ -274,7 +274,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 <div className={styles.designStatus}>
                   <div className={styles.statusHeading}>
                     <span className={styles.statusLabel}>Design System: Semi Design</span>
-                    <span className={styles.statusValue}>✓ @douyinfe/semi-ui</span>
+                    <span className={styles.statusValue}><IconTick /> @douyinfe/semi-ui</span>
                   </div>
                   <div className={styles.designStatusDetails}>
                     <span>字体家族体系</span>

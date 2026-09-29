@@ -25,7 +25,8 @@ import {
   IconLineChartStroked,
   IconDesktop,
   IconPhone,
-  IconPieChartStroked
+  IconPieChartStroked,
+  IconBulb
 } from '@douyinfe/semi-icons';
 import styles from './DataAnalysis.module.scss';
 
@@ -312,7 +313,7 @@ export default function DataAnalysis() {
             </div>
 
             <div className={styles.sourcesNote}>
-              💡 提示：超过 36% 的读者通过移动设备访问，建议保持移动端排版简洁清晰。
+              <IconBulb /> 提示：超过 36% 的读者通过移动设备访问，建议保持移动端排版简洁清晰。
             </div>
           </Card>
         </Col>

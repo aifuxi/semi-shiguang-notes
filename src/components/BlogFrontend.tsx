@@ -48,7 +48,8 @@ import {
   IconMenu,
   IconTick,
   IconChevronRight,
-  IconGlobeStroke
+  IconGlobeStroke,
+  IconStar
 } from '@douyinfe/semi-icons';
 import {
   IllustrationNoResult,
@@ -562,7 +563,7 @@ export default function BlogFrontend({
             >
               <div className={styles.subscriptionForm}>
                 <Tag color="blue" size="large" style={{ padding: '4px 10px' }}>
-                  ✨ Douyin Semi Design 驱动的极简博客
+                  <IconStar /> Douyin Semi Design 驱动的极简博客
                 </Tag>
                 <Title heading={1} style={{ margin: 0, fontWeight: 800, letterSpacing: '-0.02em' }}>
                   {settings.title}
