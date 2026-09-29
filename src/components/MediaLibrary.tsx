@@ -252,7 +252,7 @@ export default function MediaLibrary() {
                     <span>{item.size}</span>
                   </div>
                   <div className={styles.mediaFooter}>
-                    <Text type="tertiary" size="small" style={{ fontSize: 10 }}>{item.time.slice(5)}</Text>
+                    <Text type="tertiary" size="small" style={{ fontSize: 12 }}>{item.time.slice(5)}</Text>
                     <Popconfirm
                       title="确认移除此素材？"
                       onConfirm={() => deleteMedia(item.id)}

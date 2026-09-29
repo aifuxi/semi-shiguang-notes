@@ -642,7 +642,7 @@ export default function BlogFrontend({
                             <Paragraph
                               type="secondary"
                               ellipsis={{ rows: 2 }}
-                              style={{ margin: 0, fontSize: 13, lineHeight: 1.65 }}
+                              style={{ margin: 0, fontSize: 14, lineHeight: 1.65 }}
                             >
                               {post.content}
                             </Paragraph>
@@ -899,7 +899,7 @@ export default function BlogFrontend({
                         <Paragraph
                           type="secondary"
                           ellipsis={{ rows: 3 }}
-                          style={{ fontSize: 13, lineHeight: 1.65, margin: 0 }}
+                          style={{ fontSize: 14, lineHeight: 1.65, margin: 0 }}
                         >
                           {post.content}
                         </Paragraph>
@@ -987,7 +987,7 @@ export default function BlogFrontend({
                       <Paragraph
                         type="secondary"
                         ellipsis={{ rows: 2 }}
-                        style={{ fontSize: 13, lineHeight: 1.6, minHeight: 40, margin: 0 }}
+                        style={{ fontSize: 14, lineHeight: 1.6, minHeight: 40, margin: 0 }}
                       >
                         {link.description}
                       </Paragraph>

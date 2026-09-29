@@ -205,7 +205,7 @@ export default function DataAnalysis() {
                 <Tag color={item.isUp ? 'green' : 'amber'} size="small">
                   {item.isUp ? <IconArrowUp size="small" /> : <IconArrowDown size="small" />} {item.change}
                 </Tag>
-                <Text type="tertiary" size="small" style={{ fontSize: 11 }}>环比前一周期</Text>
+                <Text type="tertiary" size="small" style={{ fontSize: 12 }}>环比前一周期</Text>
               </div>
             </Card>
           </Col>
@@ -252,7 +252,7 @@ export default function DataAnalysis() {
                         stroke="var(--semi-color-border)"
                         strokeDasharray="4 4"
                       />
-                      <text x={padX - 6} y={y + 4} textAnchor="end" fontSize="10" fill="var(--semi-color-text-2)">
+                      <text x={padX - 6} y={y + 4} textAnchor="end" fontSize="12" fill="var(--semi-color-text-2)">
                         {Math.round(ratio * maxVal)}
                       </text>
                     </g>
@@ -268,7 +268,7 @@ export default function DataAnalysis() {
                 {pvPoints.map((p, i) => (
                   <g key={i}>
                     <line x1={p.x} y1={chartHeight - padY} x2={p.x} y2={chartHeight - padY + 5} stroke="var(--semi-color-border)" />
-                    <text x={p.x} y={chartHeight - padY + 16} textAnchor="middle" fontSize="10" fill="var(--semi-color-text-2)">
+                    <text x={p.x} y={chartHeight - padY + 16} textAnchor="middle" fontSize="12" fill="var(--semi-color-text-2)">
                       {p.date}
                     </text>
                     <circle cx={p.x} cy={p.y} r={3.5} fill="var(--semi-color-primary)" />

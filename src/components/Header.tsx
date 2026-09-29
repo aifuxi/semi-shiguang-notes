@@ -132,7 +132,7 @@ export default function Header({
               {item.unread ? <Badge dot type="danger" /> : <IconTick style={{ color: 'var(--semi-color-text-2)' }} />}
             </div>
             <Text type="secondary" size="small" style={{ display: 'block', marginTop: 4 }}>{item.desc}</Text>
-            <Text type="tertiary" size="small" style={{ fontSize: 11, marginTop: 4, display: 'block' }}>{item.time}</Text>
+            <Text type="tertiary" size="small" style={{ fontSize: 12, marginTop: 4, display: 'block' }}>{item.time}</Text>
           </div>
         ))}
       </div>

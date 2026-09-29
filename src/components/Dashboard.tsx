@@ -230,15 +230,15 @@ export default function Dashboard({
 
               <div className={styles.statTrend}>
                 {card.isUp ? (
-                  <Tag color="green" size="small" style={{ padding: '0 4px', fontSize: 11 }}>
+                  <Tag color="green" size="small" style={{ padding: '0 4px', fontSize: 12 }}>
                     <IconArrowUp size="small" /> {card.change}
                   </Tag>
                 ) : (
-                  <Tag color="grey" size="small" style={{ padding: '0 4px', fontSize: 11 }}>
+                  <Tag color="grey" size="small" style={{ padding: '0 4px', fontSize: 12 }}>
                     {card.change}
                   </Tag>
                 )}
-                <Text type="tertiary" size="small" style={{ fontSize: 11 }}>{card.subtext}</Text>
+                <Text type="tertiary" size="small" style={{ fontSize: 12 }}>{card.subtext}</Text>
               </div>
             </Card>
           </Col>
@@ -296,7 +296,7 @@ export default function Dashboard({
                         x={paddingX - 6}
                         y={y + 4}
                         textAnchor="end"
-                        fontSize="10"
+                        fontSize="12"
                         fill="var(--semi-color-text-2)"
                       >
                         {Math.round(ratio * maxVisits)}
@@ -332,7 +332,7 @@ export default function Dashboard({
                       x={p.x}
                       y={trendHeight - paddingY + 16}
                       textAnchor="middle"
-                      fontSize="10"
+                      fontSize="12"
                       fill="var(--semi-color-text-2)"
                     >
                       {p.date.slice(5)}
@@ -462,12 +462,12 @@ export default function Dashboard({
                     <div className={styles.commentBody}>
                       <div className={styles.commentAuthorRow}>
                         <span className={styles.commentAuthor}>{comment.author}</span>
-                        <Text type="tertiary" size="small" style={{ fontSize: 11 }}>{comment.time}</Text>
+                        <Text type="tertiary" size="small" style={{ fontSize: 12 }}>{comment.time}</Text>
                       </div>
                       <p className={styles.commentPreview}>
                         {comment.content}
                       </p>
-                      <Text type="secondary" size="small" style={{ fontSize: 11 }}>
+                      <Text type="secondary" size="small" style={{ fontSize: 12 }}>
                         在文章《{comment.postTitle}》
                       </Text>
                     </div>
@@ -571,7 +571,7 @@ export default function Dashboard({
               <Row gutter={[16, 12]}>
                 <Col span={6}>
                   <div className={styles.healthMetric}>
-                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>磁盘使用</Text>
+                    <Text type="tertiary" size="small" style={{ fontSize: 12 }}>磁盘使用</Text>
                     <div className={styles.healthValueSuccess}>
                       {siteHealth.storageUsed} / {siteHealth.storageTotal} GB
                     </div>
@@ -579,7 +579,7 @@ export default function Dashboard({
                 </Col>
                 <Col span={6}>
                   <div className={styles.healthMetric}>
-                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份健康度</Text>
+                    <Text type="tertiary" size="small" style={{ fontSize: 12 }}>备份健康度</Text>
                     <div className={styles.healthValue}>
                       {siteHealth.backupScore}分
                     </div>
@@ -587,7 +587,7 @@ export default function Dashboard({
                 </Col>
                 <Col span={6}>
                   <div className={styles.healthMetric}>
-                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份状态</Text>
+                    <Text type="tertiary" size="small" style={{ fontSize: 12 }}>备份状态</Text>
                     <div className={styles.healthValuePrimary}>
                       {siteHealth.backupStatus}
                     </div>
@@ -595,7 +595,7 @@ export default function Dashboard({
                 </Col>
                 <Col span={6}>
                   <div className={styles.healthMetric}>
-                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>安全防御</Text>
+                    <Text type="tertiary" size="small" style={{ fontSize: 12 }}>安全防御</Text>
                     <div className={styles.healthValueSuccessCompact}>
                       {siteHealth.securityLabel}
                     </div>

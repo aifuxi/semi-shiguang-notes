@@ -200,7 +200,7 @@ export default function ContentManagement({
           </div>
           <div className={styles.articleTags}>
             {record.tags.map((tag, i) => (
-              <Tag key={i} size="small" color="white" style={{ fontSize: 10 }}>
+              <Tag key={i} size="small" color="white" style={{ fontSize: 12 }}>
                 #{tag}
               </Tag>
             ))}
