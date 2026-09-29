@@ -304,6 +304,11 @@ body {
 .w-2\.5 { width: 10px; }
 .h-2\.5 { height: 10px; }
 
+/* 普通 Modal 的固定宽度不应超出视口；全屏模式保持 Semi 原有布局。 */
+.semi-modal:not(:has(.semi-modal-content-fullScreen)) {
+  max-width: calc(100% - 32px);
+}
+
 /* Responsive Media Queries */
 @media (min-width: 640px) {
   .sm\:flex-row { flex-direction: row; }
