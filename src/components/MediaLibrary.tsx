@@ -30,6 +30,7 @@ import {
   IconImage
 } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
+import styles from './MediaLibrary.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -144,7 +145,7 @@ export default function MediaLibrary() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Hidden file input */}
       <input
         ref={fileInputRef}

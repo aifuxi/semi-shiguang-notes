@@ -25,6 +25,7 @@ import {
   IconDelete
 } from '@douyinfe/semi-icons';
 import { initialCategories, initialTags } from '../mockData';
+import styles from './CategoryManagement.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -125,7 +126,7 @@ export default function CategoryManagement() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Header */}
       <div>
         <Title heading={3} style={{ margin: 0 }}>

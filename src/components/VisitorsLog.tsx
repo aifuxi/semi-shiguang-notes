@@ -24,6 +24,7 @@ import {
   IconShield
 } from '@douyinfe/semi-icons';
 import { defaultVisitorLogs } from '../mockData';
+import styles from './VisitorsLog.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -146,7 +147,7 @@ export default function VisitorsLog() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Header */}
       <div>
         <Title heading={3} style={{ margin: 0 }}>

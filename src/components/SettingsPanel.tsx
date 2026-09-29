@@ -29,6 +29,7 @@ import {
   IconKey
 } from '@douyinfe/semi-icons';
 import { BlogSettings } from '../types';
+import styles from './SettingsPanel.module.scss';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -71,7 +72,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
   };
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

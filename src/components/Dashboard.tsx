@@ -53,6 +53,7 @@ import {
   BlogSettings
 } from '../types';
 import { AdminRouteKey } from '../routes';
+import styles from './Dashboard.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -173,7 +174,7 @@ export default function Dashboard({
   const areaPath = `${linePath} L ${trendPoints[trendPoints.length - 1].x} ${trendHeight - paddingY} L ${trendPoints[0].x} ${trendHeight - paddingY} Z`;
 
   return (
-    <div className="space-y-6">
+    <div className={styles.dashboard}>
       {/* 1. Header Banner & Welcome */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -269,8 +270,8 @@ export default function Dashboard({
             style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
             bodyStyle={{ padding: '20px 16px' }}
           >
-            <div className="relative w-full overflow-hidden">
-              <svg viewBox={`0 0 ${trendWidth} ${trendHeight}`} className="w-full h-56 select-none">
+            <div className={styles.trendChart}>
+              <svg viewBox={`0 0 ${trendWidth} ${trendHeight}`} className={styles.trendChartSvg}>
                 <defs>
                   <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="var(--semi-color-primary)" stopOpacity="0.3" />
@@ -355,17 +356,15 @@ export default function Dashboard({
               {/* Hover tooltip indicator */}
               {hoveredTrendIndex !== null && (
                 <div
-                  className="absolute bg-[var(--semi-color-bg-2)] border border-[var(--semi-color-border)] rounded-lg shadow-md px-3 py-1.5 text-xs pointer-events-none"
+                  className={styles.trendTooltip}
                   style={{
-                    left: `${(trendPoints[hoveredTrendIndex].x / trendWidth) * 100}%`,
-                    top: '20px',
-                    transform: 'translateX(-50%)'
+                    left: `${(trendPoints[hoveredTrendIndex].x / trendWidth) * 100}%`
                   }}
                 >
-                  <div className="font-semibold text-[var(--semi-color-text-0)]">
+                  <div className={styles.trendTooltipDate}>
                     {trendPoints[hoveredTrendIndex].date}
                   </div>
-                  <div className="text-[var(--semi-color-primary)] font-mono font-medium">
+                  <div className={styles.trendTooltipVisits}>
                     访问量: {trendPoints[hoveredTrendIndex].visits.toLocaleString()} 次
                   </div>
                 </div>

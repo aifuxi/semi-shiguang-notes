@@ -58,6 +58,7 @@ import {
 import { Post, Comment, FriendLink, BlogSettings } from '../types';
 import Changelog from './Changelog';
 import { frontendRoutes, FrontendRouteKey } from '../routes';
+import styles from './BlogFrontend.module.scss';
 
 const { Title, Text, Paragraph } = Typography;
 const { Header, Content, Footer } = Layout;
@@ -587,9 +588,9 @@ export default function BlogFrontend({
             </Card>
 
             {/* Content & Sidebar Grid with Generous Spacing */}
-            <Row gutter={[36, 36]} className="blog-content-row" style={{ marginTop: 44 }}>
+            <Row gutter={[36, 36]} className={styles.contentRow}>
               {/* Left Column: Recent Articles */}
-              <Col xs={24} lg={16} className="blog-articles-col" style={{ marginBottom: 48 }}>
+              <Col xs={24} lg={16} className={styles.articlesColumn}>
                 <div className="space-y-6">
                   <div className="flex items-center justify-between pb-1">
                     <div>
@@ -609,7 +610,7 @@ export default function BlogFrontend({
                     </Button>
                   </div>
 
-                  <div className="blog-articles-stack flex flex-col gap-6" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                  <div className={styles.articlesStack}>
                     {publishedPosts.slice(0, 4).map((post) => (
                       <div
                         key={post.id}
@@ -690,7 +691,7 @@ export default function BlogFrontend({
 
               {/* Right Column: Profile & Category Widgets with Ample Spacing */}
               <Col xs={24} lg={8}>
-                <div className="blog-sidebar-stack flex flex-col gap-8" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+                <div className={styles.sidebarStack}>
                   {/* Blogger Card */}
                   <Card
                     bordered
@@ -863,7 +864,7 @@ export default function BlogFrontend({
                 </div>
               </Card>
             ) : (
-              <Row gutter={[24, 24]} className="blog-articles-grid-row" style={{ marginTop: 24 }}>
+              <Row gutter={[24, 24]} className={styles.articlesGridRow}>
                 {filteredPosts.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((post) => (
                   <Col xs={24} md={12} key={post.id}>
                     <div
@@ -957,7 +958,7 @@ export default function BlogFrontend({
               </Button>
             </div>
 
-            <Row gutter={[24, 24]} className="blog-friends-grid-row" style={{ marginTop: 24 }}>
+            <Row gutter={[24, 24]} className={styles.friendsGridRow}>
               {approvedFriendsLinks.map((link) => (
                 <Col xs={24} sm={12} lg={8} key={link.id}>
                   <Card

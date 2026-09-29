@@ -590,36 +590,3 @@ textarea.semi-input-textarea:focus-visible {
   border-color: var(--semi-color-danger) !important;
   box-shadow: 0 0 0 2px rgba(249, 57, 32, 0.16) !important;
 }
-
-/* 前台页面大模块物理间距保障，防止由于负 margin 或 space-y 失效导致贴合 */
-.blog-content-row {
-  margin-top: 48px !important;
-}
-
-.blog-sidebar-stack {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 32px !important;
-}
-
-.blog-sidebar-stack > .semi-card {
-  margin-bottom: 0 !important;
-}
-
-.blog-articles-stack {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 24px !important;
-}
-
-.blog-articles-col {
-  margin-bottom: 48px !important;
-}
-
-.blog-articles-grid-row {
-  margin-top: 32px !important;
-}
-
-.blog-friends-grid-row {
-  margin-top: 32px !important;
-}

@@ -33,6 +33,7 @@ import {
 } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 import { Comment, CommentStatus } from '../types';
+import styles from './CommentsManagement.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -219,7 +220,7 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* View Header */}
       <div>
         <Title heading={3} style={{ margin: 0 }}>

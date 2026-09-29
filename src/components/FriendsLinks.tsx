@@ -31,6 +31,7 @@ import {
 } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 import { FriendLink } from '../types';
+import styles from './FriendsLinks.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -299,7 +300,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

@@ -1,0 +1,26 @@
+@use './styles/layout' as layout;
+
+.contentRow {
+  margin-top: 48px !important;
+}
+
+.articlesColumn {
+  margin-bottom: 48px !important;
+}
+
+.articlesStack {
+  @include layout.vertical-stack(24px);
+}
+
+.sidebarStack {
+  @include layout.vertical-stack(32px);
+
+  > :global(.semi-card) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.articlesGridRow,
+.friendsGridRow {
+  margin-top: 32px !important;
+}

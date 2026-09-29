@@ -27,6 +27,7 @@ import {
   IconPhone,
   IconPieChartStroked
 } from '@douyinfe/semi-icons';
+import styles from './DataAnalysis.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -164,7 +165,7 @@ export default function DataAnalysis() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.page}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
