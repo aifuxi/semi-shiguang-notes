@@ -1,0 +1,82 @@
+/* 主题只新增非颜色视觉 token；Semi 的 --semi-color-* 由组件库继续管理。 */
+:root,
+body,
+body .semi-always-light,
+body[theme-mode='dark'] .semi-always-light,
+:host,
+:host .semi-always-light {
+  --semi-border-radius-extra-small: 4px;
+  --semi-border-radius-small: 8px;
+  --semi-border-radius-medium: 16px;
+  --semi-border-radius-large: 24px;
+  --semi-modern-motion-fast: 120ms;
+  --semi-modern-motion-normal: 180ms;
+
+  --semi-modern-button-surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.035),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+  --semi-modern-button-solid-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  --semi-modern-card-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.015);
+  --semi-modern-input-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --semi-modern-input-focus-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 0 0 2px color-mix(in srgb, var(--semi-color-primary) 38%, transparent);
+  --semi-modern-overlay-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+  --semi-modern-modal-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  --semi-modern-tooltip-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+body[theme-mode='dark'],
+body .semi-always-dark,
+:host([theme-mode='dark']),
+:host .semi-always-dark {
+  --semi-border-radius-extra-small: 4px;
+  --semi-border-radius-small: 8px;
+  --semi-border-radius-medium: 16px;
+  --semi-border-radius-large: 24px;
+  --semi-modern-button-surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.16);
+  --semi-modern-button-solid-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.14),
+    0 2px 4px rgba(0, 0, 0, 0.22);
+  --semi-modern-card-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --semi-modern-input-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --semi-modern-input-focus-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 2px color-mix(in srgb, var(--semi-color-primary) 45%, transparent);
+  --semi-modern-overlay-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  --semi-modern-modal-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --semi-modern-tooltip-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  transition: background-color var(--semi-modern-motion-normal) ease, color var(--semi-modern-motion-normal) ease;
+}
+
+body[theme-mode='dark'] {
+  background-color: var(--semi-color-bg-0);
+  color: var(--semi-color-text-0);
+}

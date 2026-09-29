@@ -1,0 +1,32 @@
+@use 'mixins' as theme;
+
+.semi-button {
+  border-radius: var(--semi-border-radius-small);
+  transition:
+    color var(--semi-modern-motion-fast) ease,
+    background-color var(--semi-modern-motion-fast) ease,
+    border-color var(--semi-modern-motion-fast) ease,
+    box-shadow var(--semi-modern-motion-fast) ease,
+    transform var(--semi-modern-motion-fast) ease;
+
+  &:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--semi-color-primary) 50%, transparent);
+    outline-offset: 2px;
+  }
+
+  &:active:not(.semi-button-disabled) {
+    transform: translateY(1px);
+  }
+}
+
+.semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
+  box-shadow: var(--semi-modern-button-solid-shadow);
+}
+
+.semi-button.semi-button-light:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
+  box-shadow: var(--semi-modern-button-surface-shadow);
+}
+
+.semi-button.semi-button-borderless:not(.semi-button-disabled):not(.semi-button-group .semi-button):is(:hover, :active) {
+  box-shadow: var(--semi-modern-button-surface-shadow);
+}
