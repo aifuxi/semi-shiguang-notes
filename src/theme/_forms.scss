@@ -28,6 +28,10 @@
   height: 44px;
 }
 
+.semi-input-wrapper > .semi-input {
+  height: 100%;
+}
+
 .semi-input-textarea {
   font-family: var(--semi-font-family);
   padding: 8px 12px;
