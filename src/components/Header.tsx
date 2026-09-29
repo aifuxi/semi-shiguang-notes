@@ -33,6 +33,7 @@ import {
   IconClock
 } from '@douyinfe/semi-icons';
 import { BlogSettings, Post } from '../types';
+import { AdminRouteKey } from '../routes';
 
 const { Text } = Typography;
 
@@ -40,7 +41,7 @@ interface HeaderProps {
   settings: BlogSettings;
   posts: Post[];
   onCreatePostClick: () => void;
-  onNavigateToTab: (tab: string) => void;
+  onNavigateToTab: (tab: AdminRouteKey) => void;
   onPostSelectForEditing: (post: Post) => void;
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
@@ -81,7 +82,7 @@ export default function Header({
 
   const handleSearchResultClick = (post: Post) => {
     onPostSelectForEditing(post);
-    onNavigateToTab('content');
+    onNavigateToTab('posts');
     setShowSearchModal(false);
     setSearchQuery('');
   };

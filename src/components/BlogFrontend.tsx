@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   Layout,
   Nav,
@@ -56,6 +57,7 @@ import {
 } from '@douyinfe/semi-illustrations';
 import { Post, Comment, FriendLink, BlogSettings } from '../types';
 import Changelog from './Changelog';
+import { frontendRoutes, FrontendRouteKey } from '../routes';
 
 const { Title, Text, Paragraph } = Typography;
 const { Header, Content, Footer } = Layout;
@@ -83,8 +85,18 @@ export default function BlogFrontend({
   setIsDarkMode,
   onEnterAdmin
 }: BlogFrontendProps) {
-  const [currentTab, setCurrentTab] = useState<'home' | 'articles' | 'friends' | 'changelog'>('home');
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { postId } = useParams();
+  const selectedPost = posts.find(post => post.id === postId && post.status === '已发布') ?? null;
+  const isDetailRoute = location.pathname.startsWith('/posts/');
+  const currentTab: FrontendRouteKey = location.pathname === '/articles'
+    ? 'articles'
+    : location.pathname === '/friends'
+      ? 'friends'
+      : location.pathname === '/changelog'
+        ? 'changelog'
+        : 'home';
 
   // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -168,12 +180,12 @@ export default function BlogFrontend({
   }, [friendsLinks]);
 
   const handleSelectPost = (post: Post) => {
-    setSelectedPost(post);
+    navigate(`/posts/${encodeURIComponent(post.id)}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToList = () => {
-    setSelectedPost(null);
+    navigate(frontendRoutes.articles);
   };
 
   const handleCommentSubmit = () => {
@@ -233,6 +245,18 @@ export default function BlogFrontend({
     Toast.success('感谢你的点赞与鼓励！');
   };
 
+  if (isDetailRoute && !selectedPost) {
+    return (
+      <Layout className="min-h-screen bg-[var(--semi-color-bg-0)] text-[var(--semi-color-text-0)]">
+        <Content className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex flex-col items-center gap-4">
+          <Title heading={3}>文章不存在</Title>
+          <Text type="secondary">这篇文章可能已被删除，或链接地址无效。</Text>
+          <Button theme="light" type="primary" onClick={handleBackToList}>返回博文列表</Button>
+        </Content>
+      </Layout>
+    );
+  }
+
   return (
     <Layout className="min-h-screen bg-[var(--semi-color-bg-0)] text-[var(--semi-color-text-0)]">
       {/* 1. Header Navigation Bar */}
@@ -240,7 +264,7 @@ export default function BlogFrontend({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           {/* Brand Logo */}
           <div
-            onClick={() => { setSelectedPost(null); setCurrentTab('home'); }}
+            onClick={() => navigate(frontendRoutes.home)}
             className="flex items-center gap-3.5 cursor-pointer select-none"
           >
             <Avatar
@@ -276,8 +300,7 @@ export default function BlogFrontend({
                   type={isActive ? 'primary' : 'tertiary'}
                   icon={tab.icon}
                   onClick={() => {
-                    setSelectedPost(null);
-                    setCurrentTab(tab.id as any);
+                    navigate(frontendRoutes[tab.id as FrontendRouteKey]);
                   }}
                   style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                 >
@@ -555,7 +578,7 @@ export default function BlogFrontend({
                     value={searchQuery}
                     onChange={(val) => {
                       setSearchQuery(val);
-                      if (val.trim()) setCurrentTab('articles');
+                      if (val.trim()) navigate(frontendRoutes.articles);
                     }}
                     showClear
                   />
@@ -580,7 +603,7 @@ export default function BlogFrontend({
                     <Button
                       theme="borderless"
                       type="primary"
-                      onClick={() => setCurrentTab('articles')}
+                      onClick={() => navigate(frontendRoutes.articles)}
                     >
                       浏览全部 ({publishedPosts.length}) &rarr;
                     </Button>
@@ -650,7 +673,7 @@ export default function BlogFrontend({
                       size="large"
                       onClick={() => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
-                        setCurrentTab('articles');
+                        navigate(frontendRoutes.articles);
                       }}
                       style={{
                         borderRadius: 'var(--semi-border-radius-medium)',
@@ -724,7 +747,7 @@ export default function BlogFrontend({
                           key={cat}
                           onClick={() => {
                             setSelectedCategory(cat);
-                            setCurrentTab('articles');
+                            navigate(frontendRoutes.articles);
                           }}
                           className="py-3 flex items-center justify-between text-xs cursor-pointer hover:text-[var(--semi-color-primary)] transition-colors px-1"
                         >
@@ -751,7 +774,7 @@ export default function BlogFrontend({
                           style={{ cursor: 'pointer', padding: '4px 10px' }}
                           onClick={() => {
                             setSelectedTag(tag);
-                            setCurrentTab('articles');
+                            navigate(frontendRoutes.articles);
                           }}
                         >
                           #{tag}
@@ -1049,19 +1072,19 @@ export default function BlogFrontend({
           <div className="flex items-center gap-6">
             <span
               className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
-              onClick={() => { setSelectedPost(null); setCurrentTab('home'); }}
+              onClick={() => navigate(frontendRoutes.home)}
             >
               首页
             </span>
             <span
               className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
-              onClick={() => { setSelectedPost(null); setCurrentTab('articles'); }}
+              onClick={() => navigate(frontendRoutes.articles)}
             >
               博文列表
             </span>
             <span
               className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
-              onClick={() => { setSelectedPost(null); setCurrentTab('friends'); }}
+              onClick={() => navigate(frontendRoutes.friends)}
             >
               友情链接
             </span>

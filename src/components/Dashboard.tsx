@@ -52,6 +52,7 @@ import {
   SiteHealth,
   BlogSettings
 } from '../types';
+import { AdminRouteKey } from '../routes';
 
 const { Title, Text } = Typography;
 
@@ -63,7 +64,7 @@ interface DashboardProps {
   trafficSources: TrafficSourceItem[];
   siteHealth: SiteHealth;
   settings: BlogSettings;
-  onNavigateToTab: (tab: string) => void;
+  onNavigateToTab: (tab: AdminRouteKey) => void;
   onApproveComment: (id: string) => void;
   onDeleteComment: (id: string) => void;
   onQuickActionClick: (type: 'create_post' | 'upload_media' | 'manage_categories') => void;
@@ -523,7 +524,7 @@ export default function Dashboard({
                     theme="borderless"
                     type="primary"
                     size="small"
-                    onClick={() => onNavigateToTab('content')}
+                  onClick={() => onNavigateToTab('posts')}
                   >
                     管理
                   </Button>

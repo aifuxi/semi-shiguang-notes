@@ -22,10 +22,11 @@ import {
   IconClose
 } from '@douyinfe/semi-icons';
 import { BlogSettings } from '../types';
+import { AdminRouteKey } from '../routes';
 
 interface SidebarProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab: AdminRouteKey;
+  setActiveTab: (tab: AdminRouteKey) => void;
   pendingCommentsCount: number;
   settings: BlogSettings;
   isCollapsed: boolean;
@@ -48,7 +49,7 @@ export default function Sidebar({
 }: SidebarProps) {
   const navItems = [
     { itemKey: 'dashboard', text: '仪表盘', icon: <IconHome size="large" /> },
-    { itemKey: 'content', text: '内容管理', icon: <IconArticle size="large" /> },
+    { itemKey: 'posts', text: '内容管理', icon: <IconArticle size="large" /> },
     {
       itemKey: 'comments',
       text: '评论管理',
@@ -104,7 +105,7 @@ export default function Sidebar({
           <Nav
             selectedKeys={[activeTab]}
             onSelect={(data) => {
-              setActiveTab(data.itemKey as string);
+              setActiveTab(data.itemKey as AdminRouteKey);
               setIsMobileOpen(false);
             }}
             isCollapsed={isCollapsed}
