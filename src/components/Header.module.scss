@@ -105,6 +105,10 @@
     gap: 8px;
   }
 
+  .actions .createButton {
+    display: none;
+  }
+
   .actions :global(.semi-divider) {
     display: none;
   }

@@ -180,6 +180,7 @@ export default function Header({
             theme="solid"
             type="primary"
             icon={<IconPlus />}
+            className={styles.createButton}
             onClick={onCreatePostClick}
           >
             <span className={styles.createLabel}>新建文章</span>
