@@ -23,6 +23,7 @@ import {
 } from '@douyinfe/semi-icons';
 import { BlogSettings } from '../types';
 import { AdminRouteKey } from '../routes';
+import styles from './Sidebar.module.scss';
 
 interface SidebarProps {
   activeTab: AdminRouteKey;
@@ -66,11 +67,11 @@ export default function Sidebar({
   ];
 
   const sidebarContent = (
-    <div className="h-full flex flex-col justify-between bg-[var(--semi-color-bg-1)] border-r border-[var(--semi-color-border)] select-none">
+    <div className={styles.sidebarContent}>
       {/* Brand Header */}
       <div>
-        <div className={`h-16 px-4 flex items-center border-b border-[var(--semi-color-border)] ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-          <div className="flex items-center gap-3 overflow-hidden cursor-pointer" onClick={() => setActiveTab('dashboard')}>
+        <div className={`${styles.brandHeader} ${isCollapsed ? styles.brandHeaderCollapsed : styles.brandHeaderExpanded}`}>
+          <div className={styles.brand} onClick={() => setActiveTab('dashboard')}>
             <Avatar
               size="small"
               shape="square"
@@ -79,18 +80,18 @@ export default function Sidebar({
               {settings.title.slice(0, 1)}
             </Avatar>
             {!isCollapsed && (
-              <div className="flex flex-col truncate">
-                <span className="font-semibold text-sm text-[var(--semi-color-text-0)] tracking-wide truncate">
+              <div className={styles.brandText}>
+                <span className={styles.brandTitle}>
                   {settings.title}
                 </span>
-                <span className="text-xs text-[var(--semi-color-text-2)] truncate">
+                <span className={styles.brandSubtitle}>
                   {settings.subtitle}
                 </span>
               </div>
             )}
           </div>
           {/* Mobile close button */}
-          <div className="lg:hidden">
+          <div className={styles.mobileClose}>
             <Button
               theme="borderless"
               icon={<IconClose />}
@@ -101,7 +102,7 @@ export default function Sidebar({
         </div>
 
         {/* Navigation List */}
-        <div className="p-2">
+        <div className={styles.navigation}>
           <Nav
             selectedKeys={[activeTab]}
             onSelect={(data) => {
@@ -116,7 +117,7 @@ export default function Sidebar({
                 key={item.itemKey}
                 itemKey={item.itemKey}
                 text={
-                  <span className="flex items-center justify-between w-full">
+                  <span className={styles.navigationItem}>
                     <span>{item.text}</span>
                     {!isCollapsed && item.badge ? (
                       <Badge count={item.badge} type="danger" style={{ marginLeft: 8 }} />
@@ -135,7 +136,7 @@ export default function Sidebar({
       </div>
 
       {/* Footer Controls */}
-      <div className="p-3 border-t border-[var(--semi-color-border)] space-y-2 bg-[var(--semi-color-bg-0)]">
+      <div className={styles.sidebarFooter}>
         {/* View Frontend Portal */}
         {onViewFrontend && (
           <Tooltip content="预览前台读者端" position="right">
@@ -156,7 +157,7 @@ export default function Sidebar({
         )}
 
         {/* Desktop Collapse Toggle */}
-        <div className="hidden lg:flex justify-end">
+        <div className={styles.collapseAction}>
           <Button
             theme="borderless"
             type="tertiary"
@@ -176,23 +177,19 @@ export default function Sidebar({
       {/* Mobile Drawer */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-50 lg:hidden transition-opacity"
+          className={styles.backdrop}
           onClick={() => setIsMobileOpen(false)}
         />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-55 w-64 lg:hidden transition-transform duration-200 ${
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`${styles.mobileSidebar} ${isMobileOpen ? styles.mobileSidebarOpen : styles.mobileSidebarClosed}`}
       >
         {sidebarContent}
       </aside>
 
       {/* Desktop Sider */}
       <aside
-        className={`hidden lg:block shrink-0 transition-all duration-200 h-screen sticky top-0 ${
-          isCollapsed ? 'w-16' : 'w-60'
-        }`}
+        className={`${styles.desktopSidebar} ${isCollapsed ? styles.desktopSidebarCollapsed : styles.desktopSidebarExpanded}`}
       >
         {sidebarContent}
       </aside>

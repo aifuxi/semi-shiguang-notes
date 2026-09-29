@@ -3,3 +3,187 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  border-radius: 9999px;
+  width: 20px;
+  height: 20px;
+}
+
+.rankGold {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.rankSilver {
+  background-color: #cbd5e1;
+  color: #1e293b;
+}
+
+.rankBronze {
+  background-color: rgba(180, 83, 9, .6);
+  color: #fff;
+}
+
+.rankOther {
+  color: var(--semi-color-text-2);
+}
+
+.tableMetric {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.statHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statIcon {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+}
+
+.statValueWrap {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.statValue {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-0);
+}
+
+.statTrend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.chartHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chartLegend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.pageViewsLegend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pageViewsSwatch {
+  border-radius: 9999px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--semi-color-primary);
+}
+
+.uniqueVisitorsLegend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.uniqueVisitorsSwatch {
+  border-radius: 9999px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--semi-color-success);
+}
+
+.chartViewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.chartSvg {
+  width: 100%;
+  user-select: none;
+  height: 224px;
+}
+
+.sourcesHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sourceList > * + * {
+  margin-top: 20px;
+}
+
+.sourceItem > * + * {
+  margin-top: 6px;
+}
+
+.sourceLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.sourceName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.sourcePercentage {
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+}
+
+.sourcesNote {
+  padding: 12px;
+  margin-top: 32px;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+  color: var(--semi-color-text-2);
+  border-color: var(--semi-color-border);
+}

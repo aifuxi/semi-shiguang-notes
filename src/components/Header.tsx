@@ -34,6 +34,7 @@ import {
 } from '@douyinfe/semi-icons';
 import { BlogSettings, Post } from '../types';
 import { AdminRouteKey } from '../routes';
+import styles from './Header.module.scss';
 
 const { Text } = Typography;
 
@@ -140,11 +141,11 @@ export default function Header({
 
   return (
     <>
-      <header className="h-16 px-4 sm:px-6 bg-[var(--semi-color-bg-1)] border-b border-[var(--semi-color-border)] sticky top-0 z-40 flex items-center justify-between">
+      <header className={styles.header}>
         {/* Left Area: Mobile menu & Quick Search */}
-        <div className="flex items-center gap-3">
+        <div className={styles.navigation}>
           {/* Mobile hamburger */}
-          <div className="lg:hidden">
+          <div className={styles.mobileMenu}>
             <Button
               theme="borderless"
               icon={<IconMenu size="large" />}
@@ -158,7 +159,7 @@ export default function Header({
             type="tertiary"
             icon={<IconSearch />}
             onClick={() => setShowSearchModal(true)}
-            className="!flex items-center gap-2.5 text-xs sm:text-sm"
+            className={styles.searchButton}
             style={{
               width: 220,
               justifyContent: 'flex-start',
@@ -166,15 +167,15 @@ export default function Header({
               color: 'var(--semi-color-text-2)'
             }}
           >
-            <span className="flex-1 truncate text-left">搜索文章 / 分类...</span>
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] rounded bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] font-mono">
+            <span className={styles.searchLabel}>搜索文章 / 分类...</span>
+            <kbd className={styles.searchShortcut}>
               ⌘K
             </kbd>
           </Button>
         </div>
 
         {/* Right Area: Action Buttons & User Menu */}
-        <div className="flex items-center gap-3">
+        <div className={styles.actions}>
           {/* Create Post */}
           <Button
             theme="solid"
@@ -182,7 +183,7 @@ export default function Header({
             icon={<IconPlus />}
             onClick={onCreatePostClick}
           >
-            <span className="hidden sm:inline">新建文章</span>
+            <span className={styles.createLabel}>新建文章</span>
           </Button>
 
           {/* Notifications */}
@@ -244,7 +245,7 @@ export default function Header({
               </Dropdown.Menu>
             }
           >
-            <div className="flex items-center gap-2 cursor-pointer p-1 rounded-lg hover:bg-[var(--semi-color-fill-0)] transition-colors">
+            <div className={styles.profileTrigger}>
               <Avatar
                 size="small"
                 src={settings.avatarUrl}
@@ -252,11 +253,11 @@ export default function Header({
               >
                 {settings.authorName.slice(0, 1)}
               </Avatar>
-              <div className="hidden md:flex flex-col text-left">
-                <span className="text-xs font-semibold text-[var(--semi-color-text-0)] leading-tight">
+              <div className={styles.profileDetails}>
+                <span className={styles.profileName}>
                   {settings.authorName}
                 </span>
-                <span className="text-[10px] text-[var(--semi-color-text-2)] leading-none mt-0.5">
+                <span className={styles.profileRole}>
                   {settings.authorRole}
                 </span>
               </div>
@@ -274,7 +275,7 @@ export default function Header({
         footer={null}
         width={560}
       >
-        <div className="space-y-4">
+        <div className={styles.searchPanel}>
           <Input
             ref={searchInputRef}
             prefix={<IconSearch />}
@@ -286,13 +287,13 @@ export default function Header({
             autoFocus
           />
 
-          <div className="max-h-80 overflow-y-auto space-y-2 pt-2">
+          <div className={styles.searchResults}>
             {searchQuery.trim() === '' ? (
-              <div className="text-center py-8 text-[var(--semi-color-text-2)] text-sm">
+              <div className={styles.searchEmpty}>
                 支持检索文章标题、正文关键词、标签和所属分类
               </div>
             ) : filteredPosts.length === 0 ? (
-              <div className="text-center py-8 text-[var(--semi-color-text-2)] text-sm">
+              <div className={styles.searchEmpty}>
                 未找到包含 “{searchQuery}” 的相关文章
               </div>
             ) : (
@@ -300,16 +301,16 @@ export default function Header({
                 <div
                   key={post.id}
                   onClick={() => handleSearchResultClick(post)}
-                  className="p-3 rounded-lg border border-[var(--semi-color-border)] hover:border-[var(--semi-color-primary)] hover:bg-[var(--semi-color-fill-0)] cursor-pointer transition-all flex items-start justify-between gap-3"
+                  className={styles.searchResult}
                 >
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
+                  <div className={styles.searchResultContent}>
+                    <div className={styles.searchResultHeading}>
                       <IconArticle style={{ color: 'var(--semi-color-primary)' }} />
-                      <span className="font-medium text-sm text-[var(--semi-color-text-0)] truncate">
+                      <span className={styles.searchResultTitle}>
                         {post.title}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 mt-1 text-xs text-[var(--semi-color-text-2)]">
+                    <div className={styles.searchResultMeta}>
                       <span>{post.category}</span>
                       <span>•</span>
                       <span>{post.publishTime}</span>

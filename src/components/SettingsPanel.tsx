@@ -74,7 +74,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
   return (
     <div className={styles.page}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             系统设置
@@ -106,16 +106,16 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
           {/* TAB 1: Profile & Blog Info */}
           <TabPane
             tab={
-              <span className="flex items-center gap-2">
+              <span className={styles.sectionHeading}>
                 <IconUser />
                 个人资料与站点信息
               </span>
             }
             itemKey="profile"
           >
-            <div className="max-w-2xl space-y-6 pt-4">
+            <div className={styles.siteSettings}>
               {/* Avatar Preview */}
-              <div className="flex items-center gap-4 p-4 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)]">
+              <div className={styles.siteIdentity}>
                 <Avatar
                   size="large"
                   src={avatarUrl}
@@ -123,7 +123,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 >
                   {authorName.slice(0, 1)}
                 </Avatar>
-                <div className="space-y-1 min-w-0 flex-1">
+                <div className={styles.siteIdentityText}>
                   <Text strong>博主头像预览</Text>
                   <Text type="secondary" size="small" style={{ display: 'block' }}>
                     在下方输入头像图片外链 URL 进行更新
@@ -131,7 +131,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className={styles.siteFields}>
                 <div>
                   <Text strong>博客站点名称</Text>
                   <Input
@@ -150,7 +150,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className={styles.siteFields}>
                 <div>
                   <Text strong>博主昵称 / 显示名</Text>
                   <Input
@@ -193,15 +193,15 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
           {/* TAB 2: System Preference */}
           <TabPane
             tab={
-              <span className="flex items-center gap-2">
+              <span className={styles.sectionHeading}>
                 <IconSetting />
                 系统偏好与自动化
               </span>
             }
             itemKey="system"
           >
-            <div className="max-w-2xl space-y-6 pt-4">
-              <div className="flex items-center justify-between p-4 rounded-lg border border-[var(--semi-color-border)]">
+            <div className={styles.displaySettings}>
+              <div className={styles.themeSetting}>
                 <div>
                   <Text strong>允许读者发表评论</Text>
                   <Text type="secondary" size="small" style={{ display: 'block', marginTop: 2 }}>
@@ -214,7 +214,7 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
                 />
               </div>
 
-              <div className="flex items-center justify-between p-4 rounded-lg border border-[var(--semi-color-border)]">
+              <div className={styles.layoutSetting}>
                 <div>
                   <Text strong>每日自动云端备份</Text>
                   <Text type="secondary" size="small" style={{ display: 'block', marginTop: 2 }}>
@@ -242,14 +242,14 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
           {/* TAB 3: Developer / API */}
           <TabPane
             tab={
-              <span className="flex items-center gap-2">
+              <span className={styles.sectionHeading}>
                 <IconCode />
                 高阶开发与 API 凭证
               </span>
             }
             itemKey="developer"
           >
-            <div className="max-w-2xl space-y-6 pt-4">
+            <div className={styles.systemSettings}>
               <Banner
                 type="info"
                 description="安全提示：API 密钥由云端安全隔离环境统一注入，严禁在客户端直接暴露明文。"
@@ -257,12 +257,12 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
 
               <div>
                 <Text strong>Gemini AI 大模型服务状态</Text>
-                <div className="mt-2 p-4 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono">SDK: @google/genai</span>
-                    <span className="text-xs font-bold text-[var(--semi-color-success)]">✓ 已就绪</span>
+                <div className={styles.sdkStatus}>
+                  <div className={styles.statusHeading}>
+                    <span className={styles.statusLabel}>SDK: @google/genai</span>
+                    <span className={styles.statusValue}>✓ 已就绪</span>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-[var(--semi-color-text-2)] font-mono">
+                  <div className={styles.statusDetails}>
                     <span>GEMINI_API_KEY</span>
                     <span>●●●●●●●●●●●●●●●●●●●● (系统注入保护)</span>
                   </div>
@@ -271,14 +271,14 @@ export default function SettingsPanel({ settings, setSettings }: SettingsPanelPr
 
               <div>
                 <Text strong>前端设计系统框架</Text>
-                <div className="mt-2 p-4 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono">Design System: Semi Design</span>
-                    <span className="text-xs font-bold text-[var(--semi-color-success)]">✓ @douyinfe/semi-ui</span>
+                <div className={styles.designStatus}>
+                  <div className={styles.statusHeading}>
+                    <span className={styles.statusLabel}>Design System: Semi Design</span>
+                    <span className={styles.statusValue}>✓ @douyinfe/semi-ui</span>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-[var(--semi-color-text-2)]">
+                  <div className={styles.designStatusDetails}>
                     <span>字体家族体系</span>
-                    <span className="font-mono">Space Grotesk &amp; JetBrains Mono</span>
+                    <span className={styles.fontName}>Space Grotesk &amp; JetBrains Mono</span>
                   </div>
                 </div>
               </div>

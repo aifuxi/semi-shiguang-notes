@@ -3,3 +3,163 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.fileInput {
+  display: none;
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.libraryHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.resultCount {
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-primary);
+}
+
+.emptyState {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.thumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--semi-color-fill-0);
+  height: 176px;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s ease;
+  object-fit: cover;
+  transition-duration: 300ms;
+}
+
+.thumbnail:hover .thumbnailImage {
+  transform: scale(1.05);
+}
+
+.thumbnailActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity .2s ease;
+}
+
+.thumbnail:hover .thumbnailActions {
+  opacity: 1;
+}
+
+.mediaDetails > * + * {
+  margin-top: 4px;
+}
+
+.mediaName {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--semi-color-text-0);
+}
+
+.mediaMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+  font-size: 11px;
+}
+
+.mediaFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--semi-color-border);
+  border-color: var(--semi-color-border);
+}
+
+.uploadActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.previewContent > * + * {
+  margin-top: 16px;
+}
+
+.previewContent {
+  padding-top: 8px;
+}
+
+.previewFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+  max-height: 384px;
+}
+
+.previewImage {
+  max-height: 384px;
+  object-fit: contain;
+}
+
+.previewDetails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+}
+
+@media (min-width: 640px) {
+  .previewDetails {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.previewValue {
+  font-weight: 500;
+  font-family: var(--font-mono) !important;
+}

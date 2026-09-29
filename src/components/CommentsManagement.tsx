@@ -116,15 +116,15 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
       key: 'author',
       width: 200,
       render: (_: any, record: Comment) => (
-        <div className="flex items-center gap-3">
+        <div className={styles.author}>
           <Avatar size="small" src={record.avatar}>
             {record.author.slice(0, 1)}
           </Avatar>
-          <div className="min-w-0">
-            <div className="font-semibold text-xs text-[var(--semi-color-text-0)] truncate">
+          <div className={styles.authorInfo}>
+            <div className={styles.authorName}>
               {record.author}
             </div>
-            <div className="text-[11px] text-[var(--semi-color-text-2)] truncate font-mono">
+            <div className={styles.authorEmail}>
               {record.email}
             </div>
           </div>
@@ -136,13 +136,13 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
       dataIndex: 'content',
       key: 'content',
       render: (content: string, record: Comment) => (
-        <div className="space-y-1 py-1">
-          <p className="text-xs text-[var(--semi-color-text-1)] leading-relaxed">
+        <div className={styles.commentDetails}>
+          <p className={styles.commentText}>
             {content}
           </p>
-          <div className="flex items-center gap-1.5 text-[11px] text-[var(--semi-color-text-2)]">
+          <div className={styles.commentMeta}>
             <IconArticle size="small" />
-            <span className="truncate max-w-sm">《{record.postTitle}》</span>
+            <span className={styles.postTitle}>《{record.postTitle}》</span>
             <span>•</span>
             <span>{record.time}</span>
           </div>
@@ -237,7 +237,7 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className={styles.pageHeading}>
           <RadioGroup
             type="button"
             value={activeTab}
@@ -280,7 +280,7 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
           rowKey="id"
           pagination={{ pageSize: 8 }}
           empty={
-            <div className="py-12">
+            <div className={styles.emptyState}>
               <Empty
                 image={<IllustrationNoContent style={{ width: 140, height: 140 }} />}
                 title="暂无对应状态的评论"
@@ -301,9 +301,9 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
         cancelText="取消"
         width={520}
       >
-        <div className="space-y-3 pt-2">
+        <div className={styles.reviewForm}>
           {targetComment && (
-            <div className="p-3 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] text-xs text-[var(--semi-color-text-2)]">
+            <div className={styles.reviewNote}>
               “{targetComment.content}”
             </div>
           )}

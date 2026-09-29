@@ -3,3 +3,106 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.articleIdentity > * + * {
+  margin-top: 4px;
+}
+
+.articleTitle {
+  max-width: 448px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--semi-color-text-0);
+}
+
+.articleTitle:hover {
+  color: var(--semi-color-primary) !important;
+}
+
+.articleTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.articleDate {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-1);
+}
+
+.articleMetric {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.filterHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .filterHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.filterActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyState {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.editorForm > * + * {
+  margin-top: 16px;
+}
+
+.editorForm {
+  padding-top: 8px;
+}
+
+.requiredMark {
+  color: #ef4444;
+}
+
+.editorFields {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .editorFields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

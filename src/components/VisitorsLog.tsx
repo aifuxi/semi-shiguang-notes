@@ -84,7 +84,7 @@ export default function VisitorsLog() {
       key: 'ip',
       width: 150,
       render: (ip: string) => (
-        <span className="font-mono text-xs font-semibold text-[var(--semi-color-primary)]">
+        <span className={styles.visitorId}>
           {ip}
         </span>
       )
@@ -94,7 +94,7 @@ export default function VisitorsLog() {
       dataIndex: 'location',
       key: 'location',
       render: (loc: string) => (
-        <div className="flex items-center gap-1.5 text-xs text-[var(--semi-color-text-0)]">
+        <div className={styles.visitorDevice}>
           <IconGlobeStroke style={{ color: 'var(--semi-color-text-2)' }} />
           <span>{loc}</span>
         </div>
@@ -105,7 +105,7 @@ export default function VisitorsLog() {
       dataIndex: 'entryPage',
       key: 'entryPage',
       render: (page: string) => (
-        <span className="font-mono text-xs text-[var(--semi-color-text-1)]">
+        <span className={styles.visitorIp}>
           {page}
         </span>
       )
@@ -116,9 +116,9 @@ export default function VisitorsLog() {
       key: 'os',
       width: 200,
       render: (os: string, record: any) => (
-        <div className="text-xs text-[var(--semi-color-text-2)]">
+        <div className={styles.visitorPlatform}>
           <div>{record.browser}</div>
-          <div className="text-[11px] opacity-75">{os}</div>
+          <div className={styles.visitorOs}>{os}</div>
         </div>
       )
     },
@@ -139,7 +139,7 @@ export default function VisitorsLog() {
       key: 'time',
       width: 100,
       render: (time: string) => (
-        <span className="font-mono text-xs text-[var(--semi-color-text-2)]">
+        <span className={styles.visitorTime}>
           {time}
         </span>
       )
@@ -166,14 +166,14 @@ export default function VisitorsLog() {
             style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
             bodyStyle={{ padding: '16px' }}
           >
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40">
+            <div className={styles.statContent}>
+              <div className={styles.visitsIcon}>
                 <IconUserGroup size="large" />
               </div>
               <div>
                 <Text type="secondary" size="small">当前实时在线</Text>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+                <div className={styles.statValueRow}>
+                  <span className={styles.statValue}>
                     {liveOnlineCount}
                   </span>
                   <Tag color="green" size="small">实时活跃</Tag>
@@ -189,14 +189,14 @@ export default function VisitorsLog() {
             style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
             bodyStyle={{ padding: '16px' }}
           >
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/40">
+            <div className={styles.statContent}>
+              <div className={styles.uniqueIcon}>
                 <IconGlobeStroke size="large" />
               </div>
               <div>
                 <Text type="secondary" size="small">今日独立 IP 覆盖</Text>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+                <div className={styles.statValueRow}>
+                  <span className={styles.statValue}>
                     1,428
                   </span>
                   <Text type="tertiary" size="small">涵盖 28 个城市</Text>
@@ -212,14 +212,14 @@ export default function VisitorsLog() {
             style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
             bodyStyle={{ padding: '16px' }}
           >
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-950/40">
+            <div className={styles.statContent}>
+              <div className={styles.viewsIcon}>
                 <IconShield size="large" />
               </div>
               <div>
                 <Text type="secondary" size="small">合规搜索引擎蜘蛛</Text>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+                <div className={styles.statValueRow}>
+                  <span className={styles.statValue}>
                     312
                   </span>
                   <Text type="tertiary" size="small">Google / Baidu Bot</Text>
@@ -236,9 +236,9 @@ export default function VisitorsLog() {
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+        <div className={styles.pageHeading}>
+          <div className={styles.liveStatus}>
+            <span className={styles.liveIndicator} />
             <Text strong>实时访问流已连接 (WebSocket 模拟心跳)</Text>
           </div>
           <Input

@@ -3,3 +3,101 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorInfo {
+  min-width: 0;
+}
+
+.authorName {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--semi-color-text-0);
+}
+
+.authorEmail {
+  font-family: var(--font-mono) !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--semi-color-text-2);
+  font-size: 11px;
+}
+
+.commentDetails > * + * {
+  margin-top: 4px;
+}
+
+.commentDetails {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.commentText {
+  font-size: 12px;
+  line-height: 1.625;
+  color: var(--semi-color-text-1);
+}
+
+.commentMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--semi-color-text-2);
+  font-size: 11px;
+}
+
+.postTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 384px;
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.emptyState {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.reviewForm > * + * {
+  margin-top: 12px;
+}
+
+.reviewForm {
+  padding-top: 8px;
+}
+
+.reviewNote {
+  padding: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+  color: var(--semi-color-text-2);
+  border-color: var(--semi-color-border);
+}

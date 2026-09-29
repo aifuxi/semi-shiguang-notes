@@ -248,8 +248,8 @@ export default function BlogFrontend({
 
   if (isDetailRoute && !selectedPost) {
     return (
-      <Layout className="min-h-screen bg-[var(--semi-color-bg-0)] text-[var(--semi-color-text-0)]">
-        <Content className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex flex-col items-center gap-4">
+      <Layout className={styles.page}>
+        <Content className={styles.notFoundContent}>
           <Title heading={3}>文章不存在</Title>
           <Text type="secondary">这篇文章可能已被删除，或链接地址无效。</Text>
           <Button theme="light" type="primary" onClick={handleBackToList}>返回博文列表</Button>
@@ -259,14 +259,14 @@ export default function BlogFrontend({
   }
 
   return (
-    <Layout className="min-h-screen bg-[var(--semi-color-bg-0)] text-[var(--semi-color-text-0)]">
+    <Layout className={styles.page}>
       {/* 1. Header Navigation Bar */}
-      <Header className="sticky top-0 z-50 bg-[var(--semi-color-bg-1)] border-b border-[var(--semi-color-border)] shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <Header className={styles.siteHeader}>
+        <div className={styles.headerInner}>
           {/* Brand Logo */}
           <div
             onClick={() => navigate(frontendRoutes.home)}
-            className="flex items-center gap-3.5 cursor-pointer select-none"
+            className={styles.brand}
           >
             <Avatar
               size="medium"
@@ -275,18 +275,18 @@ export default function BlogFrontend({
             >
               {settings.title.slice(0, 1)}
             </Avatar>
-            <div className="flex flex-col">
-              <span className="font-bold text-base text-[var(--semi-color-text-0)] tracking-tight leading-tight">
+            <div className={styles.brandText}>
+              <span className={styles.brandTitle}>
                 {settings.title}
               </span>
-              <span className="text-[11px] text-[var(--semi-color-text-2)] mt-0.5">
+              <span className={styles.brandSubtitle}>
                 {settings.subtitle || '时光流转，执笔留念'}
               </span>
             </div>
           </div>
 
           {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-1.5">
+          <nav className={styles.desktopNav}>
             {[
               { id: 'home', label: '首页', icon: <IconHome /> },
               { id: 'articles', label: '精选博文', icon: <IconArticle /> },
@@ -313,7 +313,7 @@ export default function BlogFrontend({
           </nav>
 
           {/* Actions on right */}
-          <div className="flex items-center gap-3">
+          <div className={styles.headerActions}>
             {/* Theme toggle */}
             <Tooltip content={isDarkMode ? '切换为浅色主题' : '切换为深色主题'}>
               <Button
@@ -338,10 +338,10 @@ export default function BlogFrontend({
       </Header>
 
       {/* 2. Main Content Workspace */}
-      <Content className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <Content className={styles.mainContent}>
         {/* ARTICLE DETAIL VIEW */}
         {selectedPost ? (
-          <div className="max-w-4xl mx-auto space-y-10">
+          <div className={styles.articleDetail}>
             {/* Back Button */}
             <div>
               <Button
@@ -361,8 +361,8 @@ export default function BlogFrontend({
               bodyStyle={{ padding: '40px 36px' }}
             >
               {/* Meta header */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2.5 flex-wrap">
+              <div className={styles.articleHeading}>
+                <div className={styles.articleTags}>
                   <Tag color="cyan" size="large">
                     {selectedPost.category}
                   </Tag>
@@ -377,7 +377,7 @@ export default function BlogFrontend({
                   {selectedPost.title}
                 </Title>
 
-                <div className="flex items-center gap-4 text-xs text-[var(--semi-color-text-2)] font-mono flex-wrap pt-2 border-b border-[var(--semi-color-border)] pb-4">
+                <div className={styles.articleMeta}>
                   <span>作者: {settings.authorName}</span>
                   <span>•</span>
                   <span>{selectedPost.publishTime}</span>
@@ -389,9 +389,9 @@ export default function BlogFrontend({
               </div>
 
               {/* Body Content */}
-              <div className="prose dark:prose-invert max-w-none text-base leading-relaxed text-[var(--semi-color-text-1)] space-y-6 font-sans py-8">
+              <div className={styles.articleBody}>
                 {selectedPost.content.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="leading-relaxed">
+                  <p key={idx} className={styles.articleParagraph}>
                     {paragraph}
                   </p>
                 ))}
@@ -400,7 +400,7 @@ export default function BlogFrontend({
               <Divider style={{ margin: '32px 0' }} />
 
               {/* Likes & Share Action */}
-              <div className="flex items-center justify-between pt-2">
+              <div className={styles.articleNavigation}>
                 <Button
                   theme="light"
                   type="danger"
@@ -431,12 +431,12 @@ export default function BlogFrontend({
               style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
               bodyStyle={{ padding: '28px 32px' }}
             >
-              <div className="flex items-center gap-5">
+              <div className={styles.authorProfile}>
                 <Avatar size="extra-large" src={settings.avatarUrl}>
                   {settings.authorName.slice(0, 1)}
                 </Avatar>
-                <div className="space-y-1.5 flex-1">
-                  <div className="flex items-center gap-2.5">
+                <div className={styles.authorDetails}>
+                  <div className={styles.authorNameRow}>
                     <Text strong style={{ fontSize: 16 }}>{settings.authorName}</Text>
                     <Tag color="blue" size="small">{settings.authorRole}</Tag>
                   </div>
@@ -450,7 +450,7 @@ export default function BlogFrontend({
             {/* Comments Section */}
             <Card
               title={
-                <div className="flex items-center gap-2.5 text-base font-semibold">
+                <div className={styles.commentHeading}>
                   <IconComment style={{ color: 'var(--semi-color-primary)' }} />
                   <span>读者互动交流 ({commentsForPost.length})</span>
                 </div>
@@ -460,11 +460,11 @@ export default function BlogFrontend({
               bodyStyle={{ padding: '32px' }}
             >
               {/* Submit Comment Box */}
-              <div className="space-y-4 mb-8 p-6 rounded-xl bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)]">
+              <div className={styles.commentForm}>
                 <Text strong style={{ fontSize: 15 }}>留下你的观点与思考</Text>
 
                 {/* Avatar Picker */}
-                <div className="flex items-center gap-2">
+                <div className={styles.avatarPicker}>
                   <Text type="secondary" size="small">选择形象:</Text>
                   <Space>
                     {avatarPresets.map((src, i) => (
@@ -472,14 +472,14 @@ export default function BlogFrontend({
                         key={i}
                         size="small"
                         src={src}
-                        className={`cursor-pointer transition-transform ${selectedAvatarIdx === i ? 'ring-2 ring-[var(--semi-color-primary)] scale-110' : 'opacity-70'}`}
+                        className={`${styles.avatarOption} ${selectedAvatarIdx === i ? styles.avatarSelected : styles.avatarDimmed}`}
                         onClick={() => setSelectedAvatarIdx(i)}
                       />
                     ))}
                   </Space>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className={styles.commentFields}>
                   <Input
                     placeholder="你的昵称 *"
                     value={commentAuthor}
@@ -499,7 +499,7 @@ export default function BlogFrontend({
                   onChange={(val) => setCommentContent(val)}
                 />
 
-                <div className="flex justify-end">
+                <div className={styles.commentSubmit}>
                   <Button
                     theme="solid"
                     type="primary"
@@ -519,26 +519,26 @@ export default function BlogFrontend({
                   description="期待你成为第一个留下足迹的小伙伴"
                 />
               ) : (
-                <div className="divide-y divide-[var(--semi-color-border)]">
+                <div className={styles.commentsList}>
                   {commentsForPost.map((c) => (
-                    <div key={c.id} className="py-4 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
+                    <div key={c.id} className={styles.commentItem}>
+                      <div className={styles.commentHeader}>
+                        <div className={styles.commentAuthor}>
                           <Avatar size="small" src={c.avatar}>
                             {c.author.slice(0, 1)}
                           </Avatar>
-                          <span className="font-semibold text-xs text-[var(--semi-color-text-0)]">
+                          <span className={styles.commentAuthorName}>
                             {c.author}
                           </span>
                           {c.author.includes('博主') && (
                             <Tag color="purple" size="small">博主</Tag>
                           )}
                         </div>
-                        <span className="text-[11px] text-[var(--semi-color-text-2)] font-mono">
+                        <span className={styles.commentDate}>
                           {c.time}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-[var(--semi-color-text-1)] pl-9 leading-relaxed">
+                      <p className={styles.commentText}>
                         {c.content}
                       </p>
                     </div>
@@ -549,7 +549,7 @@ export default function BlogFrontend({
           </div>
         ) : currentTab === 'home' ? (
           /* TAB: HOME */
-          <div className="space-y-12">
+          <div className={styles.articleSections}>
             {/* Hero Banner */}
             <Card
               bordered
@@ -560,7 +560,7 @@ export default function BlogFrontend({
               }}
               bodyStyle={{ padding: '48px 40px' }}
             >
-              <div className="max-w-2xl space-y-4">
+              <div className={styles.subscriptionForm}>
                 <Tag color="blue" size="large" style={{ padding: '4px 10px' }}>
                   ✨ Douyin Semi Design 驱动的极简博客
                 </Tag>
@@ -572,7 +572,7 @@ export default function BlogFrontend({
                 </Paragraph>
 
                 {/* Instant Search Bar */}
-                <div className="pt-3 max-w-lg">
+                <div className={styles.subscriptionAction}>
                   <Input
                     prefix={<IconSearch />}
                     size="large"
@@ -592,8 +592,8 @@ export default function BlogFrontend({
             <Row gutter={[36, 36]} className={styles.contentRow}>
               {/* Left Column: Recent Articles */}
               <Col xs={24} lg={16} className={styles.articlesColumn}>
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between pb-1">
+                <div className={styles.featuredArticles}>
+                  <div className={styles.sectionHeading}>
                     <div>
                       <Title heading={3} style={{ margin: 0, fontSize: 20 }}>
                         最新文章精选
@@ -616,25 +616,25 @@ export default function BlogFrontend({
                       <div
                         key={post.id}
                         onClick={() => handleSelectPost(post)}
-                        className="cursor-pointer group"
+                        className={styles.featuredArticle}
                       >
                         <Card
                           bordered
-                          className="transition-all duration-200 group-hover:shadow-sm"
+                          className={styles.featuredArticleCard}
                           style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                           bodyStyle={{ padding: '26px 28px' }}
                         >
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
+                          <div className={styles.featuredArticleContent}>
+                            <div className={styles.featuredArticleMeta}>
                               <Tag color="cyan" size="small">
                                 {post.category}
                               </Tag>
-                              <span className="text-xs text-[var(--semi-color-text-2)] font-mono">
+                              <span className={styles.featuredArticleDate}>
                                 {post.publishTime.slice(0, 10)}
                               </span>
                             </div>
 
-                            <Title heading={4} style={{ margin: 0 }} className="group-hover:text-[var(--semi-color-primary)] transition-colors">
+                            <Title heading={4} style={{ margin: 0 }} className={styles.featuredArticleTitle}>
                               {post.title}
                             </Title>
 
@@ -646,17 +646,17 @@ export default function BlogFrontend({
                               {post.content}
                             </Paragraph>
 
-                            <div className="pt-4 border-t border-[var(--semi-color-border)] flex items-center justify-between text-xs text-[var(--semi-color-text-2)]">
-                              <div className="flex items-center gap-2">
+                            <div className={styles.featuredArticleFooter}>
+                              <div className={styles.featuredArticleStats}>
                                 {post.tags.map(t => (
                                   <Tag key={t} size="small" color="white">
                                     #{t}
                                   </Tag>
                                 ))}
                               </div>
-                              <div className="flex items-center gap-4 font-mono">
+                              <div className={styles.featuredArticleLinks}>
                                 <span><IconEyeOpened size="small" /> {post.views || 0} 次阅读</span>
-                                <span className="text-[var(--semi-color-primary)] font-sans group-hover:translate-x-0.5 transition-transform inline-flex items-center">
+                                <span className={styles.featuredArticleReadMore}>
                                   阅读全文 &rarr;
                                 </span>
                               </div>
@@ -668,7 +668,7 @@ export default function BlogFrontend({
                   </div>
 
                   {/* Bottom Browse All Action */}
-                  <div className="pt-4 flex justify-center">
+                  <div className={styles.featuredMore}>
                     <Button
                       theme="light"
                       type="primary"
@@ -699,12 +699,12 @@ export default function BlogFrontend({
                     style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                     bodyStyle={{ padding: '28px 24px' }}
                   >
-                    <div className="text-center space-y-4">
+                    <div className={styles.profileOverview}>
                       <Avatar size="extra-large" src={settings.avatarUrl}>
                         {settings.authorName.slice(0, 1)}
                       </Avatar>
                       <div>
-                        <div className="font-bold text-lg text-[var(--semi-color-text-0)]">
+                        <div className={styles.profileName}>
                           {settings.authorName}
                         </div>
                         <Text type="secondary" size="small">{settings.authorRole}</Text>
@@ -713,21 +713,21 @@ export default function BlogFrontend({
                         {settings.aboutMe || '热爱前沿架构与交互设计，记录数字生活的点滴温度。'}
                       </Paragraph>
 
-                      <div className="pt-4 border-t border-[var(--semi-color-border)] flex items-center justify-around font-mono text-center">
+                      <div className={styles.profileStats}>
                         <div>
-                          <div className="font-bold text-lg text-[var(--semi-color-text-0)]">
+                          <div className={styles.profileStatValue}>
                             {publishedPosts.length}
                           </div>
                           <Text type="tertiary" size="small">博文篇数</Text>
                         </div>
                         <div>
-                          <div className="font-bold text-lg text-[var(--semi-color-text-0)]">
+                          <div className={styles.profileStatValue}>
                             {totalViews.toLocaleString()}
                           </div>
                           <Text type="tertiary" size="small">总阅读量</Text>
                         </div>
                         <div>
-                          <div className="font-bold text-lg text-[var(--semi-color-text-0)]">
+                          <div className={styles.profileStatValue}>
                             {approvedFriendsLinks.length}
                           </div>
                           <Text type="tertiary" size="small">伙伴互联</Text>
@@ -738,12 +738,12 @@ export default function BlogFrontend({
 
                   {/* Categories Widget */}
                   <Card
-                    title={<span className="font-semibold text-sm">分类专栏</span>}
+                    title={<span className={styles.sidebarHeading}>分类专栏</span>}
                     bordered
                     style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                     bodyStyle={{ padding: '16px 20px' }}
                   >
-                    <div className="divide-y divide-[var(--semi-color-border)]">
+                    <div className={styles.categoryList}>
                       {Object.entries(categoryStats).map(([cat, count]) => (
                         <div
                           key={cat}
@@ -751,9 +751,9 @@ export default function BlogFrontend({
                             setSelectedCategory(cat);
                             navigate(frontendRoutes.articles);
                           }}
-                          className="py-3 flex items-center justify-between text-xs cursor-pointer hover:text-[var(--semi-color-primary)] transition-colors px-1"
+                          className={styles.categoryItem}
                         >
-                          <span className="font-medium">{cat}</span>
+                          <span className={styles.categoryName}>{cat}</span>
                           <Badge count={count} type="primary" />
                         </div>
                       ))}
@@ -762,12 +762,12 @@ export default function BlogFrontend({
 
                   {/* Tag Cloud */}
                   <Card
-                    title={<span className="font-semibold text-sm">热门标签</span>}
+                    title={<span className={styles.sidebarHeading}>热门标签</span>}
                     bordered
                     style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                     bodyStyle={{ padding: '20px 24px' }}
                   >
-                    <div className="flex flex-wrap gap-2.5">
+                    <div className={styles.popularTags}>
                       {tagCloud.map(tag => (
                         <Tag
                           key={tag}
@@ -790,8 +790,8 @@ export default function BlogFrontend({
           </div>
         ) : currentTab === 'articles' ? (
           /* TAB: ARTICLES */
-          <div className="space-y-8" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+          <div className={styles.listing} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <div className={styles.listingHeading}>
               <div>
                 <Title heading={3} style={{ margin: 0, fontSize: 22 }}>
                   精选博文库
@@ -818,8 +818,8 @@ export default function BlogFrontend({
               style={{ borderRadius: 'var(--semi-border-radius-medium)', marginBottom: 36 }}
               bodyStyle={{ padding: '22px 26px' }}
             >
-              <div className="space-y-4">
-                <div className="flex items-center gap-2.5 flex-wrap">
+              <div className={styles.listingFilters}>
+                <div className={styles.listingTags}>
                   <Text type="secondary" size="small" style={{ marginRight: 4 }}>分类筛选:</Text>
                   <Button
                     size="small"
@@ -843,7 +843,7 @@ export default function BlogFrontend({
                 </div>
 
                 {selectedTag !== '全部' && (
-                  <div className="flex items-center gap-2.5 pt-3 border-t border-[var(--semi-color-border)]">
+                  <div className={styles.listingActiveTags}>
                     <Text type="secondary" size="small">当前限定标签:</Text>
                     <Tag color="blue" closable onClose={() => setSelectedTag('全部')} style={{ padding: '3px 8px' }}>
                       #{selectedTag}
@@ -856,7 +856,7 @@ export default function BlogFrontend({
             {/* Posts Grid with Comfortable Gutters */}
             {filteredPosts.length === 0 ? (
               <Card bordered style={{ borderRadius: 'var(--semi-border-radius-medium)' }}>
-                <div className="py-16">
+                <div className={styles.emptyState}>
                   <Empty
                     image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
                     title="未找到匹配的博文"
@@ -870,11 +870,11 @@ export default function BlogFrontend({
                   <Col xs={24} md={12} key={post.id}>
                     <div
                       onClick={() => handleSelectPost(post)}
-                      className="cursor-pointer h-full group"
+                      className={styles.articleTile}
                     >
                       <Card
                         bordered
-                        className="transition-all duration-200 h-full group-hover:shadow-sm"
+                        className={styles.articleTileCard}
                         style={{
                           borderRadius: 'var(--semi-border-radius-medium)',
                           display: 'flex',
@@ -883,15 +883,15 @@ export default function BlogFrontend({
                         }}
                         bodyStyle={{ padding: '26px' }}
                       >
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
+                      <div className={styles.articleTileContent}>
+                        <div className={styles.articleTileMeta}>
                           <Tag color="cyan">{post.category}</Tag>
-                          <span className="font-mono text-xs text-[var(--semi-color-text-2)]">
+                          <span className={styles.articleTileDate}>
                             {post.publishTime.slice(0, 10)}
                           </span>
                         </div>
 
-                        <Title heading={4} style={{ margin: 0 }} className="group-hover:text-[var(--semi-color-primary)] transition-colors">
+                        <Title heading={4} style={{ margin: 0 }} className={styles.articleTileTitle}>
                           {post.title}
                         </Title>
 
@@ -904,7 +904,7 @@ export default function BlogFrontend({
                         </Paragraph>
                       </div>
 
-                      <div className="pt-4 mt-4 border-t border-[var(--semi-color-border)] flex items-center justify-between text-xs text-[var(--semi-color-text-2)]">
+                      <div className={styles.articleTileFooter}>
                         <Space>
                           {post.tags.map(t => (
                             <Tag key={t} size="small" color="white">
@@ -912,7 +912,7 @@ export default function BlogFrontend({
                             </Tag>
                           ))}
                         </Space>
-                        <div className="flex items-center gap-1 font-mono">
+                        <div className={styles.articleTileMetric}>
                           <IconEyeOpened size="small" />
                           <span>{post.views || 0}</span>
                         </div>
@@ -926,7 +926,7 @@ export default function BlogFrontend({
 
             {/* Pagination */}
             {filteredPosts.length > pageSize && (
-              <div className="flex justify-center pt-8 pb-4">
+              <div className={styles.pagination}>
                 <Pagination
                   total={filteredPosts.length}
                   pageSize={pageSize}
@@ -938,8 +938,8 @@ export default function BlogFrontend({
           </div>
         ) : currentTab === 'friends' ? (
           /* TAB: FRIENDS */
-          <div className="space-y-8" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+          <div className={styles.friendsPage} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <div className={styles.friendsHeading}>
               <div>
                 <Title heading={3} style={{ margin: 0, fontSize: 22 }}>
                   友情链接枢纽
@@ -964,17 +964,17 @@ export default function BlogFrontend({
                 <Col xs={24} sm={12} lg={8} key={link.id}>
                   <Card
                     bordered
-                    className="transition-all duration-200 h-full flex flex-col justify-between"
+                    className={styles.friendCard}
                     style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                     bodyStyle={{ padding: '24px' }}
                   >
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3.5">
+                    <div className={styles.friendCardContent}>
+                      <div className={styles.friendIdentity}>
                         <Avatar size="medium" src={link.avatar}>
                           {link.name.slice(0, 1)}
                         </Avatar>
-                        <div className="min-w-0 flex-1">
-                          <div className="font-bold text-sm text-[var(--semi-color-text-0)] truncate">
+                        <div className={styles.friendDetails}>
+                          <div className={styles.friendName}>
                             {link.name}
                           </div>
                           <Tag color="cyan" size="small" style={{ marginTop: 2 }}>
@@ -991,7 +991,7 @@ export default function BlogFrontend({
                         {link.description}
                       </Paragraph>
 
-                      <div className="pt-3 border-t border-[var(--semi-color-border)] flex justify-end">
+                      <div className={styles.friendCardFooter}>
                         <a href={link.url} target="_blank" rel="noreferrer">
                           <Button
                             theme="light"
@@ -1019,9 +1019,9 @@ export default function BlogFrontend({
               cancelText="取消"
               width={520}
             >
-              <div className="space-y-4 pt-2">
+              <div className={styles.friendForm}>
                 <div>
-                  <Text strong>你的博客名称 <span className="text-red-500">*</span></Text>
+                  <Text strong>你的博客名称 <span className={styles.requiredMark}>*</span></Text>
                   <Input
                     placeholder="例如: 拾光漫步"
                     value={linkName}
@@ -1030,7 +1030,7 @@ export default function BlogFrontend({
                   />
                 </div>
                 <div>
-                  <Text strong>博客站点链接 (URL) <span className="text-red-500">*</span></Text>
+                  <Text strong>博客站点链接 (URL) <span className={styles.requiredMark}>*</span></Text>
                   <Input
                     placeholder="https://yourblog.com"
                     value={linkUrl}
@@ -1061,43 +1061,43 @@ export default function BlogFrontend({
           </div>
         ) : (
           /* TAB: CHANGELOG */
-          <div className="space-y-8">
+          <div className={styles.pageEnd}>
             <Changelog />
           </div>
         )}
       </Content>
 
       {/* 3. Footer */}
-      <Footer className="border-t border-[var(--semi-color-border)] py-10 px-4 sm:px-6 lg:px-8 bg-[var(--semi-color-bg-1)] text-xs text-[var(--semi-color-text-2)] mt-20">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <Footer className={styles.siteFooter}>
+        <div className={styles.footerInner}>
           <span>&copy; 2025 {settings.title} • 基于 Semi Design 统一重构</span>
-          <div className="flex items-center gap-6">
+          <div className={styles.footerLinks}>
             <span
-              className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
+              className={styles.footerLink}
               onClick={() => navigate(frontendRoutes.home)}
             >
               首页
             </span>
             <span
-              className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
+              className={styles.footerLink}
               onClick={() => navigate(frontendRoutes.articles)}
             >
               博文列表
             </span>
             <span
-              className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
+              className={styles.footerLink}
               onClick={() => navigate(frontendRoutes.friends)}
             >
               友情链接
             </span>
             <span
-              className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
+              className={styles.footerLink}
               onClick={() => navigate('/playground')}
             >
               组件预览
             </span>
             <span
-              className="cursor-pointer hover:text-[var(--semi-color-text-0)] transition-colors"
+              className={styles.footerLink}
               onClick={onEnterAdmin}
             >
               管理后台

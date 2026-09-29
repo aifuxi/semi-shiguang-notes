@@ -176,7 +176,7 @@ export default function Dashboard({
   return (
     <div className={styles.dashboard}>
       {/* 1. Header Banner & Welcome */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             仪表盘概览
@@ -215,20 +215,20 @@ export default function Dashboard({
               }}
               bodyStyle={{ padding: '16px' }}
             >
-              <div className="flex items-center justify-between">
+              <div className={styles.statHeading}>
                 <Text type="secondary" size="small" strong>{card.title}</Text>
-                <div className="p-2 rounded-lg bg-[var(--semi-color-fill-0)]">
+                <div className={styles.statIcon}>
                   {card.icon}
                 </div>
               </div>
 
-              <div className="my-2">
-                <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+              <div className={styles.statValueWrap}>
+                <span className={styles.statValue}>
                   {card.value}
                 </span>
               </div>
 
-              <div className="flex items-center gap-1.5 text-xs">
+              <div className={styles.statTrend}>
                 {card.isUp ? (
                   <Tag color="green" size="small" style={{ padding: '0 4px', fontSize: 11 }}>
                     <IconArrowUp size="small" /> {card.change}
@@ -251,7 +251,7 @@ export default function Dashboard({
         <Col xs={24} lg={16}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.chartHeading}>
                 <IconLineChartStroked style={{ color: 'var(--semi-color-primary)' }} />
                 <span>流量走势分析 (PV / UV)</span>
               </div>
@@ -320,7 +320,7 @@ export default function Dashboard({
 
                 {/* Data points & X Labels */}
                 {trendPoints.map((p, i) => (
-                  <g key={i} className="cursor-pointer">
+                  <g key={i} className={styles.chartPoint}>
                     <line
                       x1={p.x}
                       y1={trendHeight - paddingY}
@@ -377,7 +377,7 @@ export default function Dashboard({
         <Col xs={24} lg={8}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.sourcesHeading}>
                 <IconRingChartStroked style={{ color: 'var(--semi-color-success)' }} />
                 <span>访客来源占比</span>
               </div>
@@ -386,12 +386,12 @@ export default function Dashboard({
             style={{ borderRadius: 'var(--semi-border-radius-medium)', height: '100%' }}
             bodyStyle={{ padding: '20px 16px' }}
           >
-            <div className="space-y-4">
+            <div className={styles.sourceList}>
               {trafficSources.map((source, index) => (
-                <div key={index} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-[var(--semi-color-text-0)]">{source.name}</span>
-                    <span className="font-mono text-[var(--semi-color-text-2)]">{source.percentage}%</span>
+                <div key={index} className={styles.sourceItem}>
+                  <div className={styles.sourceLabelRow}>
+                    <span className={styles.sourceName}>{source.name}</span>
+                    <span className={styles.sourcePercentage}>{source.percentage}%</span>
                   </div>
                   <Progress
                     percent={source.percentage}
@@ -411,7 +411,7 @@ export default function Dashboard({
               ))}
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[var(--semi-color-border)] flex items-center justify-between text-xs text-[var(--semi-color-text-2)]">
+            <div className={styles.sourcesFooter}>
               <span>主要来源渠道: 搜索引擎自然搜索</span>
               <Button theme="borderless" type="primary" size="small" onClick={() => onNavigateToTab('analytics')}>
                 详细分析 &rarr;
@@ -427,8 +427,8 @@ export default function Dashboard({
         <Col xs={24} lg={12}>
           <Card
             title={
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-2">
+              <div className={styles.commentsHeading}>
+                <div className={styles.commentsHeadingLabel}>
                   <IconComment style={{ color: 'var(--semi-color-danger)' }} />
                   <span>待审核评论</span>
                   {pendingCount > 0 && <Badge count={pendingCount} type="danger" />}
@@ -448,7 +448,7 @@ export default function Dashboard({
             bodyStyle={{ padding: '12px 16px' }}
           >
             {pendingComments.length === 0 ? (
-              <div className="py-8">
+              <div className={styles.commentsEmpty}>
                 <Empty
                   image={<IllustrationNoContent style={{ width: 140, height: 140 }} />}
                   title="暂无待审核评论"
@@ -456,15 +456,15 @@ export default function Dashboard({
                 />
               </div>
             ) : (
-              <div className="divide-y divide-[var(--semi-color-border)]">
+              <div className={styles.commentsList}>
                 {pendingComments.map((comment) => (
-                  <div key={comment.id} className="py-3 flex items-start justify-between gap-3">
-                    <div className="space-y-1 min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-xs text-[var(--semi-color-text-0)]">{comment.author}</span>
+                  <div key={comment.id} className={styles.commentItem}>
+                    <div className={styles.commentBody}>
+                      <div className={styles.commentAuthorRow}>
+                        <span className={styles.commentAuthor}>{comment.author}</span>
                         <Text type="tertiary" size="small" style={{ fontSize: 11 }}>{comment.time}</Text>
                       </div>
-                      <p className="text-xs text-[var(--semi-color-text-1)] line-clamp-2 leading-relaxed">
+                      <p className={styles.commentPreview}>
                         {comment.content}
                       </p>
                       <Text type="secondary" size="small" style={{ fontSize: 11 }}>
@@ -510,12 +510,12 @@ export default function Dashboard({
 
         {/* Upcoming Schedules & System Health */}
         <Col xs={24} lg={12}>
-          <div className="space-y-4">
+          <div className={styles.scheduleContent}>
             {/* Upcoming Schedules */}
             <Card
               title={
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-2">
+                <div className={styles.scheduleHeading}>
+                  <div className={styles.scheduleHeadingLabel}>
                     <IconClock style={{ color: 'var(--semi-color-primary)' }} />
                     <span>定时发布计划</span>
                   </div>
@@ -536,14 +536,14 @@ export default function Dashboard({
               {schedules.length === 0 ? (
                 <Empty description="暂无排期的定时发布任务" />
               ) : (
-                <div className="divide-y divide-[var(--semi-color-border)]">
+                <div className={styles.scheduleList}>
                   {schedules.map((schedule) => (
-                    <div key={schedule.id} className="py-2.5 flex items-center justify-between gap-3">
-                      <div className="min-w-0 flex-1">
-                        <div className="font-medium text-xs text-[var(--semi-color-text-0)] truncate">
+                    <div key={schedule.id} className={styles.scheduleItem}>
+                      <div className={styles.scheduleDetails}>
+                        <div className={styles.scheduleTitle}>
                           {schedule.title}
                         </div>
-                        <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[var(--semi-color-text-2)]">
+                        <div className={styles.scheduleMeta}>
                           <span>{schedule.publishTime}</span>
                           <span>•</span>
                           <span>{schedule.month}{schedule.day}日</span>
@@ -559,7 +559,7 @@ export default function Dashboard({
             {/* Site Health & Server Performance */}
             <Card
               title={
-                <div className="flex items-center gap-2">
+                <div className={styles.healthHeading}>
                   <IconActivity style={{ color: 'var(--semi-color-success)' }} />
                   <span>站点运行健康度</span>
                 </div>
@@ -570,33 +570,33 @@ export default function Dashboard({
             >
               <Row gutter={[16, 12]}>
                 <Col span={6}>
-                  <div className="text-center">
+                  <div className={styles.healthMetric}>
                     <Text type="tertiary" size="small" style={{ fontSize: 11 }}>磁盘使用</Text>
-                    <div className="font-mono font-bold text-sm text-[var(--semi-color-success)] mt-1">
+                    <div className={styles.healthValueSuccess}>
                       {siteHealth.storageUsed} / {siteHealth.storageTotal} GB
                     </div>
                   </div>
                 </Col>
                 <Col span={6}>
-                  <div className="text-center">
+                  <div className={styles.healthMetric}>
                     <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份健康度</Text>
-                    <div className="font-mono font-bold text-sm text-[var(--semi-color-text-0)] mt-1">
+                    <div className={styles.healthValue}>
                       {siteHealth.backupScore}分
                     </div>
                   </div>
                 </Col>
                 <Col span={6}>
-                  <div className="text-center">
+                  <div className={styles.healthMetric}>
                     <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份状态</Text>
-                    <div className="font-bold text-xs text-[var(--semi-color-primary)] mt-1">
+                    <div className={styles.healthValuePrimary}>
                       {siteHealth.backupStatus}
                     </div>
                   </div>
                 </Col>
                 <Col span={6}>
-                  <div className="text-center">
+                  <div className={styles.healthMetric}>
                     <Text type="tertiary" size="small" style={{ fontSize: 11 }}>安全防御</Text>
-                    <div className="font-bold text-xs text-[var(--semi-color-success)] mt-1">
+                    <div className={styles.healthValueSuccessCompact}>
                       {siteHealth.securityLabel}
                     </div>
                   </div>
@@ -613,7 +613,7 @@ export default function Dashboard({
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className={styles.actionsHeading}>
           <div>
             <Text strong>快捷管理通道</Text>
             <Text type="secondary" size="small" style={{ marginLeft: 8 }}>

@@ -171,7 +171,7 @@ export default function Changelog() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             系统版本迭代日志
@@ -196,7 +196,7 @@ export default function Changelog() {
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex items-center justify-between gap-4">
+        <div className={styles.listHeading}>
           <Input
             prefix={<IconSearch />}
             placeholder="搜索版本号、功能词或特性..."
@@ -206,7 +206,7 @@ export default function Changelog() {
             style={{ maxWidth: 320 }}
           />
           <Text type="secondary" size="small">
-            已记录 <strong className="font-mono text-[var(--semi-color-primary)]">{filteredLogs.length}</strong> 个迭代里程碑
+            已记录 <strong className={styles.resultCount}>{filteredLogs.length}</strong> 个迭代里程碑
           </Text>
         </div>
       </Card>
@@ -224,19 +224,19 @@ export default function Changelog() {
               time={log.date}
               type={log.type === 'feature' ? 'default' : log.type === 'security' ? 'error' : 'success'}
             >
-              <div className="space-y-3 pb-6">
-                <div className="flex items-center gap-2.5 flex-wrap">
-                  <span className="font-bold text-base text-[var(--semi-color-text-0)] font-mono">
+              <div className={styles.releaseContent}>
+                <div className={styles.releaseHeading}>
+                  <span className={styles.releaseVersion}>
                     {log.version}
                   </span>
                   {getTypeTag(log.type)}
-                  <span className="font-semibold text-sm text-[var(--semi-color-text-0)]">
+                  <span className={styles.releaseTitle}>
                     {log.title}
                   </span>
                 </div>
 
                 <div
-                  className="mt-2.5 pl-3 border-l-2 border-[var(--semi-color-border)] space-y-2"
+                  className={styles.releaseDetails}
                   style={{
                     borderLeft: '2px solid var(--semi-color-fill-2)',
                     paddingLeft: 14,
@@ -246,7 +246,7 @@ export default function Changelog() {
                   {log.changes.map((change, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-2.5 text-sm leading-relaxed"
+                      className={styles.changeItem}
                       style={{ color: 'var(--semi-color-text-1)', fontSize: 13.5 }}
                     >
                       <span
@@ -279,10 +279,10 @@ export default function Changelog() {
         cancelText="取消"
         width={560}
       >
-        <div className="space-y-4 pt-2">
-          <div className="grid grid-cols-2 gap-4">
+        <div className={styles.releaseForm}>
+          <div className={styles.versionFields}>
             <div>
-              <Text strong>版本号 <span className="text-red-500">*</span></Text>
+              <Text strong>版本号 <span className={styles.requiredMark}>*</span></Text>
               <Input
                 placeholder="v2.3.0"
                 value={formVersion}
@@ -306,7 +306,7 @@ export default function Changelog() {
           </div>
 
           <div>
-            <Text strong>版本更新主题 <span className="text-red-500">*</span></Text>
+            <Text strong>版本更新主题 <span className={styles.requiredMark}>*</span></Text>
             <Input
               placeholder="简要概括此次升级核心..."
               value={formTitle}

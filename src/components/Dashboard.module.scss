@@ -44,3 +44,281 @@ $tooltip-padding-inline: 12px;
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   font-weight: 500;
 }
+
+/* 页面与组件的语义化样式 */
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.statHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statIcon {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+}
+
+.statValueWrap {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.statValue {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-0);
+}
+
+.statTrend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.chartHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chartPoint {
+  cursor: pointer;
+}
+
+.sourcesHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sourceList > * + * {
+  margin-top: 16px;
+}
+
+.sourceItem > * + * {
+  margin-top: 6px;
+}
+
+.sourceLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.sourceName {
+  font-weight: 500;
+  color: var(--semi-color-text-0);
+}
+
+.sourcePercentage {
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+}
+
+.sourcesFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  margin-top: 24px;
+  font-size: 12px;
+  line-height: 16px;
+  border-top: 1px solid var(--semi-color-border);
+  color: var(--semi-color-text-2);
+  border-color: var(--semi-color-border);
+}
+
+.commentsHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.commentsHeadingLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.commentsEmpty {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.commentsList > * + * {
+  border-top: 1px solid var(--semi-color-border);
+}
+
+.commentItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.commentBody > * + * {
+  margin-top: 4px;
+}
+
+.commentBody {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.commentAuthorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.commentAuthor {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--semi-color-text-0);
+}
+
+.commentPreview {
+  font-size: 12px;
+  line-height: 1.625;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--semi-color-text-1);
+}
+
+.scheduleContent > * + * {
+  margin-top: 16px;
+}
+
+.scheduleHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.scheduleHeadingLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scheduleList > * + * {
+  border-top: 1px solid var(--semi-color-border);
+}
+
+.scheduleItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.scheduleDetails {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.scheduleTitle {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--semi-color-text-0);
+}
+
+.scheduleMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  color: var(--semi-color-text-2);
+  font-size: 11px;
+}
+
+.healthHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.healthMetric {
+  text-align: center;
+}
+
+.healthValueSuccess {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-success);
+}
+
+.healthValue {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-0);
+}
+
+.healthValuePrimary {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  color: var(--semi-color-primary);
+}
+
+.healthValueSuccessCompact {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  color: var(--semi-color-success);
+}
+
+.actionsHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .actionsHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}

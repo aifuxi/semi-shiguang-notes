@@ -32,6 +32,7 @@ import {
   FriendLink
 } from './types';
 import { readStoredValue, storedValueGuards, writeStoredValue } from './storage';
+import styles from './App.module.scss';
 
 const Dashboard = lazy(() => import('./components/Dashboard'));
 const ContentManagement = lazy(() => import('./components/ContentManagement'));
@@ -268,7 +269,7 @@ export default function App() {
   ]);
 
   return (
-    <Suspense fallback={<div role="status" className="p-6 text-center text-[var(--semi-color-text-2)]">页面加载中…</div>}>
+    <Suspense fallback={<div role="status" className={styles.loadingMessage}>页面加载中…</div>}>
       {routes}
     </Suspense>
   );
@@ -310,17 +311,17 @@ function AdminLayout({
   children
 }: AdminLayoutProps) {
   return (
-    <div className="flex bg-[var(--semi-color-bg-0)] min-h-screen text-[var(--semi-color-text-0)] font-sans antialiased transition-colors duration-200">
+    <div className={styles.adminShell}>
       <Sidebar activeTab={activeTab} setActiveTab={onNavigateToTab} pendingCommentsCount={pendingCommentsCount} settings={settings} isCollapsed={isSidebarCollapsed} setIsCollapsed={setIsSidebarCollapsed} isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} onViewFrontend={onViewFrontend} />
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen overflow-x-hidden">
+      <div className={styles.adminContent}>
         <Header settings={settings} posts={posts} onCreatePostClick={onCreatePostClick} onNavigateToTab={onNavigateToTab} onPostSelectForEditing={onPostSelectForEditing} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} onMenuClick={() => setIsMobileOpen(true)} />
-        <main className="flex-1 p-4 sm:p-6 overflow-y-auto max-w-7xl w-full mx-auto">{children}</main>
-        <footer className="bg-[var(--semi-color-bg-1)] border-t border-[var(--semi-color-border)] py-4 px-6 shrink-0 text-xs text-[var(--semi-color-text-2)] font-medium transition-colors duration-200">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5">
+        <main className={styles.mainContent}>{children}</main>
+        <footer className={styles.footer}>
+          <div className={styles.footerInner}>
             <span>&copy; 2025 {settings.title} • 基于 Semi Design 统一重构。</span>
-            <div className="flex items-center gap-4">
-              <span onClick={() => Toast.info('如需查阅帮助文档，可在设置中心查看系统能力')} className="hover:text-[var(--semi-color-text-0)] transition-colors cursor-pointer">帮助文档</span>
-              <span onClick={() => Toast.info('欢迎在读者互动交流中提交宝贵反馈')} className="hover:text-[var(--semi-color-text-0)] transition-colors cursor-pointer">反馈建议</span>
+            <div className={styles.footerLinks}>
+              <span onClick={() => Toast.info('如需查阅帮助文档，可在设置中心查看系统能力')} className={styles.footerLink}>帮助文档</span>
+              <span onClick={() => Toast.info('欢迎在读者互动交流中提交宝贵反馈')} className={styles.footerLink}>反馈建议</span>
             </div>
           </div>
         </footer>
@@ -331,10 +332,10 @@ function AdminLayout({
 
 function NotFoundPage({ onGoHome }: { onGoHome: () => void }) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-[var(--semi-color-bg-0)] text-[var(--semi-color-text-0)]">
-      <h1 className="text-2xl font-semibold">页面不存在</h1>
-      <p className="text-[var(--semi-color-text-2)]">请检查地址，或返回可用页面。</p>
-      <button className="text-[var(--semi-color-primary)]" onClick={onGoHome}>返回</button>
+    <div className={styles.notFound}>
+      <h1 className={styles.notFoundTitle}>页面不存在</h1>
+      <p className={styles.notFoundDescription}>请检查地址，或返回可用页面。</p>
+      <button className={styles.homeLink} onClick={onGoHome}>返回</button>
     </div>
   );
 }

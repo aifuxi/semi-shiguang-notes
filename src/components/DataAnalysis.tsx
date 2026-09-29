@@ -121,15 +121,7 @@ export default function DataAnalysis() {
       width: 70,
       render: (rank: number) => (
         <span
-          className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold font-mono ${
-            rank === 1
-              ? 'bg-amber-500 text-white'
-              : rank === 2
-              ? 'bg-slate-300 text-slate-800'
-              : rank === 3
-              ? 'bg-amber-700/60 text-white'
-              : 'text-[var(--semi-color-text-2)]'
-          }`}
+          className={`${styles.rankBadge} ${rank === 1 ? styles.rankGold : rank === 2 ? styles.rankSilver : rank === 3 ? styles.rankBronze : styles.rankOther}`}
         >
           {rank}
         </span>
@@ -146,14 +138,14 @@ export default function DataAnalysis() {
       dataIndex: 'pv',
       key: 'pv',
       width: 100,
-      render: (val: number) => <span className="font-mono text-xs">{val.toLocaleString()}</span>
+      render: (val: number) => <span className={styles.tableMetric}>{val.toLocaleString()}</span>
     },
     {
       title: 'UV',
       dataIndex: 'uv',
       key: 'uv',
       width: 100,
-      render: (val: number) => <span className="font-mono text-xs">{val.toLocaleString()}</span>
+      render: (val: number) => <span className={styles.tableMetric}>{val.toLocaleString()}</span>
     },
     {
       title: '完读率',
@@ -167,7 +159,7 @@ export default function DataAnalysis() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             数据深度洞察
@@ -197,18 +189,18 @@ export default function DataAnalysis() {
               style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
               bodyStyle={{ padding: '16px' }}
             >
-              <div className="flex items-center justify-between">
+              <div className={styles.statHeading}>
                 <Text type="secondary" size="small">{item.title}</Text>
-                <div className="p-2 rounded-lg bg-[var(--semi-color-fill-0)]">
+                <div className={styles.statIcon}>
                   {item.icon}
                 </div>
               </div>
-              <div className="my-2">
-                <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+              <div className={styles.statValueWrap}>
+                <span className={styles.statValue}>
                   {item.value}
                 </span>
               </div>
-              <div className="flex items-center gap-1 text-xs">
+              <div className={styles.statTrend}>
                 <Tag color={item.isUp ? 'green' : 'amber'} size="small">
                   {item.isUp ? <IconArrowUp size="small" /> : <IconArrowDown size="small" />} {item.change}
                 </Tag>
@@ -224,7 +216,7 @@ export default function DataAnalysis() {
         <Col xs={24} lg={16}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.chartHeading}>
                 <IconLineChartStroked style={{ color: 'var(--semi-color-primary)' }} />
                 <span>PV / UV 双指标对比走势</span>
               </div>
@@ -233,19 +225,19 @@ export default function DataAnalysis() {
             style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
             bodyStyle={{ padding: '20px 16px' }}
           >
-            <div className="flex items-center gap-4 mb-4 text-xs">
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[var(--semi-color-primary)]" />
+            <div className={styles.chartLegend}>
+              <div className={styles.pageViewsLegend}>
+                <span className={styles.pageViewsSwatch} />
                 <span>浏览量 (PV)</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[var(--semi-color-success)]" />
+              <div className={styles.uniqueVisitorsLegend}>
+                <span className={styles.uniqueVisitorsSwatch} />
                 <span>访客数 (UV)</span>
               </div>
             </div>
 
-            <div className="w-full overflow-hidden">
-              <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-56 select-none">
+            <div className={styles.chartViewport}>
+              <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className={styles.chartSvg}>
                 {/* Y guidelines */}
                 {[0.25, 0.5, 0.75, 1.0].map((ratio, i) => {
                   const y = chartHeight - padY - ratio * (chartHeight - padY * 2);
@@ -290,7 +282,7 @@ export default function DataAnalysis() {
         <Col xs={24} lg={8}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.sourcesHeading}>
                 <IconDesktop style={{ color: 'var(--semi-color-primary)' }} />
                 <span>终端设备分布</span>
               </div>
@@ -299,15 +291,15 @@ export default function DataAnalysis() {
             style={{ borderRadius: 'var(--semi-border-radius-medium)', height: '100%' }}
             bodyStyle={{ padding: '20px 16px' }}
           >
-            <div className="space-y-5">
+            <div className={styles.sourceList}>
               {deviceDistribution.map((item, idx) => (
-                <div key={idx} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2 font-medium">
+                <div key={idx} className={styles.sourceItem}>
+                  <div className={styles.sourceLabelRow}>
+                    <div className={styles.sourceName}>
                       {item.icon}
                       <span>{item.name}</span>
                     </div>
-                    <span className="font-mono text-[var(--semi-color-text-2)]">{item.percentage}%</span>
+                    <span className={styles.sourcePercentage}>{item.percentage}%</span>
                   </div>
                   <Progress
                     percent={item.percentage}
@@ -319,7 +311,7 @@ export default function DataAnalysis() {
               ))}
             </div>
 
-            <div className="mt-8 p-3 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] text-xs text-[var(--semi-color-text-2)]">
+            <div className={styles.sourcesNote}>
               💡 提示：超过 36% 的读者通过移动设备访问，建议保持移动端排版简洁清晰。
             </div>
           </Card>

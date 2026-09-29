@@ -1,0 +1,206 @@
+
+/* 页面与组件的语义化样式 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--semi-color-border);
+  background-color: var(--semi-color-bg-1);
+  border-color: var(--semi-color-border);
+}
+
+@media (min-width: 640px) {
+  .header {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 1024px) {
+  .mobileMenu {
+    display: none;
+  }
+}
+
+.searchButton {
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex !important;
+}
+
+@media (min-width: 640px) {
+  .searchButton {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.searchLabel {
+  flex: 1 1 0%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchShortcut {
+  font-family: var(--font-mono) !important;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 4px;
+  display: none;
+  background-color: var(--semi-color-fill-0);
+  border-color: var(--semi-color-border);
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 10px;
+}
+
+@media (min-width: 640px) {
+  .searchShortcut {
+    display: inline-block;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.createLabel {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .createLabel {
+    display: inline;
+  }
+}
+
+.profileTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.profileTrigger:hover {
+  background-color: var(--semi-color-fill-0) !important;
+}
+
+.profileDetails {
+  flex-direction: column;
+  text-align: left;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .profileDetails {
+    display: flex;
+  }
+}
+
+.profileName {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--semi-color-text-0);
+}
+
+.profileRole {
+  margin-top: 2px;
+  color: var(--semi-color-text-2);
+  font-size: 10px;
+  line-height: 1;
+}
+
+.searchPanel > * + * {
+  margin-top: 16px;
+}
+
+.searchResults {
+  padding-top: 8px;
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+.searchResults > * + * {
+  margin-top: 8px;
+}
+
+.searchEmpty {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--semi-color-text-2);
+}
+
+.searchResult {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-color: var(--semi-color-border);
+}
+
+.searchResult:hover {
+  border-color: var(--semi-color-primary) !important;
+  background-color: var(--semi-color-fill-0) !important;
+}
+
+.searchResultContent {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.searchResultHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchResultTitle {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--semi-color-text-0);
+}
+
+.searchResultMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--semi-color-text-2);
+}

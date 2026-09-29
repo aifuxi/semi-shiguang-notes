@@ -191,14 +191,14 @@ export default function ContentManagement({
       dataIndex: 'title',
       key: 'title',
       render: (text: string, record: Post) => (
-        <div className="space-y-1">
+        <div className={styles.articleIdentity}>
           <div
-            className="font-medium text-[var(--semi-color-text-0)] hover:text-[var(--semi-color-primary)] cursor-pointer truncate max-w-md"
+            className={styles.articleTitle}
             onClick={() => openEditForm(record)}
           >
             {text}
           </div>
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div className={styles.articleTags}>
             {record.tags.map((tag, i) => (
               <Tag key={i} size="small" color="white" style={{ fontSize: 10 }}>
                 #{tag}
@@ -236,7 +236,7 @@ export default function ContentManagement({
       key: 'views',
       width: 110,
       render: (views: number | null) => (
-        <span className="font-mono text-xs text-[var(--semi-color-text-1)]">
+        <span className={styles.articleDate}>
           {views !== null ? views.toLocaleString() : '—'}
         </span>
       )
@@ -247,7 +247,7 @@ export default function ContentManagement({
       key: 'publishTime',
       width: 170,
       render: (time: string) => (
-        <span className="text-xs text-[var(--semi-color-text-2)] font-mono">
+        <span className={styles.articleMetric}>
           {time}
         </span>
       )
@@ -289,7 +289,7 @@ export default function ContentManagement({
   return (
     <div className={styles.page}>
       {/* View Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             内容管理
@@ -314,7 +314,7 @@ export default function ContentManagement({
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className={styles.filterHeading}>
           {/* Status Tabs */}
           <RadioGroup
             type="button"
@@ -336,7 +336,7 @@ export default function ContentManagement({
           </RadioGroup>
 
           {/* Search & Category Filter */}
-          <div className="flex items-center gap-3">
+          <div className={styles.filterActions}>
             <Select
               value={selectedCategory}
               onChange={(val) => setSelectedCategory(val as string)}
@@ -372,7 +372,7 @@ export default function ContentManagement({
           rowKey="id"
           pagination={{ pageSize: 8 }}
           empty={
-            <div className="py-12">
+            <div className={styles.emptyState}>
               <Empty
                 image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
                 title="未匹配到相关博文"
@@ -393,9 +393,9 @@ export default function ContentManagement({
         cancelText="取消"
         width={720}
       >
-        <div className="space-y-4 pt-2">
+        <div className={styles.editorForm}>
           <div>
-            <Text strong>文章标题 <span className="text-red-500">*</span></Text>
+            <Text strong>文章标题 <span className={styles.requiredMark}>*</span></Text>
             <Input
               placeholder="输入一个吸睛且准确的博文标题..."
               value={formTitle}
@@ -405,7 +405,7 @@ export default function ContentManagement({
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className={styles.editorFields}>
             <div>
               <Text strong>所属分类</Text>
               <Select

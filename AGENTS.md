@@ -3,7 +3,7 @@
 ## 项目结构
 
 - `src/`：React + TypeScript 应用入口、共享类型、模拟数据和页面组件；`src/components/` 按功能划分管理后台与读者端界面。
-- `src/index.css`：全局样式；`index.html`：Vite 页面入口。
+- `src/index.css`：全局基础样式；组件样式位于相邻的 `*.module.scss`；`index.html`：Vite 页面入口。
 - `assets/`：静态资源；`docs/`：项目调研文档。
 - 根目录配置包括 `vite.config.ts`、`tsconfig.json` 和 `package.json`。
 
@@ -17,7 +17,7 @@
 
 ## 代码风格与命名
 
-使用 TypeScript、React 函数组件和 JSX；沿用相邻文件的格式与导入习惯，缩进保持一致。组件文件使用 PascalCase（如 `ContentManagement.tsx`），工具、数据和样式文件使用 camelCase 或既有名称。共享数据结构放在 `src/types.ts`，演示数据放在 `src/mockData.ts`。界面文案以中文为主；沿用 Semi UI 组件及 `src/index.css` 中定义的原生 CSS 工具类（如 `flex`、`gap-3`），避免无关的大范围重排。
+使用 TypeScript、React 函数组件和 JSX；沿用相邻文件的格式与导入习惯，缩进保持一致。组件文件使用 PascalCase（如 `ContentManagement.tsx`），工具、数据和样式文件使用 camelCase 或既有名称。共享数据结构放在 `src/types.ts`，演示数据放在 `src/mockData.ts`。界面文案以中文为主；沿用 Semi UI 组件，使用相邻的 SCSS Module 编写语义化组件样式，`src/index.css` 仅放全局基础样式和必要的全局覆盖，避免重新引入仿 Tailwind 工具类或无关的大范围重排。
 
 ## 测试与验证
 

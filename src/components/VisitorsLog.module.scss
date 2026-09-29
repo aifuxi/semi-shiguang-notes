@@ -3,3 +3,132 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.visitorId {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-primary);
+}
+
+.visitorDevice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--semi-color-text-0);
+}
+
+.visitorIp {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-1);
+}
+
+.visitorPlatform {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--semi-color-text-2);
+}
+
+.visitorOs {
+  opacity: 0.75;
+  font-size: 11px;
+}
+
+.visitorTime {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+}
+
+.statContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.visitsIcon {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: rgba(16, 185, 129, 0.08);
+  color: #059669;
+}
+
+:global(.dark) .visitsIcon {
+  background-color: rgba(2, 44, 34, .4);
+}
+
+.statValueRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  align-items: baseline;
+}
+
+.statValue {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-0);
+}
+
+.uniqueIcon {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: rgba(51, 112, 255, 0.08);
+  color: #2563eb;
+}
+
+:global(.dark) .uniqueIcon {
+  background-color: rgba(23, 37, 84, .4);
+}
+
+.viewsIcon {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: rgba(147, 51, 234, 0.08);
+  color: #9333ea;
+}
+
+:global(.dark) .viewsIcon {
+  background-color: rgba(59, 7, 100, .4);
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.liveStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.liveIndicator {
+  border-radius: 9999px;
+  background-color: #10b981;
+  width: 10px;
+  height: 10px;
+  animation: visitorPing 1s cubic-bezier(0, 0, .2, 1) infinite;
+}
+
+@keyframes visitorPing {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}

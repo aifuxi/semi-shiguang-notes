@@ -157,19 +157,19 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
       dataIndex: 'name',
       key: 'name',
       render: (_: any, record: FriendLink) => (
-        <div className="flex items-center gap-3">
+        <div className={styles.friendIdentity}>
           <Avatar size="small" src={record.avatar}>
             {record.name.slice(0, 1)}
           </Avatar>
-          <div className="min-w-0">
-            <div className="font-semibold text-xs text-[var(--semi-color-text-0)] truncate">
+          <div className={styles.friendDetails}>
+            <div className={styles.friendName}>
               {record.name}
             </div>
             <a
               href={record.url}
               target="_blank"
               rel="noreferrer"
-              className="text-[11px] text-[var(--semi-color-primary)] hover:underline truncate block"
+              className={styles.friendUrl}
             >
               {record.url}
             </a>
@@ -182,7 +182,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
       dataIndex: 'description',
       key: 'description',
       render: (desc: string) => (
-        <span className="text-xs text-[var(--semi-color-text-1)] line-clamp-1">{desc}</span>
+        <span className={styles.friendDescription}>{desc}</span>
       )
     },
     {
@@ -250,7 +250,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
   return (
     <div className={styles.page}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             友情链接管理
@@ -275,8 +275,8 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className={styles.listHeading}>
+          <div className={styles.listHeadingLabel}>
             <Select
               value={categoryFilter}
               onChange={(val) => setCategoryFilter(val as string)}
@@ -323,7 +323,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
           rowKey="id"
           pagination={{ pageSize: 8 }}
           empty={
-            <div className="py-12">
+            <div className={styles.emptyState}>
               <Empty
                 image={<IllustrationNoContent style={{ width: 140, height: 140 }} />}
                 title="暂无对应友链数据"
@@ -344,9 +344,9 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
         cancelText="取消"
         width={520}
       >
-        <div className="space-y-4 pt-2">
+        <div className={styles.friendForm}>
           <div>
-            <Text strong>网站名称 <span className="text-red-500">*</span></Text>
+            <Text strong>网站名称 <span className={styles.requiredMark}>*</span></Text>
             <Input
               placeholder="例如: 拾光漫步"
               value={formName}
@@ -356,7 +356,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
           </div>
 
           <div>
-            <Text strong>网站链接 (URL) <span className="text-red-500">*</span></Text>
+            <Text strong>网站链接 (URL) <span className={styles.requiredMark}>*</span></Text>
             <Input
               placeholder="https://example.com"
               value={formUrl}
@@ -385,7 +385,7 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className={styles.friendFields}>
             <div>
               <Text strong>所属分类</Text>
               <Select

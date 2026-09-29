@@ -86,9 +86,9 @@ export default function CategoryManagement() {
       dataIndex: 'name',
       key: 'name',
       render: (name: string, record: any) => (
-        <div className="flex items-center gap-2">
+        <div className={styles.categoryName}>
           <span
-            className="w-3 h-3 rounded-full shrink-0"
+            className={styles.categorySwatch}
             style={{ backgroundColor: record.color || 'var(--semi-color-primary)' }}
           />
           <Text strong>{name}</Text>
@@ -101,7 +101,7 @@ export default function CategoryManagement() {
       key: 'count',
       width: 100,
       render: (count: number) => (
-        <span className="font-mono text-xs text-[var(--semi-color-text-2)]">{count} 篇</span>
+        <span className={styles.categoryCount}>{count} 篇</span>
       )
     },
     {
@@ -142,7 +142,7 @@ export default function CategoryManagement() {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.editHeading}>
                 <IconFolder style={{ color: 'var(--semi-color-primary)' }} />
                 <span>博文分类体系</span>
                 <Badge count={categories.length} type="primary" />
@@ -153,7 +153,7 @@ export default function CategoryManagement() {
             bodyStyle={{ padding: '16px' }}
           >
             {/* Quick Add Form */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className={styles.colorField}>
               <Input
                 placeholder="新增分类标题..."
                 value={newCatName}
@@ -164,7 +164,7 @@ export default function CategoryManagement() {
                 type="color"
                 value={newCatColor}
                 onChange={(e) => setNewCatColor(e.target.value)}
-                className="w-9 h-8 p-0.5 rounded border border-[var(--semi-color-border)] cursor-pointer shrink-0 bg-transparent"
+                className={styles.colorInput}
                 title="选择分类主题色"
               />
               <Button
@@ -191,7 +191,7 @@ export default function CategoryManagement() {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <div className="flex items-center gap-2">
+              <div className={styles.createHeading}>
                 <IconPriceTag style={{ color: 'var(--semi-color-success)' }} />
                 <span>标签云检索</span>
                 <Badge count={tags.length} type="success" />
@@ -202,7 +202,7 @@ export default function CategoryManagement() {
             bodyStyle={{ padding: '16px' }}
           >
             {/* Quick Add Tag */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className={styles.createColorField}>
               <Input
                 placeholder="新增标签词..."
                 value={newTagName}
@@ -220,7 +220,7 @@ export default function CategoryManagement() {
             </div>
 
             {/* Tag Badges Cloud */}
-            <div className="flex flex-wrap gap-2.5 p-4 rounded-lg bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] min-h-[220px]">
+            <div className={styles.tagsEditor}>
               {tags.map((tag) => (
                 <Tag
                   key={tag.name}
@@ -233,7 +233,7 @@ export default function CategoryManagement() {
                     fontSize: 12
                   }}
                 >
-                  #{tag.name} <span className="opacity-70 text-[10px] ml-1">({tag.count})</span>
+                  #{tag.name} <span className={styles.tagCount}>({tag.count})</span>
                 </Tag>
               ))}
             </div>

@@ -3,3 +3,80 @@
 .page {
   @include layout.vertical-stack(24px);
 }
+
+/* 页面与组件的语义化样式 */
+.categoryName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.categorySwatch {
+  flex-shrink: 0;
+  border-radius: 9999px;
+  width: 12px;
+  height: 12px;
+}
+
+.categoryCount {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-mono) !important;
+  color: var(--semi-color-text-2);
+}
+
+.editHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.colorInput {
+  flex-shrink: 0;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  border-color: var(--semi-color-border);
+  width: 36px;
+  height: 32px;
+  padding: 2px;
+  background-color: transparent;
+}
+
+.createHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.createColorField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tagsEditor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--semi-color-border);
+  border-radius: 8px;
+  background-color: var(--semi-color-fill-0);
+  border-color: var(--semi-color-border);
+  min-height: 220px;
+}
+
+.tagCount {
+  opacity: 0.7;
+  font-size: 10px;
+  margin-left: 4px;
+}

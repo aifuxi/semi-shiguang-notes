@@ -151,12 +151,12 @@ export default function MediaLibrary() {
         ref={fileInputRef}
         type="file"
         accept="image/*"
-        className="hidden"
+        className={styles.fileInput}
         onChange={handleFileChange}
       />
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className={styles.pageHeading}>
         <div>
           <Title heading={3} style={{ margin: 0 }}>
             媒体资产库
@@ -181,7 +181,7 @@ export default function MediaLibrary() {
         style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
         bodyStyle={{ padding: '16px' }}
       >
-        <div className="flex items-center justify-between gap-4">
+        <div className={styles.libraryHeading}>
           <Input
             prefix={<IconSearch />}
             placeholder="搜索图片文件名..."
@@ -191,7 +191,7 @@ export default function MediaLibrary() {
             style={{ maxWidth: 320 }}
           />
           <Text type="secondary" size="small">
-            共计 <strong className="font-mono text-[var(--semi-color-primary)]">{filteredMedia.length}</strong> 份素材
+            共计 <strong className={styles.resultCount}>{filteredMedia.length}</strong> 份素材
           </Text>
         </div>
       </Card>
@@ -199,7 +199,7 @@ export default function MediaLibrary() {
       {/* Media Grid */}
       {filteredMedia.length === 0 ? (
         <Card bordered style={{ borderRadius: 'var(--semi-border-radius-medium)' }}>
-          <div className="py-12">
+          <div className={styles.emptyState}>
             <Empty
               image={<IllustrationNoContent style={{ width: 140, height: 140 }} />}
               title="未找到对应媒体素材"
@@ -214,13 +214,13 @@ export default function MediaLibrary() {
               <Card
                 bordered
                 cover={
-                  <div className="relative group overflow-hidden bg-[var(--semi-color-fill-0)] h-44 flex items-center justify-center">
+                  <div className={styles.thumbnail}>
                     <img
                       src={item.url}
                       alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className={styles.thumbnailImage}
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <div className={styles.thumbnailActions}>
                       <Button
                         theme="solid"
                         type="tertiary"
@@ -243,15 +243,15 @@ export default function MediaLibrary() {
                 style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
                 bodyStyle={{ padding: '12px' }}
               >
-                <div className="space-y-1">
-                  <div className="font-medium text-xs text-[var(--semi-color-text-0)] truncate" title={item.name}>
+                <div className={styles.mediaDetails}>
+                  <div className={styles.mediaName} title={item.name}>
                     {item.name}
                   </div>
-                  <div className="flex items-center justify-between text-[11px] text-[var(--semi-color-text-2)] font-mono">
+                  <div className={styles.mediaMeta}>
                     <span>{item.dimension}</span>
                     <span>{item.size}</span>
                   </div>
-                  <div className="pt-2 flex items-center justify-between border-t border-[var(--semi-color-border)]">
+                  <div className={styles.mediaFooter}>
                     <Text type="tertiary" size="small" style={{ fontSize: 10 }}>{item.time.slice(5)}</Text>
                     <Popconfirm
                       title="确认移除此素材？"
@@ -278,7 +278,7 @@ export default function MediaLibrary() {
         visible={Boolean(selectedMedia)}
         onCancel={() => setSelectedMedia(null)}
         footer={
-          <div className="flex justify-end gap-2">
+          <div className={styles.uploadActions}>
             <Button
               theme="solid"
               type="primary"
@@ -295,30 +295,30 @@ export default function MediaLibrary() {
         width={680}
       >
         {selectedMedia && (
-          <div className="space-y-4 pt-2">
-            <div className="max-h-96 overflow-hidden rounded-lg bg-[var(--semi-color-fill-0)] flex items-center justify-center">
+          <div className={styles.previewContent}>
+            <div className={styles.previewFrame}>
               <img
                 src={selectedMedia.url}
                 alt={selectedMedia.name}
-                className="max-h-96 object-contain"
+                className={styles.previewImage}
               />
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs p-3 rounded-lg bg-[var(--semi-color-fill-0)]">
+            <div className={styles.previewDetails}>
               <div>
                 <Text type="tertiary" size="small">文件体积</Text>
-                <div className="font-mono font-medium">{selectedMedia.size}</div>
+                <div className={styles.previewValue}>{selectedMedia.size}</div>
               </div>
               <div>
                 <Text type="tertiary" size="small">图片分辨率</Text>
-                <div className="font-mono font-medium">{selectedMedia.dimension}</div>
+                <div className={styles.previewValue}>{selectedMedia.dimension}</div>
               </div>
               <div>
                 <Text type="tertiary" size="small">上传时间</Text>
-                <div className="font-mono font-medium">{selectedMedia.time}</div>
+                <div className={styles.previewValue}>{selectedMedia.time}</div>
               </div>
               <div>
                 <Text type="tertiary" size="small">媒体格式</Text>
-                <div className="font-mono font-medium">{selectedMedia.type}</div>
+                <div className={styles.previewValue}>{selectedMedia.type}</div>
               </div>
             </div>
           </div>
