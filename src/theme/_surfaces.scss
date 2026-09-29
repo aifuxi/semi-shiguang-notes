@@ -11,31 +11,12 @@
 .semi-navigation-item,
 .semi-navigation-sub-title {
   border-radius: var(--semi-border-radius-extra-small);
-  transition:
-    color var(--semi-modern-motion-fast) ease,
-    background-color var(--semi-modern-motion-fast) ease;
-}
-
-.semi-dropdown-item {
-  margin-inline: 4px;
-}
-
-.semi-dropdown-item:focus-visible,
-.semi-navigation-sub-title:focus-visible,
-.semi-navigation-item:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--semi-color-primary) 55%, transparent);
-  outline-offset: -2px;
 }
 
 .semi-modal-content:not(.semi-modal-content-fullScreen) {
   border-radius: var(--semi-border-radius-medium);
-  overflow: hidden;
 }
 
 .semi-tooltip-wrapper {
   border-radius: var(--semi-border-radius-extra-small);
-}
-
-.semi-modal:has(.semi-modal-content:not(.semi-modal-content-fullScreen)) {
-  max-width: calc(100vw - 32px);
 }

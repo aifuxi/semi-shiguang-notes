@@ -1,39 +1,7 @@
-/* Radio、Switch、Tabs 与分页的键盘焦点和状态过渡。 */
-.semi-radio,
-.semi-radio-buttonRadioComponent,
-.semi-switch,
-.semi-tabs-tab,
-.semi-page-item {
-  transition:
-    color var(--semi-modern-motion-fast) ease,
-    background-color var(--semi-modern-motion-fast) ease,
-    border-color var(--semi-modern-motion-fast) ease;
-}
-
-.semi-radio:focus-within .semi-radio-inner-display,
-.semi-radio-buttonRadioComponent:focus-within,
-.semi-tabs-tab:focus-visible,
-.semi-page-item:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--semi-color-primary) 48%, transparent);
-  outline-offset: 2px;
-}
-
 .semi-radio-buttonRadioGroup {
   border-radius: var(--semi-border-radius-small);
 }
 
 .semi-radio-buttonRadioComponent {
   border-radius: var(--semi-border-radius-extra-small);
-}
-
-.semi-switch-focus {
-  outline: 3px solid color-mix(in srgb, var(--semi-color-primary) 48%, transparent);
-  outline-offset: 2px;
-}
-
-.semi-switch-disabled,
-.semi-radio-disabled,
-.semi-tabs-tab-disabled,
-.semi-page-item-disabled {
-  cursor: not-allowed;
 }

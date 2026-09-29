@@ -1,4 +1,4 @@
-/* 主题只新增非颜色视觉 token；Semi 的 --semi-color-* 由组件库继续管理。 */
+/* 主题只覆盖圆角和阴影；颜色、背景与其他样式由 Semi 管理。 */
 :root,
 body,
 body .semi-always-light,
@@ -9,8 +9,6 @@ body[theme-mode='dark'] .semi-always-light,
   --semi-border-radius-small: 8px;
   --semi-border-radius-medium: 16px;
   --semi-border-radius-large: 24px;
-  --semi-modern-motion-fast: 120ms;
-  --semi-modern-motion-normal: 180ms;
 
   --semi-modern-button-surface-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
@@ -21,8 +19,6 @@ body[theme-mode='dark'] .semi-always-light,
     inset 0 -1px 0 rgba(0, 0, 0, 0.12),
     inset 0 0 0 1px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.1);
-  --semi-modern-button-solid-overlay:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, 0.06));
 }
 
 body[theme-mode='dark'],
@@ -42,15 +38,4 @@ body .semi-always-dark,
     inset 0 -1px 0 rgba(0, 0, 0, 0.18),
     inset 0 0 0 1px rgba(0, 0, 0, 0.14),
     0 2px 4px rgba(0, 0, 0, 0.22);
-  --semi-modern-button-solid-overlay:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, 0.08));
-}
-
-body {
-  transition: background-color var(--semi-modern-motion-normal) ease, color var(--semi-modern-motion-normal) ease;
-}
-
-body[theme-mode='dark'] {
-  background-color: var(--semi-color-bg-0);
-  color: var(--semi-color-text-0);
 }

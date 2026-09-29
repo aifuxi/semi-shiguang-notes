@@ -1,30 +1,12 @@
 .semi-button {
   border-radius: var(--semi-border-radius-small);
-  transition:
-    color var(--semi-modern-motion-fast) ease,
-    background-color var(--semi-modern-motion-fast) ease,
-    border-color var(--semi-modern-motion-fast) ease,
-    box-shadow var(--semi-modern-motion-fast) ease,
-    transform var(--semi-modern-motion-fast) ease;
-
-  &:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--semi-color-primary) 50%, transparent);
-    outline-offset: 2px;
-  }
-
-  &:active:not(.semi-button-disabled) {
-    transform: translateY(1px);
-  }
 }
 
 .semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
-  background-image: var(--semi-modern-button-solid-overlay);
   box-shadow: var(--semi-modern-button-solid-shadow);
 }
 
 .semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button):is(:hover, :active) {
-  /* 悬停后回到 Semi 自己的纯色状态，避免渐变与组件状态色叠加。 */
-  background-image: none;
   box-shadow: none;
 }
 

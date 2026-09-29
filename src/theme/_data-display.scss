@@ -1,23 +1,5 @@
-/* 表格保持信息密度，以边界和轻微 hover 背景区分层级。 */
-.semi-table-thead > .semi-table-row > .semi-table-row-head {
-  font-weight: 600;
-}
-
-.semi-table-tbody > .semi-table-row > .semi-table-row-cell {
-  transition: background-color var(--semi-modern-motion-fast) ease;
-}
-
-.semi-table-tbody > .semi-table-row:hover > .semi-table-row-cell {
-  background-image: none;
-  background-color: var(--semi-color-fill-0);
-}
-
 .semi-tag {
   border-radius: var(--semi-border-radius-extra-small);
-  transition:
-    color var(--semi-modern-motion-fast) ease,
-    background-color var(--semi-modern-motion-fast) ease,
-    border-color var(--semi-modern-motion-fast) ease;
 }
 
 .semi-progress-track,
