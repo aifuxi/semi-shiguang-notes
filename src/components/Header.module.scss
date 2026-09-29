@@ -26,6 +26,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
@@ -35,11 +37,24 @@
 }
 
 .searchButton {
+  width: 220px;
+  min-width: 0;
+  flex-shrink: 1;
   align-items: center;
   gap: 10px;
   font-size: 12px;
   line-height: 16px;
   display: flex !important;
+}
+
+.searchButton :global(.semi-button-content),
+.searchButton :global(.semi-button-content-right) {
+  flex: 1;
+  min-width: 0;
+}
+
+.searchButton :global(.semi-button-content-right) {
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
@@ -51,6 +66,7 @@
 
 .searchLabel {
   flex: 1 1 0%;
+  min-width: 0;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,6 +97,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 639px) {
+  .actions {
+    gap: 8px;
+  }
+
+  .actions :global(.semi-divider) {
+    display: none;
+  }
 }
 
 .createLabel {

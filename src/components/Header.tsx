@@ -161,7 +161,6 @@ export default function Header({
             onClick={() => setShowSearchModal(true)}
             className={styles.searchButton}
             style={{
-              width: 220,
               justifyContent: 'flex-start',
               backgroundColor: 'var(--semi-color-bg-0)',
               color: 'var(--semi-color-text-2)'
