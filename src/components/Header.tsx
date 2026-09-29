@@ -153,17 +153,24 @@ export default function Header({
           </div>
 
           {/* Quick Search Trigger */}
-          <div
+          <Button
+            theme="outline"
+            type="tertiary"
+            icon={<IconSearch />}
             onClick={() => setShowSearchModal(true)}
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-[var(--semi-border-radius-medium)] border border-[var(--semi-color-border)] bg-[var(--semi-color-bg-0)] hover:border-[var(--semi-color-primary)] text-[var(--semi-color-text-2)] hover:text-[var(--semi-color-text-1)] cursor-pointer text-xs sm:text-sm transition-all"
-            style={{ width: 220 }}
+            className="!flex items-center gap-2.5 text-xs sm:text-sm"
+            style={{
+              width: 220,
+              justifyContent: 'flex-start',
+              backgroundColor: 'var(--semi-color-bg-0)',
+              color: 'var(--semi-color-text-2)'
+            }}
           >
-            <IconSearch />
-            <span className="flex-1 truncate">搜索文章 / 分类...</span>
+            <span className="flex-1 truncate text-left">搜索文章 / 分类...</span>
             <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] rounded bg-[var(--semi-color-fill-0)] border border-[var(--semi-color-border)] font-mono">
               ⌘K
             </kbd>
-          </div>
+          </Button>
         </div>
 
         {/* Right Area: Action Buttons & User Menu */}
