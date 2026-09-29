@@ -45,7 +45,6 @@ const SettingsPanel = lazy(() => import('./components/SettingsPanel'));
 const FriendsLinks = lazy(() => import('./components/FriendsLinks'));
 const Changelog = lazy(() => import('./components/Changelog'));
 const BlogFrontend = lazy(() => import('./components/BlogFrontend'));
-const ComponentPlayground = lazy(() => import('./components/ComponentPlayground'));
 
 export default function App() {
   // 1. Persistent States via LocalStorage
@@ -224,17 +223,6 @@ export default function App() {
     { path: '/articles', element: <BlogFrontend {...blogProps} /> },
     { path: '/friends', element: <BlogFrontend {...blogProps} /> },
     { path: '/changelog', element: <BlogFrontend {...blogProps} /> },
-    {
-      path: '/playground',
-      element: (
-        <ComponentPlayground
-          settings={settings}
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-          onEnterAdmin={() => navigate(adminRoutes.dashboard)}
-        />
-      )
-    },
     { path: '/posts/:postId', element: <BlogFrontend {...blogProps} /> },
     {
       path: adminRoutes.dashboard,

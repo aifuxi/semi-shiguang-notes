@@ -293,7 +293,6 @@ export default function BlogFrontend({
               { id: 'articles', label: '精选博文', icon: <IconArticle /> },
               { id: 'friends', label: '友情链接', icon: <IconLink /> },
               { id: 'changelog', label: '更新日志', icon: <IconHistory /> },
-              { id: 'playground', label: '组件预览', icon: <IconSetting /> },
             ].map((tab) => {
               const isActive = currentTab === tab.id && (!selectedPost || tab.id !== 'home');
               return (
@@ -1090,12 +1089,6 @@ export default function BlogFrontend({
               onClick={() => navigate(frontendRoutes.friends)}
             >
               友情链接
-            </span>
-            <span
-              className={styles.footerLink}
-              onClick={() => navigate('/playground')}
-            >
-              组件预览
             </span>
             <span
               className={styles.footerLink}
