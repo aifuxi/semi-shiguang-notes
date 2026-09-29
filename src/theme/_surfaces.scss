@@ -1,11 +1,7 @@
 .semi-dropdown-wrapper,
 .semi-popover-wrapper {
   border-radius: var(--semi-border-radius-small);
-  box-shadow: var(--semi-modern-overlay-shadow);
-}
-
-.semi-popconfirm-popover {
-  box-shadow: var(--semi-modern-overlay-shadow);
+  box-shadow: var(--semi-modern-overlay-edge-shadow), var(--semi-shadow-elevated);
 }
 
 .semi-dropdown-menu {
@@ -20,9 +16,10 @@
 
 .semi-modal-content:not(.semi-modal-content-fullScreen) {
   border-radius: var(--semi-border-radius-medium);
-  box-shadow: var(--semi-modern-modal-shadow);
+  box-shadow: var(--semi-modern-modal-edge-shadow), var(--semi-shadow-elevated);
 }
 
 .semi-tooltip-wrapper {
   border-radius: var(--semi-border-radius-extra-small);
+  box-shadow: var(--semi-modern-tooltip-edge-shadow);
 }

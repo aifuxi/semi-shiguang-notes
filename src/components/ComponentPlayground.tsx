@@ -59,7 +59,7 @@ const tableColumns = [
 const tableData = [
   { key: 'button', name: 'Button', coverage: '主题、焦点、按下、禁用', status: '已覆盖' },
   { key: 'form', name: 'Form controls', coverage: '默认、聚焦、错误、禁用', status: '已覆盖' },
-  { key: 'overlay', name: 'Overlays', coverage: '主题圆角、Semi 原生阴影、焦点', status: '已覆盖' }
+  { key: 'overlay', name: 'Overlays', coverage: '主题圆角、Semi 层级阴影与边缘高光', status: '已覆盖' }
 ];
 
 function PreviewSection({
@@ -287,7 +287,7 @@ export default function ComponentPlayground({
                 <Tabs activeKey={activeTab} onChange={key => setActiveTab(String(key))}>
                   <Tabs.TabPane tab="按钮" itemKey="buttons">按钮状态可在上方区域查看。</Tabs.TabPane>
                   <Tabs.TabPane tab="表单" itemKey="forms">默认、错误及禁用状态保持一致的焦点和边界表现。</Tabs.TabPane>
-                  <Tabs.TabPane tab="浮层" itemKey="overlays">浮层主题统一了内高光与阴影层次，Tooltip 保持轻量。</Tabs.TabPane>
+                  <Tabs.TabPane tab="浮层" itemKey="overlays">Popover、Dropdown、Popconfirm 和 Modal 沿用 Semi 层级阴影，并增加细腻边缘高光；Tooltip 只保留轻量边缘。</Tabs.TabPane>
                 </Tabs>
               </Card>
               <Card className={styles.panel} title="Nav · Pagination" bordered>
@@ -376,7 +376,7 @@ export default function ComponentPlayground({
                   >
                     <Button>打开 Dropdown</Button>
                   </Dropdown>
-                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">主题为浮层增加了细腻高光与柔和阴影。</Text></div>}>
+                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">沿用 Semi 浮层层级阴影，并增加细腻边缘高光。</Text></div>}>
                     <Button theme="light" type="primary">打开 Popover</Button>
                   </Popover>
                   <Tooltip content="统一的轻量提示层">
