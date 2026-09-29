@@ -20,13 +20,15 @@ body[theme-mode='dark'] .semi-always-light,
     inset 0 0 0 1px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.1);
   --semi-modern-overlay-shadow:
-    0 2px 5px rgba(15, 23, 42, 0.08),
-    0 0 0 1px rgba(15, 23, 42, 0.045),
-    0 10px 24px rgba(15, 23, 42, 0.18);
+    0 0 0 1px rgba(15, 23, 42, 0.07),
+    0 2px 6px rgba(15, 23, 42, 0.07),
+    0 6px 18px rgba(15, 23, 42, 0.08),
+    0 12px 36px rgba(15, 23, 42, 0.15);
   --semi-modern-modal-shadow:
-    0 4px 10px rgba(15, 23, 42, 0.1),
-    0 0 0 1px rgba(15, 23, 42, 0.05),
-    0 20px 48px rgba(15, 23, 42, 0.24);
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.09),
+    0 12px 28px rgba(15, 23, 42, 0.12),
+    0 24px 56px rgba(15, 23, 42, 0.2);
 }
 
 body[theme-mode='dark'],
@@ -47,11 +49,13 @@ body .semi-always-dark,
     inset 0 0 0 1px rgba(0, 0, 0, 0.14),
     0 2px 4px rgba(0, 0, 0, 0.22);
   --semi-modern-overlay-shadow:
-    0 3px 7px rgba(0, 0, 0, 0.24),
-    0 0 0 1px rgba(255, 255, 255, 0.09),
-    0 10px 24px rgba(0, 0, 0, 0.48);
+    0 0 0 1px rgba(0, 0, 0, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.28),
+    0 8px 40px rgba(0, 0, 0, 0.38);
   --semi-modern-modal-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 20px 48px rgba(0, 0, 0, 0.62);
+    0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.22),
+    0 12px 28px rgba(0, 0, 0, 0.34),
+    0 24px 56px rgba(0, 0, 0, 0.52);
 }
