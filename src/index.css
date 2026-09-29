@@ -148,6 +148,9 @@ body {
 .min-h-screen { min-height: 100vh; }
 .h-16 { height: 64px; }
 .h-18 { height: 72px; }
+.w-16 { width: 64px; }
+.w-60 { width: 240px; }
+.w-64 { width: 256px; }
 .max-w-xs { max-width: 320px; }
 .max-w-md { max-width: 448px; }
 .max-w-lg { max-width: 512px; }
@@ -161,11 +164,16 @@ body {
 
 .sticky { position: sticky; }
 .top-0 { top: 0; }
+.left-0 { left: 0; }
+.inset-y-0 { top: 0; bottom: 0; }
 .relative { position: relative; }
 .absolute { position: absolute; }
+.fixed { position: fixed; }
 .z-10 { z-index: 10; }
 .z-20 { z-index: 20; }
+.z-40 { z-index: 40; }
 .z-50 { z-index: 50; }
+.z-55 { z-index: 55; }
 .overflow-hidden { overflow: hidden; }
 .overflow-x-hidden { overflow-x: hidden; }
 .overflow-y-auto { overflow-y: auto; }
@@ -238,6 +246,8 @@ body {
 .transition-transform { transition: transform 0.2s ease; }
 .transition-all { transition: all 0.2s ease; }
 .duration-200 { transition-duration: 200ms; }
+.translate-x-0 { transform: translateX(0); }
+.-translate-x-full { transform: translateX(-100%); }
 
 /* Theme colors & helpers */
 .bg-\[var\(--semi-color-bg-0\)\] { background-color: var(--semi-color-bg-0); }
@@ -275,9 +285,7 @@ body {
 .opacity-100 { opacity: 1; }
 
 .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
-.fixed { position: fixed; }
 .bg-black\/40 { background-color: rgba(0, 0, 0, 0.4); }
-.z-40 { z-index: 40; }
 .h-44 { height: 176px; }
 .max-h-96 { max-height: 384px; }
 .object-cover { object-fit: cover; }
@@ -314,6 +322,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .lg\:hidden { display: none; }
+  .lg\:block { display: block; }
+  .lg\:flex { display: flex; }
   .lg\:px-8 { padding-left: 32px; padding-right: 32px; }
   .lg\:px-12 { padding-left: 48px; padding-right: 48px; }
   .lg\:py-14 { padding-top: 56px; padding-bottom: 56px; }
@@ -612,4 +623,3 @@ textarea.semi-input-textarea:focus-visible {
 .blog-friends-grid-row {
   margin-top: 32px !important;
 }
-

@@ -1,10 +1,10 @@
 {
-  "name": "react-example",
+  "name": "semi-shiguang-notes",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
+    "dev": "vite --port=6121 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
@@ -15,7 +15,6 @@
     "@douyinfe/semi-icons-lab": "^2.103.0",
     "@douyinfe/semi-illustrations": "^2.103.0",
     "@douyinfe/semi-ui": "^2.103.0",
-    "@google/genai": "^2.4.0",
     "@vitejs/plugin-react": "^5.0.4",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
