@@ -59,7 +59,7 @@ const tableColumns = [
 const tableData = [
   { key: 'button', name: 'Button', coverage: '主题、焦点、按下、禁用', status: '已覆盖' },
   { key: 'form', name: 'Form controls', coverage: '默认、聚焦、错误、禁用', status: '已覆盖' },
-  { key: 'overlay', name: 'Overlays', coverage: '边框、圆角、阴影、焦点', status: '已覆盖' }
+  { key: 'overlay', name: 'Overlays', coverage: '主题圆角、Semi 原生阴影、焦点', status: '已覆盖' }
 ];
 
 function PreviewSection({
@@ -287,7 +287,7 @@ export default function ComponentPlayground({
                 <Tabs activeKey={activeTab} onChange={key => setActiveTab(String(key))}>
                   <Tabs.TabPane tab="按钮" itemKey="buttons">按钮状态可在上方区域查看。</Tabs.TabPane>
                   <Tabs.TabPane tab="表单" itemKey="forms">默认、错误及禁用状态保持一致的焦点和边界表现。</Tabs.TabPane>
-                  <Tabs.TabPane tab="浮层" itemKey="overlays">浮层使用统一边界、圆角和阴影。</Tabs.TabPane>
+                  <Tabs.TabPane tab="浮层" itemKey="overlays">浮层保留 Semi 原生阴影，主题只调整圆角。</Tabs.TabPane>
                 </Tabs>
               </Card>
               <Card className={styles.panel} title="Nav · Pagination" bordered>
@@ -358,7 +358,7 @@ export default function ComponentPlayground({
                   </div>
                   <Tag color="blue">Card</Tag>
                 </div>
-                <Text type="secondary">卡片采用轻量边缘阴影，保持内容层级清晰，同时延续页面底色与边框 token。</Text>
+                <Text type="secondary">普通卡片沿用 Semi 边框；只有显式启用阴影模式时才显示 Semi 原生阴影。</Text>
               </Card>
               <Card className={styles.panel} title="Overlay 交互" bordered>
                 <Space wrap>
@@ -376,7 +376,7 @@ export default function ComponentPlayground({
                   >
                     <Button>打开 Dropdown</Button>
                   </Dropdown>
-                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">统一的边框、圆角与浮层阴影。</Text></div>}>
+                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">保留 Semi 浮层阴影，主题调整圆角。</Text></div>}>
                     <Button theme="light" type="primary">打开 Popover</Button>
                   </Popover>
                   <Tooltip content="统一的轻量提示层">
@@ -414,7 +414,7 @@ export default function ComponentPlayground({
         onCancel={() => setModalVisible(false)}
         onOk={() => setModalVisible(false)}
       >
-        <Text>Dialog / Modal 使用统一的圆角、边缘阴影和标题分隔线。</Text>
+        <Text>Modal 保留 Semi 原生阴影与无分割线布局，主题只调整圆角。</Text>
       </Modal>
     </Layout>
   );

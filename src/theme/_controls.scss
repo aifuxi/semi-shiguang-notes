@@ -7,8 +7,7 @@
   transition:
     color var(--semi-modern-motion-fast) ease,
     background-color var(--semi-modern-motion-fast) ease,
-    border-color var(--semi-modern-motion-fast) ease,
-    box-shadow var(--semi-modern-motion-fast) ease;
+    border-color var(--semi-modern-motion-fast) ease;
 }
 
 .semi-radio:focus-within .semi-radio-inner-display,

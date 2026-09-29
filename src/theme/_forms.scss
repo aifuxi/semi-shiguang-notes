@@ -7,14 +7,9 @@
 .semi-tree-select:not(.semi-tree-select-disabled):not(.semi-tree-select-borderless),
 .semi-cascader:not(.semi-cascader-disabled):not(.semi-cascader-borderless) {
   @include theme.control-transition;
-  box-shadow: var(--semi-modern-input-edge-shadow);
-  border: 1px solid var(--semi-color-border) !important;
-  border-radius: var(--semi-border-radius-small) !important;
-  background-color: var(--semi-color-fill-0);
-  overflow: hidden;
 }
 
-/* 对齐调研中的 36px / 40px 控件基线，同时保留 Semi 的 small / large 尺寸语义。 */
+/* 保留项目的控件尺寸，视觉状态沿用 Semi 原生样式。 */
 .semi-input-wrapper-default,
 .semi-select:not(.semi-select-small):not(.semi-select-large) {
   min-height: 40px;
@@ -33,94 +28,9 @@
   height: 44px;
 }
 
-.semi-input-textarea,
-.semi-input-textarea:hover,
-.semi-input-textarea:focus,
-.semi-input-textarea:focus-visible,
-textarea.semi-input-textarea,
-textarea.semi-input-textarea:hover,
-textarea.semi-input-textarea:focus,
-textarea.semi-input-textarea:focus-visible {
-  font-family: var(--semi-font-family) !important;
-  padding: 8px 12px !important;
-  line-height: 1.5 !important;
+.semi-input-textarea {
+  font-family: var(--semi-font-family);
+  padding: 8px 12px;
+  line-height: 1.5;
   min-height: 40px;
-  outline: none !important;
-  outline-offset: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  background-color: transparent !important;
-  resize: none;
-}
-
-.semi-input,
-.semi-input:hover,
-.semi-input:focus,
-.semi-input:focus-visible {
-  outline: none !important;
-  outline-offset: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-.semi-input-wrapper:not(.semi-input-wrapper-disabled):hover,
-.semi-input-textarea-wrapper:not(.semi-input-textarea-wrapper-disabled):hover,
-.semi-select:not(.semi-select-disabled):not(.semi-select-borderless):hover,
-.semi-tagInput:not(.semi-tagInput-disabled):not(.semi-tagInput-borderless):hover,
-.semi-tree-select:not(.semi-tree-select-disabled):not(.semi-tree-select-borderless):hover,
-.semi-cascader:not(.semi-cascader-disabled):not(.semi-cascader-borderless):hover {
-  border-color: var(--semi-color-border) !important;
-  background-color: var(--semi-color-fill-1);
-  box-shadow: var(--semi-modern-input-edge-shadow);
-}
-
-.semi-input-wrapper.semi-input-wrapper-focus,
-.semi-input-wrapper:focus-within,
-.semi-input-textarea-wrapper.semi-input-textarea-wrapper-focus,
-.semi-input-textarea-wrapper:focus-within,
-.semi-select:focus,
-.semi-select-focus,
-.semi-select-open,
-.semi-select:focus-within,
-.semi-tagInput-focus,
-.semi-tagInput:focus-within,
-.semi-tree-select-focus,
-.semi-tree-select:focus-within,
-.semi-cascader:focus,
-.semi-cascader:focus-within {
-  border-color: var(--semi-color-primary) !important;
-  background-color: var(--semi-color-fill-0);
-  box-shadow: var(--semi-modern-input-focus-shadow) !important;
-  outline: none !important;
-}
-
-.semi-input-wrapper.semi-input-wrapper-error,
-.semi-input-textarea-wrapper.semi-input-textarea-wrapper-error,
-.semi-select-error,
-.semi-tagInput-error,
-.semi-tree-select-error,
-.semi-cascader-error {
-  border-color: var(--semi-color-danger) !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--semi-color-danger) 18%, transparent) !important;
-}
-
-.semi-input-wrapper.semi-input-wrapper-error:focus-within,
-.semi-input-textarea-wrapper.semi-input-textarea-wrapper-error:focus-within,
-.semi-select-error:focus-within,
-.semi-tagInput-error:focus-within,
-.semi-tree-select-error:focus-within,
-.semi-cascader-error:focus-within {
-  box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--semi-color-danger) 18%, transparent),
-    var(--semi-modern-input-edge-shadow) !important;
-}
-
-.semi-input-wrapper-disabled,
-.semi-input-textarea-wrapper-disabled,
-.semi-select-disabled,
-.semi-tagInput-disabled,
-.semi-tree-select-disabled,
-.semi-cascader-disabled {
-  cursor: not-allowed;
-  box-shadow: none;
 }
