@@ -1,0 +1,8 @@
+{
+  "name": "Semi 拾光笔记",
+  "description": "拾光笔记 - 个人博客的现代化多功能实时管理仪表盘与内容管理系统",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

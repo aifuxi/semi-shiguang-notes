@@ -1,0 +1,658 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState } from 'react';
+import {
+  Card,
+  Row,
+  Col,
+  Button,
+  Tag,
+  Badge,
+  Progress,
+  RadioGroup,
+  Radio,
+  Empty,
+  Popconfirm,
+  Toast,
+  Tooltip,
+  Typography,
+  Space,
+  Banner
+} from '@douyinfe/semi-ui';
+import {
+  IconLineChartStroked,
+  IconRingChartStroked,
+  IconUserGroup,
+  IconArticle,
+  IconEdit,
+  IconComment,
+  IconMail,
+  IconArrowUp,
+  IconCalendar,
+  IconTick,
+  IconDelete,
+  IconPlus,
+  IconUpload,
+  IconPriceTag,
+  IconShield,
+  IconActivity,
+  IconClock,
+  IconChevronRight
+} from '@douyinfe/semi-icons';
+import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
+import {
+  Post,
+  Comment,
+  UpcomingSchedule,
+  TrafficTrendItem,
+  TrafficSourceItem,
+  SiteHealth,
+  BlogSettings
+} from '../types';
+
+const { Title, Text } = Typography;
+
+interface DashboardProps {
+  posts: Post[];
+  comments: Comment[];
+  schedules: UpcomingSchedule[];
+  trafficTrend: TrafficTrendItem[];
+  trafficSources: TrafficSourceItem[];
+  siteHealth: SiteHealth;
+  settings: BlogSettings;
+  onNavigateToTab: (tab: string) => void;
+  onApproveComment: (id: string) => void;
+  onDeleteComment: (id: string) => void;
+  onQuickActionClick: (type: 'create_post' | 'upload_media' | 'manage_categories') => void;
+}
+
+export default function Dashboard({
+  posts,
+  comments,
+  schedules,
+  trafficTrend,
+  trafficSources,
+  siteHealth,
+  settings,
+  onNavigateToTab,
+  onApproveComment,
+  onDeleteComment,
+  onQuickActionClick
+}: DashboardProps) {
+  const [trendRange, setTrendRange] = useState('7d');
+  const [hoveredTrendIndex, setHoveredTrendIndex] = useState<number | null>(null);
+
+  const totalVisits = 128942;
+  const weeklyVisitors = 8432;
+  const publishedCount = posts.filter(p => p.status === '已发布').length;
+  const draftCount = posts.filter(p => p.status === '草稿').length + 12;
+  const pendingCount = comments.filter(c => c.status === '待审核').length;
+  const emailSubscribers = 2156;
+
+  const pendingComments = comments.filter(c => c.status === '待审核').slice(0, 5);
+
+  const statCards = [
+    {
+      title: '总访问量',
+      value: totalVisits.toLocaleString(),
+      change: '18.6%',
+      isUp: true,
+      subtext: '较上周',
+      icon: <IconLineChartStroked size="large" style={{ color: 'var(--semi-color-primary)' }} />,
+      tagColor: 'blue' as const
+    },
+    {
+      title: '本周访客',
+      value: weeklyVisitors.toLocaleString(),
+      change: '12.3%',
+      isUp: true,
+      subtext: '较上周',
+      icon: <IconUserGroup size="large" style={{ color: 'var(--semi-color-success)' }} />,
+      tagColor: 'green' as const
+    },
+    {
+      title: '已发布文章',
+      value: publishedCount,
+      change: '+5',
+      isUp: true,
+      subtext: '较上周',
+      icon: <IconArticle size="large" style={{ color: 'var(--semi-color-secondary)' }} />,
+      tagColor: 'purple' as const
+    },
+    {
+      title: '草稿箱',
+      value: draftCount,
+      change: '持平',
+      isUp: false,
+      subtext: '较上周',
+      icon: <IconEdit size="large" style={{ color: 'var(--semi-color-warning)' }} />,
+      tagColor: 'orange' as const
+    },
+    {
+      title: '待审核评论',
+      value: pendingCount,
+      change: '+3',
+      isUp: true,
+      subtext: '待处理',
+      icon: <IconComment size="large" style={{ color: 'var(--semi-color-danger)' }} />,
+      tagColor: 'red' as const,
+      badge: pendingCount > 0
+    },
+    {
+      title: '邮件订阅',
+      value: emailSubscribers.toLocaleString(),
+      change: '8.7%',
+      isUp: true,
+      subtext: '较上周',
+      icon: <IconMail size="large" style={{ color: 'var(--semi-color-info)' }} />,
+      tagColor: 'cyan' as const
+    },
+  ];
+
+  // SVG dimensions for smooth Traffic Trend Line Chart
+  const trendWidth = 600;
+  const trendHeight = 220;
+  const paddingX = 40;
+  const paddingY = 30;
+  const maxVisits = 10000;
+
+  const trendPoints = trafficTrend.map((item, index) => {
+    const x = paddingX + (index * (trendWidth - paddingX * 2)) / (trafficTrend.length - 1);
+    const y = trendHeight - paddingY - (item.visits / maxVisits) * (trendHeight - paddingY * 2);
+    return { x, y, ...item };
+  });
+
+  const linePath = trendPoints
+    .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+    .join(' ');
+
+  const areaPath = `${linePath} L ${trendPoints[trendPoints.length - 1].x} ${trendHeight - paddingY} L ${trendPoints[0].x} ${trendHeight - paddingY} Z`;
+
+  return (
+    <div className="space-y-6">
+      {/* 1. Header Banner & Welcome */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <Title heading={3} style={{ margin: 0 }}>
+            仪表盘概览
+          </Title>
+          <Text type="secondary" size="small" style={{ marginTop: 4, display: 'block' }}>
+            欢迎回来，{settings.authorName}！这是《{settings.title}》的实时运营概览。
+          </Text>
+        </div>
+
+        <Space>
+          <Tag color="blue" size="large" style={{ padding: '6px 12px' }}>
+            <IconCalendar style={{ marginRight: 6 }} />
+            2025-05-14 至 2025-05-20
+          </Tag>
+          <Button
+            theme="light"
+            type="primary"
+            icon={<IconPlus />}
+            onClick={() => onQuickActionClick('create_post')}
+          >
+            快速发文
+          </Button>
+        </Space>
+      </div>
+
+      {/* 2. Top Statistic Cards Grid */}
+      <Row gutter={[16, 16]}>
+        {statCards.map((card, idx) => (
+          <Col xs={12} sm={8} lg={4} key={idx}>
+            <Card
+              bordered
+              style={{
+                borderRadius: 'var(--semi-border-radius-medium)',
+                height: '100%',
+                position: 'relative'
+              }}
+              bodyStyle={{ padding: '16px' }}
+            >
+              <div className="flex items-center justify-between">
+                <Text type="secondary" size="small" strong>{card.title}</Text>
+                <div className="p-2 rounded-lg bg-[var(--semi-color-fill-0)]">
+                  {card.icon}
+                </div>
+              </div>
+
+              <div className="my-2">
+                <span className="text-2xl font-bold font-mono text-[var(--semi-color-text-0)]">
+                  {card.value}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs">
+                {card.isUp ? (
+                  <Tag color="green" size="small" style={{ padding: '0 4px', fontSize: 11 }}>
+                    <IconArrowUp size="small" /> {card.change}
+                  </Tag>
+                ) : (
+                  <Tag color="grey" size="small" style={{ padding: '0 4px', fontSize: 11 }}>
+                    {card.change}
+                  </Tag>
+                )}
+                <Text type="tertiary" size="small" style={{ fontSize: 11 }}>{card.subtext}</Text>
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      {/* 3. Charts & Analytics Row */}
+      <Row gutter={[16, 16]}>
+        {/* Traffic Trend Chart */}
+        <Col xs={24} lg={16}>
+          <Card
+            title={
+              <div className="flex items-center gap-2">
+                <IconLineChartStroked style={{ color: 'var(--semi-color-primary)' }} />
+                <span>流量走势分析 (PV / UV)</span>
+              </div>
+            }
+            headerExtraContent={
+              <RadioGroup
+                type="button"
+                value={trendRange}
+                onChange={(e) => setTrendRange(e.target.value)}
+              >
+                <Radio value="7d">近 7 天</Radio>
+                <Radio value="30d">近 30 天</Radio>
+              </RadioGroup>
+            }
+            bordered
+            style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
+            bodyStyle={{ padding: '20px 16px' }}
+          >
+            <div className="relative w-full overflow-hidden">
+              <svg viewBox={`0 0 ${trendWidth} ${trendHeight}`} className="w-full h-56 select-none">
+                <defs>
+                  <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--semi-color-primary)" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="var(--semi-color-primary)" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+
+                {/* Grid horizontal guidelines */}
+                {[0.25, 0.5, 0.75, 1.0].map((ratio, i) => {
+                  const y = trendHeight - paddingY - ratio * (trendHeight - paddingY * 2);
+                  return (
+                    <g key={i}>
+                      <line
+                        x1={paddingX}
+                        y1={y}
+                        x2={trendWidth - paddingX}
+                        y2={y}
+                        stroke="var(--semi-color-border)"
+                        strokeDasharray="4 4"
+                      />
+                      <text
+                        x={paddingX - 6}
+                        y={y + 4}
+                        textAnchor="end"
+                        fontSize="10"
+                        fill="var(--semi-color-text-2)"
+                      >
+                        {Math.round(ratio * maxVisits)}
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* Area under curve */}
+                <path d={areaPath} fill="url(#trendGradient)" />
+
+                {/* Main line */}
+                <path
+                  d={linePath}
+                  fill="none"
+                  stroke="var(--semi-color-primary)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                {/* Data points & X Labels */}
+                {trendPoints.map((p, i) => (
+                  <g key={i} className="cursor-pointer">
+                    <line
+                      x1={p.x}
+                      y1={trendHeight - paddingY}
+                      x2={p.x}
+                      y2={trendHeight - paddingY + 5}
+                      stroke="var(--semi-color-border)"
+                    />
+                    <text
+                      x={p.x}
+                      y={trendHeight - paddingY + 16}
+                      textAnchor="middle"
+                      fontSize="10"
+                      fill="var(--semi-color-text-2)"
+                    >
+                      {p.date.slice(5)}
+                    </text>
+
+                    {/* Interactive hover circle */}
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={hoveredTrendIndex === i ? 6 : 4}
+                      fill={hoveredTrendIndex === i ? 'var(--semi-color-primary)' : 'var(--semi-color-bg-1)'}
+                      stroke="var(--semi-color-primary)"
+                      strokeWidth="2.5"
+                      onMouseEnter={() => setHoveredTrendIndex(i)}
+                      onMouseLeave={() => setHoveredTrendIndex(null)}
+                    />
+                  </g>
+                ))}
+              </svg>
+
+              {/* Hover tooltip indicator */}
+              {hoveredTrendIndex !== null && (
+                <div
+                  className="absolute bg-[var(--semi-color-bg-2)] border border-[var(--semi-color-border)] rounded-lg shadow-md px-3 py-1.5 text-xs pointer-events-none"
+                  style={{
+                    left: `${(trendPoints[hoveredTrendIndex].x / trendWidth) * 100}%`,
+                    top: '20px',
+                    transform: 'translateX(-50%)'
+                  }}
+                >
+                  <div className="font-semibold text-[var(--semi-color-text-0)]">
+                    {trendPoints[hoveredTrendIndex].date}
+                  </div>
+                  <div className="text-[var(--semi-color-primary)] font-mono font-medium">
+                    访问量: {trendPoints[hoveredTrendIndex].visits.toLocaleString()} 次
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+        </Col>
+
+        {/* Traffic Sources Breakdown */}
+        <Col xs={24} lg={8}>
+          <Card
+            title={
+              <div className="flex items-center gap-2">
+                <IconRingChartStroked style={{ color: 'var(--semi-color-success)' }} />
+                <span>访客来源占比</span>
+              </div>
+            }
+            bordered
+            style={{ borderRadius: 'var(--semi-border-radius-medium)', height: '100%' }}
+            bodyStyle={{ padding: '20px 16px' }}
+          >
+            <div className="space-y-4">
+              {trafficSources.map((source, index) => (
+                <div key={index} className="space-y-1.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-medium text-[var(--semi-color-text-0)]">{source.name}</span>
+                    <span className="font-mono text-[var(--semi-color-text-2)]">{source.percentage}%</span>
+                  </div>
+                  <Progress
+                    percent={source.percentage}
+                    stroke={
+                      index === 0
+                        ? 'var(--semi-color-primary)'
+                        : index === 1
+                        ? 'var(--semi-color-success)'
+                        : index === 2
+                        ? 'var(--semi-color-warning)'
+                        : 'var(--semi-color-info)'
+                    }
+                    showInfo={false}
+                    size="small"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-[var(--semi-color-border)] flex items-center justify-between text-xs text-[var(--semi-color-text-2)]">
+              <span>主要来源渠道: 搜索引擎自然搜索</span>
+              <Button theme="borderless" type="primary" size="small" onClick={() => onNavigateToTab('analytics')}>
+                详细分析 &rarr;
+              </Button>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* 4. Schedules, Site Health & Comments Row */}
+      <Row gutter={[16, 16]}>
+        {/* Pending Comments to Review */}
+        <Col xs={24} lg={12}>
+          <Card
+            title={
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <IconComment style={{ color: 'var(--semi-color-danger)' }} />
+                  <span>待审核评论</span>
+                  {pendingCount > 0 && <Badge count={pendingCount} type="danger" />}
+                </div>
+                <Button
+                  theme="borderless"
+                  type="primary"
+                  size="small"
+                  onClick={() => onNavigateToTab('comments')}
+                >
+                  查看全部
+                </Button>
+              </div>
+            }
+            bordered
+            style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
+            bodyStyle={{ padding: '12px 16px' }}
+          >
+            {pendingComments.length === 0 ? (
+              <div className="py-8">
+                <Empty
+                  image={<IllustrationNoContent style={{ width: 140, height: 140 }} />}
+                  title="暂无待审核评论"
+                  description="所有读者留言均已处理完毕"
+                />
+              </div>
+            ) : (
+              <div className="divide-y divide-[var(--semi-color-border)]">
+                {pendingComments.map((comment) => (
+                  <div key={comment.id} className="py-3 flex items-start justify-between gap-3">
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-xs text-[var(--semi-color-text-0)]">{comment.author}</span>
+                        <Text type="tertiary" size="small" style={{ fontSize: 11 }}>{comment.time}</Text>
+                      </div>
+                      <p className="text-xs text-[var(--semi-color-text-1)] line-clamp-2 leading-relaxed">
+                        {comment.content}
+                      </p>
+                      <Text type="secondary" size="small" style={{ fontSize: 11 }}>
+                        在文章《{comment.postTitle}》
+                      </Text>
+                    </div>
+
+                    <Space>
+                      <Button
+                        theme="light"
+                        type="primary"
+                        size="small"
+                        icon={<IconTick />}
+                        onClick={() => {
+                          onApproveComment(comment.id);
+                          Toast.success('评论已通过审核');
+                        }}
+                      >
+                        通过
+                      </Button>
+                      <Popconfirm
+                        title="确定删除此评论？"
+                        content="删除后无法恢复"
+                        onConfirm={() => {
+                          onDeleteComment(comment.id);
+                          Toast.warning('评论已删除');
+                        }}
+                      >
+                        <Button
+                          theme="borderless"
+                          type="danger"
+                          size="small"
+                          icon={<IconDelete />}
+                        />
+                      </Popconfirm>
+                    </Space>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+        </Col>
+
+        {/* Upcoming Schedules & System Health */}
+        <Col xs={24} lg={12}>
+          <div className="space-y-4">
+            {/* Upcoming Schedules */}
+            <Card
+              title={
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-2">
+                    <IconClock style={{ color: 'var(--semi-color-primary)' }} />
+                    <span>定时发布计划</span>
+                  </div>
+                  <Button
+                    theme="borderless"
+                    type="primary"
+                    size="small"
+                    onClick={() => onNavigateToTab('content')}
+                  >
+                    管理
+                  </Button>
+                </div>
+              }
+              bordered
+              style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
+              bodyStyle={{ padding: '12px 16px' }}
+            >
+              {schedules.length === 0 ? (
+                <Empty description="暂无排期的定时发布任务" />
+              ) : (
+                <div className="divide-y divide-[var(--semi-color-border)]">
+                  {schedules.map((schedule) => (
+                    <div key={schedule.id} className="py-2.5 flex items-center justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <div className="font-medium text-xs text-[var(--semi-color-text-0)] truncate">
+                          {schedule.title}
+                        </div>
+                        <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[var(--semi-color-text-2)]">
+                          <span>{schedule.publishTime}</span>
+                          <span>•</span>
+                          <span>{schedule.month}{schedule.day}日</span>
+                        </div>
+                      </div>
+                      <Tag color="cyan" size="small">准备就绪</Tag>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </Card>
+
+            {/* Site Health & Server Performance */}
+            <Card
+              title={
+                <div className="flex items-center gap-2">
+                  <IconActivity style={{ color: 'var(--semi-color-success)' }} />
+                  <span>站点运行健康度</span>
+                </div>
+              }
+              bordered
+              style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
+              bodyStyle={{ padding: '16px' }}
+            >
+              <Row gutter={[16, 12]}>
+                <Col span={6}>
+                  <div className="text-center">
+                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>磁盘使用</Text>
+                    <div className="font-mono font-bold text-sm text-[var(--semi-color-success)] mt-1">
+                      {siteHealth.storageUsed} / {siteHealth.storageTotal} GB
+                    </div>
+                  </div>
+                </Col>
+                <Col span={6}>
+                  <div className="text-center">
+                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份健康度</Text>
+                    <div className="font-mono font-bold text-sm text-[var(--semi-color-text-0)] mt-1">
+                      {siteHealth.backupScore}分
+                    </div>
+                  </div>
+                </Col>
+                <Col span={6}>
+                  <div className="text-center">
+                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>备份状态</Text>
+                    <div className="font-bold text-xs text-[var(--semi-color-primary)] mt-1">
+                      {siteHealth.backupStatus}
+                    </div>
+                  </div>
+                </Col>
+                <Col span={6}>
+                  <div className="text-center">
+                    <Text type="tertiary" size="small" style={{ fontSize: 11 }}>安全防御</Text>
+                    <div className="font-bold text-xs text-[var(--semi-color-success)] mt-1">
+                      {siteHealth.securityLabel}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          </div>
+        </Col>
+      </Row>
+
+      {/* 5. Quick Actions Bar */}
+      <Card
+        bordered
+        style={{ borderRadius: 'var(--semi-border-radius-medium)' }}
+        bodyStyle={{ padding: '16px' }}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <Text strong>快捷管理通道</Text>
+            <Text type="secondary" size="small" style={{ marginLeft: 8 }}>
+              常用功能快捷触达
+            </Text>
+          </div>
+          <Space wrap>
+            <Button
+              theme="light"
+              type="primary"
+              icon={<IconPlus />}
+              onClick={() => onQuickActionClick('create_post')}
+            >
+              撰写文章
+            </Button>
+            <Button
+              theme="light"
+              icon={<IconUpload />}
+              onClick={() => onQuickActionClick('upload_media')}
+            >
+              上传媒体
+            </Button>
+            <Button
+              theme="light"
+              icon={<IconPriceTag />}
+              onClick={() => onQuickActionClick('manage_categories')}
+            >
+              分类标签
+            </Button>
+            <Button
+              theme="light"
+              icon={<IconShield />}
+              onClick={() => Toast.info('备份程序已在后台运行中')}
+            >
+              一键全站备份
+            </Button>
+          </Space>
+        </div>
+      </Card>
+    </div>
+  );
+}

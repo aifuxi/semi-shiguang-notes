@@ -1,0 +1,615 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ========================================================
+   Pure Native CSS Layout & Typography System (No Tailwind)
+   ======================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --semi-font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  font-family: var(--semi-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--semi-color-bg-0);
+  color: var(--semi-color-text-0);
+}
+
+/* Flexbox utilities */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1 1 0%; }
+.shrink-0 { flex-shrink: 0; }
+.min-w-0 { min-width: 0; }
+
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-start { justify-content: flex-start; }
+
+/* Grid utilities */
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Gap utilities */
+.gap-1 { gap: 4px; }
+.gap-1\.5 { gap: 6px; }
+.gap-2 { gap: 8px; }
+.gap-2\.5 { gap: 10px; }
+.gap-3 { gap: 12px; }
+.gap-3\.5 { gap: 14px; }
+.gap-4 { gap: 16px; }
+.gap-5 { gap: 20px; }
+.gap-6 { gap: 24px; }
+.gap-8 { gap: 32px; }
+.gap-10 { gap: 40px; }
+.gap-12 { gap: 48px; }
+
+/* Vertical spacing utilities */
+.space-y-1 > * + * { margin-top: 4px; }
+.space-y-1\.5 > * + * { margin-top: 6px; }
+.space-y-2 > * + * { margin-top: 8px; }
+.space-y-3 > * + * { margin-top: 12px; }
+.space-y-4 > * + * { margin-top: 16px; }
+.space-y-5 > * + * { margin-top: 20px; }
+.space-y-6 > * + * { margin-top: 24px; }
+.space-y-8 > * + * { margin-top: 32px; }
+.space-y-10 > * + * { margin-top: 40px; }
+.space-y-12 > * + * { margin-top: 48px; }
+
+/* Padding utilities */
+.p-1 { padding: 4px; }
+.p-2 { padding: 8px; }
+.p-3 { padding: 12px; }
+.p-4 { padding: 16px; }
+.p-5 { padding: 20px; }
+.p-6 { padding: 24px; }
+.p-8 { padding: 32px; }
+
+.px-2 { padding-left: 8px; padding-right: 8px; }
+.px-3 { padding-left: 12px; padding-right: 12px; }
+.px-4 { padding-left: 16px; padding-right: 16px; }
+.px-6 { padding-left: 24px; padding-right: 24px; }
+.px-8 { padding-left: 32px; padding-right: 32px; }
+
+.py-1 { padding-top: 4px; padding-bottom: 4px; }
+.py-2 { padding-top: 8px; padding-bottom: 8px; }
+.py-2\.5 { padding-top: 10px; padding-bottom: 10px; }
+.py-3 { padding-top: 12px; padding-bottom: 12px; }
+.py-4 { padding-top: 16px; padding-bottom: 16px; }
+.py-6 { padding-top: 24px; padding-bottom: 24px; }
+.py-8 { padding-top: 32px; padding-bottom: 32px; }
+.py-10 { padding-top: 40px; padding-bottom: 40px; }
+.py-12 { padding-top: 48px; padding-bottom: 48px; }
+.py-16 { padding-top: 64px; padding-bottom: 64px; }
+
+.pt-1 { padding-top: 4px; }
+.pt-2 { padding-top: 8px; }
+.pt-3 { padding-top: 12px; }
+.pt-4 { padding-top: 16px; }
+.pt-6 { padding-top: 24px; }
+.pt-8 { padding-top: 32px; }
+.pb-1 { padding-bottom: 4px; }
+.pb-2 { padding-bottom: 8px; }
+.pb-4 { padding-bottom: 16px; }
+.pb-6 { padding-bottom: 24px; }
+.pl-9 { padding-left: 36px; }
+
+/* Margin utilities */
+.m-0 { margin: 0; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mt-0\.5 { margin-top: 2px; }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.mt-5 { margin-top: 20px; }
+.mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 32px; }
+.mt-10 { margin-top: 40px; }
+.mt-16 { margin-top: 64px; }
+.mt-20 { margin-top: 80px; }
+
+.mb-1 { margin-bottom: 4px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.mb-8 { margin-bottom: 32px; }
+.mb-10 { margin-bottom: 40px; }
+.mb-12 { margin-bottom: 48px; }
+
+.my-2\.5 { margin-top: 10px; margin-bottom: 10px; }
+.my-4 { margin-top: 16px; margin-bottom: 16px; }
+.my-6 { margin-top: 24px; margin-bottom: 24px; }
+
+/* Sizing & Positioning */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+.h-16 { height: 64px; }
+.h-18 { height: 72px; }
+.max-w-xs { max-width: 320px; }
+.max-w-md { max-width: 448px; }
+.max-w-lg { max-width: 512px; }
+.max-w-xl { max-width: 576px; }
+.max-w-2xl { max-width: 672px; }
+.max-w-3xl { max-width: 768px; }
+.max-w-4xl { max-width: 896px; }
+.max-w-5xl { max-width: 1024px; }
+.max-w-6xl { max-width: 1152px; }
+.max-w-7xl { max-width: 1280px; }
+
+.sticky { position: sticky; }
+.top-0 { top: 0; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-50 { z-index: 50; }
+.overflow-hidden { overflow: hidden; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+.max-h-80 { max-height: 320px; }
+
+/* Typography */
+.text-xs { font-size: 12px; line-height: 16px; }
+.text-sm { font-size: 14px; line-height: 20px; }
+.text-base { font-size: 16px; line-height: 24px; }
+.text-lg { font-size: 18px; line-height: 28px; }
+.text-xl { font-size: 20px; line-height: 28px; }
+.text-2xl { font-size: 24px; line-height: 32px; }
+.text-3xl { font-size: 30px; line-height: 36px; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+.font-mono { font-family: "JetBrains Mono", monospace; }
+
+.tracking-tight { letter-spacing: -0.025em; }
+.leading-tight { line-height: 1.25; }
+.leading-relaxed { line-height: 1.625; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Borders & Shapes */
+.border { border: 1px solid var(--semi-color-border); }
+.border-t { border-top: 1px solid var(--semi-color-border); }
+.border-b { border-bottom: 1px solid var(--semi-color-border); }
+.border-l { border-left: 1px solid var(--semi-color-border); }
+.border-l-2 { border-left: 2px solid var(--semi-color-border); }
+.border-r { border-right: 1px solid var(--semi-color-border); }
+.border-none { border: none; }
+
+.rounded { border-radius: 4px; }
+.rounded-md { border-radius: 6px; }
+.rounded-lg { border-radius: 8px; }
+.rounded-xl { border-radius: 12px; }
+.rounded-2xl { border-radius: 16px; }
+.rounded-full { border-radius: 9999px; }
+
+.divide-y > * + * { border-top: 1px solid var(--semi-color-border); }
+
+/* Shadows & Transitions */
+.shadow-xs { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+.shadow-sm { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+.cursor-pointer { cursor: pointer; }
+.select-none { user-select: none; }
+.hidden { display: none; }
+.block { display: block; }
+
+.transition-colors { transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.transition-transform { transition: transform 0.2s ease; }
+.transition-all { transition: all 0.2s ease; }
+.duration-200 { transition-duration: 200ms; }
+
+/* Theme colors & helpers */
+.bg-\[var\(--semi-color-bg-0\)\] { background-color: var(--semi-color-bg-0); }
+.bg-\[var\(--semi-color-bg-1\)\] { background-color: var(--semi-color-bg-1); }
+.bg-\[var\(--semi-color-fill-0\)\] { background-color: var(--semi-color-fill-0); }
+.bg-\[var\(--semi-color-fill-1\)\] { background-color: var(--semi-color-fill-1); }
+
+.text-\[var\(--semi-color-text-0\)\] { color: var(--semi-color-text-0); }
+.text-\[var\(--semi-color-text-1\)\] { color: var(--semi-color-text-1); }
+.text-\[var\(--semi-color-text-2\)\] { color: var(--semi-color-text-2); }
+.text-\[var\(--semi-color-primary\)\] { color: var(--semi-color-primary); }
+.text-\[var\(--semi-color-success\)\] { color: var(--semi-color-success); }
+.text-red-500 { color: #ef4444; }
+
+.border-\[var\(--semi-color-border\)\] { border-color: var(--semi-color-border); }
+.rounded-\[var\(--semi-border-radius-medium\)\] { border-radius: var(--semi-border-radius-medium); }
+
+.hover\:border-\[var\(--semi-color-primary\)\]:hover { border-color: var(--semi-color-primary) !important; }
+.hover\:text-\[var\(--semi-color-text-0\)\]:hover { color: var(--semi-color-text-0) !important; }
+.hover\:text-\[var\(--semi-color-text-1\)\]:hover { color: var(--semi-color-text-1) !important; }
+.hover\:text-\[var\(--semi-color-primary\)\]:hover { color: var(--semi-color-primary) !important; }
+.hover\:bg-\[var\(--semi-color-fill-0\)\]:hover { background-color: var(--semi-color-fill-0) !important; }
+.hover\:underline:hover { text-decoration: underline; }
+
+.group:hover .group-hover\:text-\[var\(--semi-color-primary\)\] { color: var(--semi-color-primary) !important; }
+.group:hover .group-hover\:translate-x-0\.5 { transform: translateX(2px); }
+.group:hover .group-hover\:shadow-sm { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+.group:hover .group-hover\:opacity-100 { opacity: 1; }
+.group:hover .group-hover\:scale-105 { transform: scale(1.05); }
+
+.antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.opacity-0 { opacity: 0; }
+.opacity-70 { opacity: 0.7; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.fixed { position: fixed; }
+.bg-black\/40 { background-color: rgba(0, 0, 0, 0.4); }
+.z-40 { z-index: 40; }
+.h-44 { height: 176px; }
+.max-h-96 { max-height: 384px; }
+.object-cover { object-fit: cover; }
+.object-contain { object-fit: contain; }
+.duration-300 { transition-duration: 300ms; }
+.scale-110 { transform: scale(1.1); }
+.ring-2 { box-shadow: 0 0 0 2px var(--semi-color-primary); }
+
+.bg-blue-50 { background-color: rgba(51, 112, 255, 0.08); }
+.text-blue-600 { color: #2563eb; }
+.bg-emerald-50 { background-color: rgba(16, 185, 129, 0.08); }
+.text-emerald-600 { color: #059669; }
+.bg-emerald-500 { background-color: #10b981; }
+.bg-purple-50 { background-color: rgba(147, 51, 234, 0.08); }
+.text-purple-600 { color: #9333ea; }
+.w-2\.5 { width: 10px; }
+.h-2\.5 { height: 10px; }
+
+/* Responsive Media Queries */
+@media (min-width: 640px) {
+  .sm\:flex-row { flex-direction: row; }
+  .sm\:items-center { align-items: center; }
+  .sm\:px-6 { padding-left: 24px; padding-right: 24px; }
+  .sm\:px-8 { padding-left: 32px; padding-right: 32px; }
+  .sm\:text-base { font-size: 16px; line-height: 24px; }
+  .sm\:text-3xl { font-size: 30px; line-height: 36px; }
+  .sm\:text-sm { font-size: 14px; line-height: 20px; }
+  .sm\:py-16 { padding-top: 64px; padding-bottom: 64px; }
+}
+
+@media (min-width: 768px) {
+  .md\:flex { display: flex; }
+  .md\:hidden { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:px-8 { padding-left: 32px; padding-right: 32px; }
+  .lg\:px-12 { padding-left: 48px; padding-right: 48px; }
+  .lg\:py-14 { padding-top: 56px; padding-bottom: 56px; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:flex { display: flex; }
+}
+
+/* Semi UI font overrides to maintain the beloved Space Grotesk / JetBrains Mono font */
+.semi-ui,
+.semi-button,
+.semi-typography,
+.semi-table,
+.semi-nav,
+.semi-card,
+.semi-input,
+.semi-input-wrapper,
+.semi-input-textarea,
+.semi-input-textarea-wrapper,
+textarea.semi-input-textarea,
+.semi-select,
+.semi-select-selection,
+.semi-tagInput,
+.semi-tree-select,
+.semi-cascader,
+.semi-modal,
+.semi-tabs,
+.semi-tag {
+  font-family: var(--semi-font-family) !important;
+}
+
+code, pre, .font-mono, .semi-code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* Ensure smooth theme transitions */
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body[theme-mode='dark'] {
+  background-color: var(--semi-color-bg-0);
+  color: var(--semi-color-text-0);
+}
+
+body,
+body[theme-mode=dark] .semi-always-light,
+:host,
+:host .semi-always-light {
+  --semi-border-radius-extra-small: 4px;
+  --semi-border-radius-small: 8px;
+  --semi-border-radius-medium: 16px;
+  --semi-border-radius-large: 24px;
+  --semi-modern-button-surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(0, 0, 0, 0.035),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+  --semi-modern-button-solid-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 极简内侧微光边缘：彻底去除厚重外散投影，保留精致内描边层次 */
+  --semi-modern-card-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 0 0 1px rgba(0, 0, 0, 0.015);
+  /* 输入框同款微质感边缘与纯粹清晰的品牌聚焦色环（无模糊漫射，纯色环更饱满鲜明） */
+  --semi-modern-input-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --semi-modern-input-focus-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 0 0 2px rgba(51, 112, 255, 0.38);
+  --semi-modern-overlay-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42), inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+  --semi-modern-modal-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  --semi-modern-tooltip-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+body[theme-mode=dark],
+body .semi-always-dark,
+:host([theme-mode=dark]),
+:host .semi-always-dark {
+  --semi-border-radius-extra-small: 4px;
+  --semi-border-radius-small: 8px;
+  --semi-border-radius-medium: 16px;
+  --semi-border-radius-large: 24px;
+  --semi-modern-button-surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.16);
+  --semi-modern-button-solid-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.14), 0 2px 4px rgba(0, 0, 0, 0.22);
+  /* 深色模式下仅保留极细腻的微光内描边 */
+  --semi-modern-card-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  /* 输入框深色微质感边缘与纯粹清晰的深色聚焦色环 */
+  --semi-modern-input-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --semi-modern-input-focus-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 2px rgba(84, 169, 255, 0.45);
+  /* 深色基线的 elevated 阴影已有内描边，这里只补顶部高光。 */
+  --semi-modern-overlay-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  --semi-modern-modal-edge-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --semi-modern-tooltip-edge-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+/* 填充按钮增加层次，solid 按自身填充色使用更清晰的内侧高光。 */
+.semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
+  box-shadow: var(--semi-modern-button-solid-shadow);
+}
+
+.semi-button.semi-button-light:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
+  box-shadow: var(--semi-modern-button-surface-shadow);
+}
+
+/* borderless 仅在交互时出现背景，此时沿用 light 的细边缘层次。 */
+.semi-button.semi-button-borderless:not(.semi-button-disabled):not(.semi-button-group .semi-button):is(:hover, :active) {
+  box-shadow: var(--semi-modern-button-surface-shadow);
+}
+
+/* 彻底移除 Semi Card 自带的 elevated 重阴影 (0 4px 14px...) */
+.semi-card-shadows-hover:hover,
+.semi-card-shadows-always {
+  box-shadow: none !important;
+}
+
+/* 独立卡片：仅保留在 index.css 中定义的极简边缘层次，网格卡片仍沿用组件本身的分隔 */
+.semi-card.semi-card-bordered:not(.semi-card-group-grid > .semi-card) {
+  box-shadow: var(--semi-modern-card-edge-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.semi-card.semi-card-bordered.semi-card-shadows-always:not(.semi-card-group-grid > .semi-card) {
+  box-shadow: var(--semi-modern-card-edge-shadow) !important;
+}
+
+.semi-card.semi-card-bordered.semi-card-shadows-hover:not(.semi-card-group-grid > .semi-card):hover {
+  box-shadow: var(--semi-modern-card-edge-shadow) !important;
+  border-color: var(--semi-color-primary-light-active) !important;
+}
+
+/* Popconfirm 与选择面板复用 Popover 表面，只在最外层添加一次边缘效果。 */
+.semi-dropdown-wrapper,
+.semi-popover-wrapper {
+  box-shadow: var(--semi-modern-overlay-edge-shadow), var(--semi-shadow-elevated);
+}
+
+/* Tooltip 的灰色表面随明暗模式反转，单独配色且不新增外投影。 */
+.semi-tooltip-wrapper {
+  box-shadow: var(--semi-modern-tooltip-edge-shadow);
+}
+
+/* Modal 已有实体边框；全屏内容不需要额外的内侧高光。 */
+.semi-modal-content:not(.semi-modal-content-fullScreen) {
+  box-shadow: var(--semi-modern-modal-edge-shadow), var(--semi-shadow-elevated);
+}
+
+/* 全表单控件体系（Input / TextArea / Select / TagInput / TreeSelect / Cascader / AutoComplete）：
+   严格对齐同款微光高光、极简内描边与无实线生硬跳跃的交互动效 */
+.semi-input-wrapper:not(.semi-input-wrapper-disabled):not(.semi-input-wrapper-hidden):not(.semi-input-borderless),
+.semi-input-textarea-wrapper:not(.semi-input-textarea-wrapper-disabled):not(.semi-input-textarea-borderless),
+.semi-select:not(.semi-select-disabled):not(.semi-select-borderless),
+.semi-tagInput:not(.semi-tagInput-disabled):not(.semi-tagInput-borderless),
+.semi-tree-select:not(.semi-tree-select-disabled):not(.semi-tree-select-borderless),
+.semi-cascader:not(.semi-cascader-disabled):not(.semi-cascader-borderless) {
+  box-shadow: var(--semi-modern-input-edge-shadow);
+  border: 1px solid var(--semi-color-border) !important;
+  border-radius: var(--semi-border-radius-small) !important;
+  background-color: var(--semi-color-fill-0);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* 文本域与单行输入框内部排版严格对齐，彻底消除浏览器原生与悬停/聚焦实线轮廓与边框 */
+.semi-input-textarea,
+.semi-input-textarea:hover,
+.semi-input-textarea:focus,
+.semi-input-textarea:focus-visible,
+textarea.semi-input-textarea,
+textarea.semi-input-textarea:hover,
+textarea.semi-input-textarea:focus,
+textarea.semi-input-textarea:focus-visible {
+  font-family: var(--semi-font-family) !important;
+  padding: 8px 12px !important;
+  line-height: 1.5 !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  resize: none;
+}
+
+.semi-input,
+.semi-input:hover,
+.semi-input:focus,
+.semi-input:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 悬停态：保持自然柔和边框，通过底层细腻浅色填充与微光边缘反馈，绝不突兀出现实线彩色描边 */
+.semi-input-wrapper:not(.semi-input-wrapper-disabled):hover,
+.semi-input-textarea-wrapper:not(.semi-input-textarea-wrapper-disabled):hover,
+.semi-select:not(.semi-select-disabled):not(.semi-select-borderless):hover,
+.semi-tagInput:not(.semi-tagInput-disabled):not(.semi-tagInput-borderless):hover,
+.semi-tree-select:not(.semi-tree-select-disabled):not(.semi-tree-select-borderless):hover,
+.semi-cascader:not(.semi-cascader-disabled):not(.semi-cascader-borderless):hover {
+  border-color: var(--semi-color-border) !important;
+  background-color: var(--semi-color-fill-1);
+  box-shadow: var(--semi-modern-input-edge-shadow);
+}
+
+/* 聚焦 / 展开态：统一采用更清晰明显的现代柔和光晕与品牌色边框环抱 */
+.semi-input-wrapper.semi-input-wrapper-focus,
+.semi-input-wrapper:focus-within,
+.semi-input-textarea-wrapper.semi-input-textarea-wrapper-focus,
+.semi-input-textarea-wrapper:focus-within,
+.semi-select:focus,
+.semi-select-focus,
+.semi-select-open,
+.semi-select:focus-within,
+.semi-tagInput-focus,
+.semi-tagInput:focus-within,
+.semi-tree-select-focus,
+.semi-tree-select:focus-within,
+.semi-cascader:focus,
+.semi-cascader:focus-within {
+  border-color: var(--semi-color-primary) !important;
+  background-color: var(--semi-color-fill-0);
+  box-shadow: var(--semi-modern-input-focus-shadow) !important;
+  outline: none !important;
+}
+
+/* 错误态统一微光警示 */
+.semi-input-wrapper.semi-input-wrapper-error,
+.semi-input-textarea-wrapper.semi-input-textarea-wrapper-error,
+.semi-select-error,
+.semi-tagInput-error,
+.semi-tree-select-error,
+.semi-cascader-error {
+  border-color: var(--semi-color-danger) !important;
+  box-shadow: 0 0 0 2px rgba(249, 57, 32, 0.16) !important;
+}
+
+/* 前台页面大模块物理间距保障，防止由于负 margin 或 space-y 失效导致贴合 */
+.blog-content-row {
+  margin-top: 48px !important;
+}
+
+.blog-sidebar-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+}
+
+.blog-sidebar-stack > .semi-card {
+  margin-bottom: 0 !important;
+}
+
+.blog-articles-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
+
+.blog-articles-col {
+  margin-bottom: 48px !important;
+}
+
+.blog-articles-grid-row {
+  margin-top: 32px !important;
+}
+
+.blog-friends-grid-row {
+  margin-top: 32px !important;
+}
+
