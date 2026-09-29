@@ -47,8 +47,8 @@ export default function CategoryManagement() {
       return;
     }
 
-    setCategories([
-      ...categories,
+    setCategories(prevCategories => [
+      ...prevCategories,
       { name: newCatName.trim(), count: 0, color: newCatColor }
     ]);
     setNewCatName('');
@@ -56,7 +56,7 @@ export default function CategoryManagement() {
   };
 
   const handleDeleteCategory = (name: string) => {
-    setCategories(categories.filter((c) => c.name !== name));
+    setCategories(prevCategories => prevCategories.filter((c) => c.name !== name));
     Toast.success(`分类 “${name}” 已删除`);
   };
 
@@ -70,13 +70,13 @@ export default function CategoryManagement() {
       return;
     }
 
-    setTags([...tags, { name: newTagName.trim(), count: 0 }]);
+    setTags(prevTags => [...prevTags, { name: newTagName.trim(), count: 0 }]);
     setNewTagName('');
     Toast.success('标签创建成功');
   };
 
   const handleDeleteTag = (name: string) => {
-    setTags(tags.filter((t) => t.name !== name));
+    setTags(prevTags => prevTags.filter((t) => t.name !== name));
     Toast.success(`标签 “${name}” 已删除`);
   };
 

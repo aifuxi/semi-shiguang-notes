@@ -125,7 +125,7 @@ export default function MediaLibrary() {
       type: file.type || 'image/jpeg'
     };
 
-    setMediaItems([newMedia, ...mediaItems]);
+    setMediaItems(prevMediaItems => [newMedia, ...prevMediaItems]);
     Toast.success(`图片 “${file.name}” 已成功上传到媒体库`);
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
@@ -136,7 +136,7 @@ export default function MediaLibrary() {
   };
 
   const deleteMedia = (id: string) => {
-    setMediaItems(mediaItems.filter(m => m.id !== id));
+    setMediaItems(prevMediaItems => prevMediaItems.filter(m => m.id !== id));
     Toast.success('媒体文件已移除');
   };
 

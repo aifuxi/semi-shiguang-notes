@@ -3,22 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { lazy, ReactNode, Suspense, useState, useEffect } from 'react';
 import { Toast } from '@douyinfe/semi-ui';
 import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import ContentManagement from './components/ContentManagement';
-import CommentsManagement from './components/CommentsManagement';
-import MediaLibrary from './components/MediaLibrary';
-import CategoryManagement from './components/CategoryManagement';
-import DataAnalysis from './components/DataAnalysis';
-import VisitorsLog from './components/VisitorsLog';
-import SettingsPanel from './components/SettingsPanel';
-import FriendsLinks, { initialLinks } from './components/FriendsLinks';
-import Changelog from './components/Changelog';
-import BlogFrontend from './components/BlogFrontend';
 import { adminRoutes, AdminRouteKey } from './routes';
 
 import {
@@ -28,7 +17,8 @@ import {
   initialTrafficTrend,
   initialTrafficSources,
   defaultSiteHealth,
-  defaultBlogSettings
+  defaultBlogSettings,
+  initialLinks
 } from './mockData';
 
 import {
@@ -41,65 +31,66 @@ import {
   BlogSettings,
   FriendLink
 } from './types';
+import { readStoredValue, storedValueGuards, writeStoredValue } from './storage';
+
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const ContentManagement = lazy(() => import('./components/ContentManagement'));
+const CommentsManagement = lazy(() => import('./components/CommentsManagement'));
+const MediaLibrary = lazy(() => import('./components/MediaLibrary'));
+const CategoryManagement = lazy(() => import('./components/CategoryManagement'));
+const DataAnalysis = lazy(() => import('./components/DataAnalysis'));
+const VisitorsLog = lazy(() => import('./components/VisitorsLog'));
+const SettingsPanel = lazy(() => import('./components/SettingsPanel'));
+const FriendsLinks = lazy(() => import('./components/FriendsLinks'));
+const Changelog = lazy(() => import('./components/Changelog'));
+const BlogFrontend = lazy(() => import('./components/BlogFrontend'));
 
 export default function App() {
   // 1. Persistent States via LocalStorage
-  const [posts, setPosts] = useState<Post[]>(() => {
-    const saved = localStorage.getItem('shiguang_posts');
-    return saved ? JSON.parse(saved) : initialPosts;
-  });
+  const [posts, setPosts] = useState<Post[]>(() =>
+    readStoredValue('shiguang_posts', initialPosts, storedValueGuards.posts)
+  );
 
-  const [comments, setComments] = useState<Comment[]>(() => {
-    const saved = localStorage.getItem('shiguang_comments');
-    return saved ? JSON.parse(saved) : initialComments;
-  });
+  const [comments, setComments] = useState<Comment[]>(() =>
+    readStoredValue('shiguang_comments', initialComments, storedValueGuards.comments)
+  );
 
-  const [schedules, setSchedules] = useState<UpcomingSchedule[]>(() => {
-    const saved = localStorage.getItem('shiguang_schedules');
-    return saved ? JSON.parse(saved) : initialSchedules;
-  });
+  const [schedules, setSchedules] = useState<UpcomingSchedule[]>(() =>
+    readStoredValue('shiguang_schedules', initialSchedules, storedValueGuards.schedules)
+  );
 
-  const [trafficTrend, setTrafficTrend] = useState<TrafficTrendItem[]>(() => {
-    const saved = localStorage.getItem('shiguang_traffic_trend');
-    return saved ? JSON.parse(saved) : initialTrafficTrend;
-  });
+  const [trafficTrend, setTrafficTrend] = useState<TrafficTrendItem[]>(() =>
+    readStoredValue('shiguang_traffic_trend', initialTrafficTrend, storedValueGuards.trafficTrend)
+  );
 
-  const [trafficSources, setTrafficSources] = useState<TrafficSourceItem[]>(() => {
-    const saved = localStorage.getItem('shiguang_traffic_sources');
-    return saved ? JSON.parse(saved) : initialTrafficSources;
-  });
+  const [trafficSources, setTrafficSources] = useState<TrafficSourceItem[]>(() =>
+    readStoredValue('shiguang_traffic_sources', initialTrafficSources, storedValueGuards.trafficSources)
+  );
 
-  const [siteHealth, setSiteHealth] = useState<SiteHealth>(() => {
-    const saved = localStorage.getItem('shiguang_site_health');
-    return saved ? JSON.parse(saved) : defaultSiteHealth;
-  });
+  const [siteHealth, setSiteHealth] = useState<SiteHealth>(() =>
+    readStoredValue('shiguang_site_health', defaultSiteHealth, storedValueGuards.siteHealth)
+  );
 
-  const [settings, setSettings] = useState<BlogSettings>(() => {
-    const saved = localStorage.getItem('shiguang_settings');
-    return saved ? JSON.parse(saved) : defaultBlogSettings;
-  });
+  const [settings, setSettings] = useState<BlogSettings>(() =>
+    readStoredValue('shiguang_settings', defaultBlogSettings, storedValueGuards.settings)
+  );
 
-  const [friendsLinks, setFriendsLinks] = useState<FriendLink[]>(() => {
-    const saved = localStorage.getItem('shiguang_friends_links');
-    return saved ? JSON.parse(saved) : initialLinks;
-  });
+  const [friendsLinks, setFriendsLinks] = useState<FriendLink[]>(() =>
+    readStoredValue('shiguang_friends_links', initialLinks, storedValueGuards.friendsLinks)
+  );
 
   // Dark Mode global state and sync with Semi Design theme-mode
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('shiguang_dark_mode');
-    if (saved) return saved === 'true';
-    const savedSettings = localStorage.getItem('shiguang_settings');
-    if (savedSettings) {
-      try {
-        const parsed = JSON.parse(savedSettings);
-        return parsed.theme === 'dark';
-      } catch (e) {}
-    }
-    return false;
+    const storedDarkMode = readStoredValue<boolean | null>(
+      'shiguang_dark_mode',
+      null,
+      storedValueGuards.darkMode
+    );
+    return storedDarkMode ?? (settings.theme === 'dark');
   });
 
   useEffect(() => {
-    localStorage.setItem('shiguang_dark_mode', String(isDarkMode));
+    writeStoredValue('shiguang_dark_mode', isDarkMode);
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
       document.body.setAttribute('theme-mode', 'dark');
@@ -131,35 +122,35 @@ export default function App() {
 
   // Sync state modifications to LocalStorage
   useEffect(() => {
-    localStorage.setItem('shiguang_posts', JSON.stringify(posts));
+    writeStoredValue('shiguang_posts', posts);
   }, [posts]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_comments', JSON.stringify(comments));
+    writeStoredValue('shiguang_comments', comments);
   }, [comments]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_schedules', JSON.stringify(schedules));
+    writeStoredValue('shiguang_schedules', schedules);
   }, [schedules]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_traffic_trend', JSON.stringify(trafficTrend));
+    writeStoredValue('shiguang_traffic_trend', trafficTrend);
   }, [trafficTrend]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_traffic_sources', JSON.stringify(trafficSources));
+    writeStoredValue('shiguang_traffic_sources', trafficSources);
   }, [trafficSources]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_site_health', JSON.stringify(siteHealth));
+    writeStoredValue('shiguang_site_health', siteHealth);
   }, [siteHealth]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_settings', JSON.stringify(settings));
+    writeStoredValue('shiguang_settings', settings);
   }, [settings]);
 
   useEffect(() => {
-    localStorage.setItem('shiguang_friends_links', JSON.stringify(friendsLinks));
+    writeStoredValue('shiguang_friends_links', friendsLinks);
   }, [friendsLinks]);
 
   // Global operations
@@ -264,7 +255,11 @@ export default function App() {
     { path: '*', element: <NotFoundPage onGoHome={() => navigate('/')} /> }
   ]);
 
-  return routes;
+  return (
+    <Suspense fallback={<div role="status" className="p-6 text-center text-[var(--semi-color-text-2)]">页面加载中…</div>}>
+      {routes}
+    </Suspense>
+  );
 }
 
 interface AdminLayoutProps {

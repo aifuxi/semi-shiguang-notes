@@ -31,62 +31,10 @@ import {
 } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 import { FriendLink } from '../types';
+import { initialLinks } from '../mockData';
 import styles from './FriendsLinks.module.scss';
 
 const { Title, Text } = Typography;
-
-export const initialLinks: FriendLink[] = [
-  {
-    id: '1',
-    name: '拾光漫步',
-    url: 'https://shiguang.example.com',
-    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80',
-    description: '记录生活中的小确幸，留存每一抹温柔。',
-    category: '生活感悟',
-    status: '正常',
-    sortOrder: 1,
-  },
-  {
-    id: '2',
-    name: '代码与诗',
-    url: 'https://codepoetry.example.com',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
-    description: '用逻辑构建世界，用诗意点缀灵魂。',
-    category: '技术博客',
-    status: '正常',
-    sortOrder: 2,
-  },
-  {
-    id: '3',
-    name: '数字极简主义',
-    url: 'https://minimalist.example.com',
-    avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&h=120&q=80',
-    description: '专注极简生活，摆脱数字噪音，回归纯真。',
-    category: '创意设计',
-    status: '正常',
-    sortOrder: 3,
-  },
-  {
-    id: '4',
-    name: '极客风暴',
-    url: 'https://geekstorm.example.com',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
-    description: '探索前沿科技，分享极客折腾日记。',
-    category: '技术博客',
-    status: '异常',
-    sortOrder: 4,
-  },
-  {
-    id: '5',
-    name: '云端彼岸',
-    url: 'https://cloudside.example.com',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80',
-    description: '渴望交换友链，期待与有温度的你相遇。',
-    category: '生活感悟',
-    status: '待审核',
-    sortOrder: 5,
-  }
-];
 
 interface FriendsLinksProps {
   links?: FriendLink[];
@@ -152,13 +100,13 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
         description: formDesc.trim() || '暂无站点简介',
         category: formCategory,
         status: formStatus,
-        sortOrder: links.length + 1
+        sortOrder: 0
       };
-      setLinks([newLink, ...links]);
+      setLinks(prevLinks => [{ ...newLink, sortOrder: prevLinks.length + 1 }, ...prevLinks]);
       Toast.success('友链已成功添加');
     } else {
       setLinks(
-        links.map(l =>
+        prevLinks => prevLinks.map(l =>
           l.id === currentLinkId
             ? {
                 ...l,
@@ -179,12 +127,12 @@ export default function FriendsLinks({ links: propLinks, setLinks: propSetLinks 
   };
 
   const handleDelete = (id: string) => {
-    setLinks(links.filter(l => l.id !== id));
+    setLinks(prevLinks => prevLinks.filter(l => l.id !== id));
     Toast.success('友链已移除');
   };
 
   const handleApprove = (id: string) => {
-    setLinks(links.map(l => l.id === id ? { ...l, status: '正常' } : l));
+    setLinks(prevLinks => prevLinks.map(l => l.id === id ? { ...l, status: '正常' } : l));
     Toast.success('已审核通过该友情链接');
   };
 

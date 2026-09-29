@@ -50,17 +50,17 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
   const [replyContent, setReplyContent] = useState('');
 
   const handleApprove = (id: string) => {
-    setComments(comments.map(c => c.id === id ? { ...c, status: '已通过' as CommentStatus } : c));
+    setComments(prevComments => prevComments.map(c => c.id === id ? { ...c, status: '已通过' as CommentStatus } : c));
     Toast.success('评论审核通过');
   };
 
   const handleReject = (id: string) => {
-    setComments(comments.map(c => c.id === id ? { ...c, status: '已拒绝' as CommentStatus } : c));
+    setComments(prevComments => prevComments.map(c => c.id === id ? { ...c, status: '已拒绝' as CommentStatus } : c));
     Toast.warning('已标记为垃圾评论');
   };
 
   const handleDelete = (id: string) => {
-    setComments(comments.filter(c => c.id !== id));
+    setComments(prevComments => prevComments.filter(c => c.id !== id));
     Toast.success('评论已被彻底删除');
   };
 
@@ -86,7 +86,7 @@ export default function CommentsManagement({ comments, setComments }: CommentsMa
       email: 'aifuxi.js@gmail.com'
     };
 
-    setComments([adminReply, ...comments]);
+    setComments(prevComments => [adminReply, ...prevComments]);
     Toast.success('回复已成功发送');
     setReplyModalOpen(false);
   };

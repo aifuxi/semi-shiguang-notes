@@ -135,11 +135,11 @@ export default function ContentManagement({
         tags: tagsArray.length > 0 ? tagsArray : ['随笔'],
         content: formContent || '暂无详细内容'
       };
-      setPosts([newPost, ...posts]);
+      setPosts(prevPosts => [newPost, ...prevPosts]);
       Toast.success('新博文已成功创建！');
     } else {
       setPosts(
-        posts.map((post) =>
+        prevPosts => prevPosts.map((post) =>
           post.id === editId
             ? {
                 ...post,
@@ -159,7 +159,7 @@ export default function ContentManagement({
   };
 
   const handleDeletePost = (id: string) => {
-    setPosts(posts.filter((post) => post.id !== id));
+    setPosts(prevPosts => prevPosts.filter((post) => post.id !== id));
     Toast.success('文章已被移除');
   };
 
