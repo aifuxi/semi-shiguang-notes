@@ -287,7 +287,7 @@ export default function ComponentPlayground({
                 <Tabs activeKey={activeTab} onChange={key => setActiveTab(String(key))}>
                   <Tabs.TabPane tab="按钮" itemKey="buttons">按钮状态可在上方区域查看。</Tabs.TabPane>
                   <Tabs.TabPane tab="表单" itemKey="forms">默认、错误及禁用状态保持一致的焦点和边界表现。</Tabs.TabPane>
-                  <Tabs.TabPane tab="浮层" itemKey="overlays">浮层保留 Semi 原生阴影，主题只调整圆角。</Tabs.TabPane>
+                  <Tabs.TabPane tab="浮层" itemKey="overlays">浮层主题统一了内高光与阴影层次，Tooltip 保持轻量。</Tabs.TabPane>
                 </Tabs>
               </Card>
               <Card className={styles.panel} title="Nav · Pagination" bordered>
@@ -376,7 +376,7 @@ export default function ComponentPlayground({
                   >
                     <Button>打开 Dropdown</Button>
                   </Dropdown>
-                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">保留 Semi 浮层阴影，主题调整圆角。</Text></div>}>
+                  <Popover content={<div className={styles.popoverContent}><Text strong>Popover 内容</Text><Text type="secondary">主题为浮层增加了细腻高光与柔和阴影。</Text></div>}>
                     <Button theme="light" type="primary">打开 Popover</Button>
                   </Popover>
                   <Tooltip content="统一的轻量提示层">
@@ -414,7 +414,7 @@ export default function ComponentPlayground({
         onCancel={() => setModalVisible(false)}
         onOk={() => setModalVisible(false)}
       >
-        <Text>Modal 保留 Semi 原生阴影与无分割线布局，主题只调整圆角。</Text>
+        <Text>Modal 使用主题浮层阴影与无分割线布局，全屏模式保持原有样式。</Text>
       </Modal>
     </Layout>
   );

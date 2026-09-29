@@ -1,6 +1,11 @@
 .semi-dropdown-wrapper,
 .semi-popover-wrapper {
   border-radius: var(--semi-border-radius-small);
+  box-shadow: var(--semi-modern-overlay-shadow);
+}
+
+.semi-popconfirm-popover {
+  box-shadow: var(--semi-modern-overlay-shadow);
 }
 
 .semi-dropdown-menu {
@@ -15,6 +20,7 @@
 
 .semi-modal-content:not(.semi-modal-content-fullScreen) {
   border-radius: var(--semi-border-radius-medium);
+  box-shadow: var(--semi-modern-modal-shadow);
 }
 
 .semi-tooltip-wrapper {
