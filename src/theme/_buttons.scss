@@ -20,7 +20,14 @@
 }
 
 .semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button) {
+  background-image: var(--semi-modern-button-solid-overlay);
   box-shadow: var(--semi-modern-button-solid-shadow);
+}
+
+.semi-button.semi-button-solid:not(.semi-button-disabled):not(.semi-button-group .semi-button):is(:hover, :active) {
+  /* 悬停后回到 Semi 自己的纯色状态，避免渐变与组件状态色叠加。 */
+  background-image: none;
+  box-shadow: none;
 }
 
 .semi-button.semi-button-light:not(.semi-button-disabled):not(.semi-button-group .semi-button) {

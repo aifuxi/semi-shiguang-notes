@@ -20,6 +20,7 @@
 .semi-dropdown-wrapper,
 .semi-popover-wrapper {
   border-radius: var(--semi-border-radius-small);
+  border: 1px solid var(--semi-color-border);
   box-shadow: var(--semi-modern-overlay-edge-shadow), var(--semi-shadow-elevated);
 }
 
@@ -30,9 +31,14 @@
 .semi-dropdown-item,
 .semi-navigation-item,
 .semi-navigation-sub-title {
+  border-radius: var(--semi-border-radius-extra-small);
   transition:
     color var(--semi-modern-motion-fast) ease,
     background-color var(--semi-modern-motion-fast) ease;
+}
+
+.semi-dropdown-item {
+  margin-inline: 4px;
 }
 
 .semi-dropdown-item:focus-visible,
